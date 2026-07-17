@@ -23,10 +23,11 @@ const VIDEO_DATA_URL = /^data:video\/(?:mp4|webm);base64,/i;
 const FONT_DATA_URL = /^data:(?:font|application)\/[\w+.-]+;base64,/i;
 
 const SCROLLBAR_STYLES = ["default", "slim", "hidden"];
-const PARTICLE_KINDS = ["none", "sakura", "snow"];
+const PARTICLE_KINDS = ["none", "sakura", "snow", "neon", "stardust"];
 const MOTION_MODES = ["default", "off"];
 const TYPING_FX_KINDS = ["none", "sparkle", "petal"];
 const LIST_FX_KINDS = ["none", "slide"];
+const BG_MOTION_KINDS = ["none", "breathe", "drift"];
 const TRIGGER_POSITIONS = ["top-center", "top-right", "bottom-right"];
 
 function isVideoBackground(background) {
@@ -182,6 +183,7 @@ function normalizeTheme(theme) {
       motion: pickEnum(effects.motion, MOTION_MODES),
       typingFx: pickEnum(effects.typingFx, TYPING_FX_KINDS),
       listFx: pickEnum(effects.listFx, LIST_FX_KINDS),
+      bgMotion: pickEnum(effects.bgMotion, BG_MOTION_KINDS),
       slideshowMinutes: sizeOrZero(effects.slideshowMinutes, 1, 240)
     },
     trigger: {
@@ -372,6 +374,16 @@ function themeCss(theme) {
   }
   if (effects.motion === "off") {
     rules.push("*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important;animation-delay:0s!important}");
+  }
+  // 背景动效：缓慢呼吸/漂移（GPU 合成 transform，视频背景与关闭动效时不发射）
+  if (effects.bgMotion && effects.bgMotion !== "none" && effects.motion !== "off" && !isVideoBackground(theme.background)) {
+    if (effects.bgMotion === "drift") {
+      rules.push("@keyframes codexDollBgDrift{0%{transform:scale(1.06) translate(-.8%,-.5%)}100%{transform:scale(1.06) translate(.8%,.5%)}}");
+      rules.push("@media (prefers-reduced-motion: no-preference){#root::before{animation:codexDollBgDrift 46s ease-in-out infinite alternate}}");
+    } else {
+      rules.push("@keyframes codexDollBgBreathe{0%{transform:scale(1)}100%{transform:scale(1.05)}}");
+      rules.push("@media (prefers-reduced-motion: no-preference){#root::before{animation:codexDollBgBreathe 28s ease-in-out infinite alternate}}");
+    }
   }
   const customCss = sanitizeCustomCss(theme.customCss);
   if (customCss) rules.push(customCss);

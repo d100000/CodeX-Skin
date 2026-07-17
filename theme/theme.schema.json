@@ -174,7 +174,9 @@
           "enum": [
             "none",
             "sakura",
-            "snow"
+            "snow",
+            "neon",
+            "stardust"
           ]
         },
         "motion": {
@@ -199,6 +201,13 @@
           "enum": [
             "none",
             "slide"
+          ]
+        },
+        "bgMotion": {
+          "enum": [
+            "none",
+            "breathe",
+            "drift"
           ]
         }
       }

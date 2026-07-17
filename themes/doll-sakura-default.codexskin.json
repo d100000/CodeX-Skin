@@ -45,7 +45,8 @@
     "particles": "sakura",
     "scrollbar": "slim",
     "typingFx": "petal",
-    "listFx": "slide"
+    "listFx": "slide",
+    "bgMotion": "breathe"
   },
   "brand": {
     "startupTint": true

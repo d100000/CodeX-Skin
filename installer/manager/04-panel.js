@@ -213,8 +213,9 @@ async function init() {
   };
   const applyParticles = (theme) => {
     const kind = theme.effects.particles;
+    const accent = theme.colors.accent;
     if (kind === "none" || reducedMotion()) { stopParticles(); return; }
-    if (particlesState && particlesState.kind === kind) return;
+    if (particlesState && particlesState.kind === kind && particlesState.accent === accent) return;
     stopParticles();
     const root = document.getElementById("root");
     if (!root) return;
@@ -224,15 +225,20 @@ async function init() {
     canvas.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none";
     root.appendChild(canvas);
     const context = canvas.getContext("2d");
-    const spawn = (top) => ({
-      x: Math.random(), y: top ? -0.05 : Math.random(),
-      size: 2.5 + Math.random() * 4,
-      vx: kind === "sakura" ? -(0.2 + Math.random() * 0.5) : (Math.random() - 0.5) * 0.3,
-      vy: 0.35 + Math.random() * 0.75,
-      rotation: Math.random() * Math.PI, spin: (Math.random() - 0.5) * 0.03
+    const rising = kind === "neon";
+    const still = kind === "stardust";
+    const spawn = (edge) => ({
+      x: Math.random(),
+      y: edge ? (rising ? 1.05 : -0.05) : Math.random(),
+      size: still ? 1.5 + Math.random() * 2.5 : (kind === "neon" ? 1.5 + Math.random() * 2.2 : 2.5 + Math.random() * 4),
+      vx: kind === "sakura" ? -(0.2 + Math.random() * 0.5) : (Math.random() - 0.5) * (still ? 0.05 : 0.3),
+      vy: rising ? -(0.15 + Math.random() * 0.35) : (still ? 0 : 0.35 + Math.random() * 0.75),
+      rotation: Math.random() * Math.PI,
+      spin: (Math.random() - 0.5) * 0.03,
+      phase: Math.random() * Math.PI * 2
     });
-    const items = Array.from({ length: 26 }, () => spawn(false));
-    const state = { canvas, kind, raf: 0 };
+    const items = Array.from({ length: kind === "neon" ? 34 : 26 }, () => spawn(false));
+    const state = { canvas, kind, accent, raf: 0 };
     const frame = () => {
       if (!canvas.isConnected) return;
       if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
@@ -240,28 +246,58 @@ async function init() {
         canvas.height = canvas.clientHeight;
       }
       const { width, height } = canvas;
+      const now = performance.now() / 1000;
       context.clearRect(0, 0, width, height);
       for (const item of items) {
         item.x += item.vx / 900;
         item.y += item.vy / 900;
         item.rotation += item.spin;
-        if (item.y > 1.05 || item.x < -0.05) Object.assign(item, spawn(true), { x: Math.random() * 1.1 });
+        if (item.y > 1.05 || item.y < -0.05 || item.x < -0.05 || item.x > 1.05) {
+          Object.assign(item, spawn(true), still ? { y: Math.random() } : null, { x: Math.random() * 1.05 });
+        }
         context.save();
         context.translate(item.x * width, item.y * height);
-        context.rotate(item.rotation);
         if (kind === "sakura") {
+          context.rotate(item.rotation);
           context.fillStyle = "rgba(244,177,199,.72)";
           context.beginPath();
           context.ellipse(0, 0, item.size, item.size * 0.62, 0, 0, Math.PI * 2);
           context.fill();
-        } else {
+        } else if (kind === "snow") {
           context.fillStyle = "rgba(255,255,255,.8)";
           context.beginPath();
           context.arc(0, 0, item.size * 0.55, 0, Math.PI * 2);
           context.fill();
+        } else if (kind === "neon") {
+          // 霓虹光尘：强调色光点上浮 + 呼吸透明度 + 发光
+          const pulse = .35 + .35 * Math.sin(now * 1.4 + item.phase);
+          context.globalAlpha = pulse;
+          context.shadowBlur = 8;
+          context.shadowColor = accent;
+          context.fillStyle = accent;
+          context.beginPath();
+          context.arc(0, 0, item.size, 0, Math.PI * 2);
+          context.fill();
+        } else {
+          // 星尘：原地闪烁的小四角星
+          const twinkle = .25 + .55 * Math.abs(Math.sin(now * 1.8 + item.phase));
+          context.globalAlpha = twinkle;
+          context.rotate(item.rotation);
+          context.fillStyle = "#ffffff";
+          context.beginPath();
+          for (let i = 0; i < 8; i += 1) {
+            const radius = i % 2 === 0 ? item.size * 1.6 : item.size * 0.55;
+            const angle = i * Math.PI / 4;
+            if (i === 0) context.moveTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+            else context.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+          }
+          context.closePath();
+          context.fill();
         }
         context.restore();
       }
+      context.globalAlpha = 1;
+      context.shadowBlur = 0;
       state.raf = requestAnimationFrame(frame);
     };
     particlesState = state;

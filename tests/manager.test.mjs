@@ -162,7 +162,7 @@ test("phase B/C dimensions normalize with follow-default values", () => {
   const theme = core.normalizeTheme({ id: "a" });
   assert.deepEqual(theme.backgrounds, []);
   assert.equal(theme.backgroundDark, null);
-  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", typingFx: "none", listFx: "none", slideshowMinutes: 0 });
+  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", typingFx: "none", listFx: "none", bgMotion: "none", slideshowMinutes: 0 });
   assert.deepEqual(theme.trigger, { position: "top-center", icon: "D", autoHide: false });
   assert.deepEqual(theme.brand, { startupTint: false, logo: null, titlePrefix: "" });
   assert.deepEqual(theme.typography.fontFaces, []);
@@ -313,6 +313,18 @@ test("paletteFromPixels derives a readable palette from the dominant hue", () =>
   assert.ok(Math.max(...channels(palette.text)) < 90, "text 必须足够深保证可读性");
   const [r, , b] = channels(palette.accent);
   assert.ok(r > b, "粉色图片的强调色应偏暖");
+});
+
+test("bgMotion emits GPU keyframes only when appropriate", () => {
+  const breathe = core.themeCss(core.normalizeTheme({ id: "a", background: SAMPLE_IMAGE, effects: { bgMotion: "breathe" } }));
+  assert.match(breathe, /@keyframes codexDollBgBreathe/);
+  assert.match(breathe, /prefers-reduced-motion: no-preference/);
+  const drift = core.themeCss(core.normalizeTheme({ id: "b", effects: { bgMotion: "drift" } }));
+  assert.match(drift, /codexDollBgDrift 46s/);
+  const off = core.themeCss(core.normalizeTheme({ id: "c", effects: { bgMotion: "breathe", motion: "off" } }));
+  assert.doesNotMatch(off, /@keyframes codexDollBg/);
+  const video = core.themeCss(core.normalizeTheme({ id: "d", background: SAMPLE_VIDEO, effects: { bgMotion: "drift" } }));
+  assert.doesNotMatch(video, /@keyframes codexDollBg/);
 });
 
 test("paletteFromPixels falls back to luminance-based neutral palettes for grayscale", () => {

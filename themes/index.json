@@ -25,15 +25,15 @@
       "id": "doll-room-light",
       "name": "暖光书房",
       "file": "doll-room-light.codexskin.json",
-      "bytes": 70277,
-      "sha256": "2e423198cbeb6f34a402018ecb112e9c7602f40dbcab8492a0a4b3d8bdd6553d"
+      "bytes": 70304,
+      "sha256": "636bb244cf5b20dd349ca102217ffa0b322abe3b3dc3ee96b85bc3df638ce6b5"
     },
     {
       "id": "doll-sakura-default",
       "name": "樱花玩偶 · 默认",
       "file": "doll-sakura-default.codexskin.json",
-      "bytes": 1110,
-      "sha256": "7ef2c2301a1f16b4ef7f7bca9f565ba66c8ec4d4185f3c07ccc223e7f6bc2603"
+      "bytes": 1137,
+      "sha256": "bac5c475171464a78bf3487b9c8c3c2898231e28c2c940442a3c75b842271606"
     }
   ]
 }
