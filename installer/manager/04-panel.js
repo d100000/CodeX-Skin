@@ -279,13 +279,19 @@ async function init() {
     trigger.style.top = "";
     trigger.style.right = "";
     trigger.style.bottom = "";
+    trigger.style.left = "";
+    trigger.style.transform = "";
     const chromeOn = theme.chrome && theme.chrome.enabled;
     if (chromeOn) {
       if (config.position === "top-right") {
         trigger.style.top = "2px";
         trigger.style.right = "146px";
       } else if (config.position === "top-center") {
+        // Electron 计算拖拽区域时忽略 CSS transform：translateX(-50%) 会让 no-drag
+        // 豁口偏移 15px、按钮实际位置落进标题栏拖拽区导致点击变成拖窗。改用纯 left 定位。
         trigger.style.top = "2px";
+        trigger.style.left = "calc(50% - 15px)";
+        trigger.style.transform = "none";
       } else if (config.position === "bottom-right" && theme.chrome.statusBar) {
         trigger.style.bottom = "32px";
       }
