@@ -184,6 +184,9 @@ function normalizeTheme(theme) {
       icon: (typeof trigger.icon === "string" && trigger.icon.trim() ? [...trigger.icon.trim()].slice(0, 2).join("") : "D"),
       autoHide: Boolean(trigger.autoHide)
     },
+    sidePanel: normalizeSidePanel(source.sidePanel),
+    tokens: normalizeTokens(source.tokens),
+    customCss: sanitizeCustomCss(source.customCss),
     brand: {
       startupTint: Boolean(source.brand && source.brand.startupTint),
       logo: source.brand && source.brand.logo === "hide"
@@ -266,6 +269,9 @@ function rootExtraVars(theme) {
     parts.push("--startup-logo-shimmer-base:color-mix(in srgb," + theme.colors.accent + " 32%,transparent)!important");
     parts.push("--startup-logo-shimmer-peak:color-mix(in srgb," + theme.colors.accent + " 68%,white)!important");
   }
+  // 发射点再清洗一次：草稿实时编辑不经过 normalizeTheme，防止绕过
+  const tokens = normalizeTokens(theme.tokens);
+  for (const token in tokens) parts.push(token + ":" + tokens[token] + "!important");
   return parts.join(";");
 }
 
@@ -305,7 +311,59 @@ function themeCss(theme) {
   if (effects.motion === "off") {
     rules.push("*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important;animation-delay:0s!important}");
   }
+  const customCss = sanitizeCustomCss(theme.customCss);
+  if (customCss) rules.push(customCss);
   return rules.join("");
+}
+
+// WCAG 相对亮度对比度（1-21）。文字对表面 ≥4.5 视为可读。
+function contrastRatio(hexA, hexB) {
+  const luminance = (hex) => {
+    const channel = (i) => {
+      const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+      return c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4);
+    };
+    return .2126 * channel(1) + .7152 * channel(3) + .0722 * channel(5);
+  };
+  const a = luminance(hexA);
+  const b = luminance(hexB);
+  return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+}
+
+// 高级 token 表：仅接受合法自定义属性名，值剔除 CSS 语句字符与外链 url。
+function normalizeTokens(source) {
+  if (!source || typeof source !== "object") return {};
+  const out = {};
+  let count = 0;
+  for (const key in source) {
+    if (count >= 100) break;
+    if (!/^--[\w-]{1,60}$/.test(key)) continue;
+    const value = String(source[key]).replace(/[;{}]/g, "").trim().slice(0, 300);
+    if (!value || /url\(\s*['"]?(?!data:)/i.test(value)) continue;
+    out[key] = value;
+    count += 1;
+  }
+  return out;
+}
+
+// 自定义 CSS：去掉 @import 与非 data: 的 url()，注入包保持零外联。
+function sanitizeCustomCss(value) {
+  if (typeof value !== "string") return "";
+  return value
+    .slice(0, 200000)
+    .replace(/@import[^;]*;?/gi, "")
+    .replace(/url\(\s*(?!['"]?data:)[^)]*\)/gi, "url()");
+}
+
+function normalizeSidePanel(source) {
+  const panel = source || {};
+  return {
+    enabled: Boolean(panel.enabled),
+    width: clampNumber(panel.width, 240, 200, 320),
+    title: typeof panel.title === "string" ? panel.title.replace(/[<>]/g, "").slice(0, 20) : "",
+    image: typeof panel.image === "string" && BACKGROUND_DATA_URL.test(panel.image) ? panel.image : null,
+    card: typeof panel.card === "string" ? panel.card.replace(/[<>]/g, "").slice(0, 300) : ""
+  };
 }
 
 function hslToHex(h, s, l) {
@@ -318,13 +376,9 @@ function hslToHex(h, s, l) {
   return "#" + f(0) + f(8) + f(4);
 }
 
-// 从缩样像素（RGBA 扁平数组）提取主色调，按可读性公式生成三色：
-// accent 取主色相的中明度色，surface 固定为极浅底色，text 固定为深色——保证对比度可用。
-// 近灰度图返回 null（沿用默认配色）。
-function paletteFromPixels(data) {
+function hueBucketsFromPixels(data) {
   const buckets = new Array(36).fill(0);
   let totalWeight = 0;
-  const pixelCount = data.length / 4;
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
     const max = Math.max(r, g, b), min = Math.min(r, g, b), delta = max - min;
@@ -338,18 +392,49 @@ function paletteFromPixels(data) {
     buckets[Math.floor(hue / 10) % 36] += weight;
     totalWeight += weight;
   }
+  return { buckets, totalWeight, pixelCount: data.length / 4 };
+}
+
+function paletteFromHue(hue) {
+  return {
+    accent: hslToHex(hue, .34, .42),
+    surface: hslToHex(hue, .55, .975),
+    text: hslToHex(hue, .24, .2)
+  };
+}
+
+// 从缩样像素（RGBA 扁平数组）提取主色调，按可读性公式生成三色：
+// accent 取主色相的中明度色，surface 固定为极浅底色，text 固定为深色——保证对比度可用。
+// 近灰度图返回 null（沿用默认配色）。
+function paletteFromPixels(data) {
+  const { buckets, totalWeight, pixelCount } = hueBucketsFromPixels(data);
   if (totalWeight < pixelCount * .02) return null;
   let best = 0, bestScore = -1;
   for (let i = 0; i < 36; i += 1) {
     const score = buckets[(i + 35) % 36] * .5 + buckets[i] + buckets[(i + 1) % 36] * .5;
     if (score > bestScore) { bestScore = score; best = i; }
   }
-  const hue = best * 10 + 5;
-  return {
-    accent: hslToHex(hue, .34, .42),
-    surface: hslToHex(hue, .55, .975),
-    text: hslToHex(hue, .24, .2)
-  };
+  return paletteFromHue(best * 10 + 5);
+}
+
+// 取色候选：按权重取前 N 个互相间隔 ≥30° 的色相桶，各生成一套配色。
+function paletteCandidatesFromPixels(data, count = 4) {
+  const { buckets, totalWeight, pixelCount } = hueBucketsFromPixels(data);
+  if (totalWeight < pixelCount * .02) return [];
+  const scored = buckets
+    .map((weight, i) => ({ i, score: buckets[(i + 35) % 36] * .5 + weight + buckets[(i + 1) % 36] * .5 }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score);
+  const chosen = [];
+  for (const entry of scored) {
+    if (chosen.length >= count) break;
+    const clash = chosen.some((taken) => {
+      const distance = Math.abs(taken - entry.i);
+      return Math.min(distance, 36 - distance) < 3;
+    });
+    if (!clash) chosen.push(entry.i);
+  }
+  return chosen.map((bucket) => paletteFromHue(bucket * 10 + 5));
 }
 
 function themeEquals(a, b) {

@@ -64,6 +64,7 @@ function installRuntime() {
     "theme/theme.schema.json",
     "public/assets/doll-sakura-hero.webp",
     "public/assets/doll-room-light.webp",
+    "public/assets/doll-character-side.jpg",
   ];
   const temporary = `${INSTALL_ROOT}.tmp-${process.pid}`;
   rmSync(temporary, { recursive: true, force: true });

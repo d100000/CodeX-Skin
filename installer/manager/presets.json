@@ -23,6 +23,33 @@
   },
   {
     "schemaVersion": 3,
+    "id": "classic-blue-2007",
+    "name": "经典蓝 · 2007 怀旧",
+    "background": "none",
+    "colors": { "accent": "#2a6feb", "surface": "#eef4fd", "text": "#1b2a41" },
+    "layout": { "x": 50, "y": 50, "veil": 50 },
+    "typography": { "sans": "Tahoma, Verdana, \"PingFang SC\", sans-serif" },
+    "shape": { "radiusScale": 0.5, "shadow": "bold" },
+    "terminal": {
+      "black": "#0d1a33", "red": "#c0392b", "green": "#1e8f4d", "yellow": "#d4881e",
+      "blue": "#2a6feb", "magenta": "#8e44ad", "cyan": "#1691a8", "white": "#eef4fd",
+      "brightBlack": "#41547a", "brightRed": "#e05b4b", "brightGreen": "#2fbf68", "brightYellow": "#f2a83c",
+      "brightBlue": "#5a92f5", "brightMagenta": "#ab6bc9", "brightCyan": "#2fb3ca", "brightWhite": "#ffffff"
+    },
+    "trigger": { "position": "top-right", "icon": "🐧" },
+    "brand": { "startupTint": true },
+    "sidePanel": {
+      "enabled": true,
+      "width": 250,
+      "title": "Codex 好友",
+      "image": "asset://doll-character-side.jpg",
+      "card": "代码有问题？找我！我是你的智能伙伴 Codex，陪你写代码、改 Bug、查文档，超可靠哒！"
+    },
+    "customCss": "#root::before{background:linear-gradient(180deg,#9dc7f7 0,#cfe4fb 120px,#e9f2fc 320px,#dcebfa 100%)!important} .app-shell-left-panel{background:linear-gradient(180deg,#f4f9ff,#dcebfb 70%,#cfe3f9)!important;border-right:1px solid #7aa2d8!important} .main-surface,.browser-main-surface{background:rgba(255,255,255,.88)!important;border:1px solid #86a9dc!important;box-shadow:0 2px 6px rgba(42,80,150,.18)!important} .composer-surface-chrome{background:#fff!important;border:1px solid #6f9ad6!important;box-shadow:inset 0 1px 3px rgba(52,90,150,.16)!important} .app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(157,199,247,.85),transparent)!important}",
+    "createdAt": "2026-07-17T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
     "id": "doll-plain-focus",
     "name": "素净专注",
     "background": "none",

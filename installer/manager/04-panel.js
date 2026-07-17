@@ -74,6 +74,10 @@ async function init() {
     }
     const particlesCanvas = document.getElementById("codex-doll-skin-particles");
     if (particlesCanvas) particlesCanvas.style.display = paused ? "none" : "";
+    const sidePanelEl = document.getElementById("codex-doll-skin-sidepanel");
+    if (sidePanelEl) sidePanelEl.style.display = paused ? "none" : "";
+    const sidePanelStyle = document.getElementById("codex-doll-sidepanel-style");
+    if (sidePanelStyle) sidePanelStyle.disabled = paused;
     pauseSwitch.checked = !paused;
     pauseText.textContent = paused ? "皮肤已暂停" : "皮肤已开启";
   };
@@ -328,6 +332,51 @@ async function init() {
     }
   };
 
+  // 右侧展示面板：注入 fixed 右栏 + 让主内容让位，样式跟随主题色
+  const applySidePanel = (theme) => {
+    const config = theme.sidePanel;
+    let panelEl = document.getElementById("codex-doll-skin-sidepanel");
+    let reserveStyle = document.getElementById("codex-doll-sidepanel-style");
+    if (!config || !config.enabled) {
+      if (panelEl) panelEl.remove();
+      if (reserveStyle) reserveStyle.remove();
+      return;
+    }
+    if (!reserveStyle) {
+      reserveStyle = document.createElement("style");
+      reserveStyle.id = "codex-doll-sidepanel-style";
+      document.head.appendChild(reserveStyle);
+    }
+    reserveStyle.textContent = ".app-shell-main-content-frame{margin-right:" + (config.width + 16) + "px!important}";
+    if (!panelEl) {
+      panelEl = document.createElement("aside");
+      panelEl.id = "codex-doll-skin-sidepanel";
+      panelEl.setAttribute("aria-label", "皮肤右侧面板");
+      document.body.appendChild(panelEl);
+    }
+    panelEl.style.cssText = "position:fixed;top:52px;right:10px;bottom:14px;width:" + config.width + "px;z-index:9;display:flex;flex-direction:column;gap:10px;padding:12px;overflow:auto;border:1px solid color-mix(in srgb," + theme.colors.accent + " 32%,transparent);border-radius:calc(10px * var(--corner-radius-scale,1.25) / 1.25);background:color-mix(in srgb," + theme.colors.surface + " 90%,transparent);backdrop-filter:blur(14px) saturate(1.05);color:" + theme.colors.text + ";font:13px/1.55 var(--font-sans,system-ui);-webkit-app-region:no-drag";
+    panelEl.textContent = "";
+    if (config.title) {
+      const title = document.createElement("strong");
+      title.textContent = config.title;
+      title.style.cssText = "font-size:13.5px;color:" + theme.colors.accent + ";border-bottom:1px solid color-mix(in srgb," + theme.colors.accent + " 22%,transparent);padding-bottom:7px";
+      panelEl.appendChild(title);
+    }
+    if (config.image) {
+      const image = document.createElement("img");
+      image.src = config.image;
+      image.alt = "";
+      image.style.cssText = "width:100%;border-radius:calc(8px * var(--corner-radius-scale,1.25) / 1.25);object-fit:cover";
+      panelEl.appendChild(image);
+    }
+    if (config.card) {
+      const card = document.createElement("p");
+      card.textContent = config.card;
+      card.style.cssText = "margin:0;padding:10px;border-radius:calc(8px * var(--corner-radius-scale,1.25) / 1.25);background:color-mix(in srgb," + theme.colors.accent + " 8%,transparent);border:1px solid color-mix(in srgb," + theme.colors.accent + " 18%,transparent)";
+      panelEl.appendChild(card);
+    }
+  };
+
   let slideshowTimer = 0;
   let slideshowIndex = 0;
   const applySlideshow = (theme) => {
@@ -348,6 +397,7 @@ async function init() {
     applyTrigger(theme);
     applyBrand(theme);
     applySlideshow(theme);
+    applySidePanel(theme);
   };
   matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", () => { if (lastApplied) applyExtras(lastApplied); });
 
@@ -369,11 +419,39 @@ async function init() {
   };
 
   // ---------- 编辑器 ----------
+  // 从已有背景图重新计算取色候选（3-4 套按色相权重排序的配色）
+  const extractPalettes = (dataUrl) => new Promise((resolve) => {
+    const image = new Image();
+    image.onerror = () => resolve([]);
+    image.onload = () => {
+      try {
+        const sample = document.createElement("canvas");
+        sample.width = 64;
+        sample.height = 64;
+        const context = sample.getContext("2d");
+        context.drawImage(image, 0, 0, 64, 64);
+        resolve(paletteCandidatesFromPixels(context.getImageData(0, 0, 64, 64).data, 4));
+      } catch { resolve([]); }
+    };
+    image.src = dataUrl;
+  });
+
   const editor = createEditor({
     applyLive,
     pickImage,
     pickFile,
+    extractPalettes,
+    builtinCharacter: (presetThemes.find((preset) => preset.sidePanel && preset.sidePanel.image) || { sidePanel: {} }).sidePanel.image || null,
     notify: showToast,
+    onDuplicate: async (draft) => {
+      const theme = normalizeTheme(draft);
+      theme.id = makeThemeId(theme.name);
+      theme.name = theme.name + " 副本";
+      theme.createdAt = new Date().toISOString();
+      await putTheme(exportableTheme(theme));
+      await selectTheme(theme, { skipDirtyCheck: true });
+      showToast("已复制为新皮肤");
+    },
     onSave: async (draft, { asCopy }) => {
       const theme = normalizeTheme(draft);
       if (asCopy || findPreset(theme.id)) {
@@ -415,21 +493,18 @@ async function init() {
   const emptyHint = document.createElement("p");
   emptyHint.className = "cds-hint";
   emptyHint.textContent = "上传一张背景图，自动按图取色，30 秒做一套自己的皮肤。";
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.className = "cds-name-input cds-search";
+  searchInput.placeholder = "搜索皮肤…";
+  searchInput.addEventListener("input", () => renderLibrary());
   const newButton = cdsButton("＋ 自定义图片（自动取色）", true);
   newButton.addEventListener("click", async () => {
     const picked = await pickImage();
     if (!picked) return;
-    const theme = normalizeTheme({
-      id: makeThemeId(picked.fileName),
-      name: picked.fileName || "我的皮肤",
-      background: picked.dataUrl,
-      colors: picked.palette || undefined
-    });
-    await putTheme(exportableTheme(theme));
-    await selectTheme(theme);
-    showToast(picked.palette ? "已创建新皮肤 · 已按图片自动取色" : "已创建新皮肤");
+    await createThemeFromImage(picked.dataUrl, picked.palette, picked.fileName);
   });
-  library.append(libraryTitle, cards, emptyHint, newButton);
+  library.append(libraryTitle, searchInput, cards, emptyHint, newButton);
 
   const cardThumbBackground = (theme) => {
     const image = theme.preview || theme.background;
@@ -439,7 +514,8 @@ async function init() {
   };
 
   async function renderLibrary() {
-    const themes = await listThemes();
+    const query = searchInput.value.trim().toLowerCase();
+    const themes = (await listThemes()).filter((theme) => !query || theme.name.toLowerCase().includes(query) || theme.id.includes(query));
     const selectedId = currentThemeId();
     cards.textContent = "";
     for (const theme of themes) {
@@ -493,48 +569,97 @@ async function init() {
     const idLine = document.createElement("code");
     idLine.textContent = theme.id;
     const note = document.createElement("p");
+    let conflict = false;
     if (findPreset(theme.id)) {
       theme.id = makeThemeId(theme.name);
       note.textContent = "与内置主题重名，将以新 ID 导入。";
     } else if (await getTheme(theme.id)) {
-      note.textContent = "已存在同 ID 皮肤，导入将覆盖它。";
+      conflict = true;
+      note.textContent = "已存在同 ID 皮肤：可覆盖，或保留两者。";
     } else {
       note.textContent = "确认后导入并立即应用。";
     }
     info.append(title, idLine, note);
     const actions = document.createElement("div");
     actions.className = "cds-actions";
-    const ok = cdsButton("确认导入", true);
-    ok.addEventListener("click", async () => {
+    const importAs = async (finalTheme) => {
       importConfirm.hidden = true;
-      await putTheme(exportableTheme(theme));
-      await selectTheme(theme, { skipDirtyCheck: true });
+      await putTheme(exportableTheme(finalTheme));
+      await selectTheme(finalTheme, { skipDirtyCheck: true });
       showToast("已导入皮肤");
-    });
+    };
+    const ok = cdsButton("确认导入", true);
+    ok.addEventListener("click", () => importAs(theme));
+    actions.append(ok);
+    if (conflict) {
+      const keepBoth = cdsButton("保留两者");
+      keepBoth.addEventListener("click", () => importAs({ ...theme, id: makeThemeId(theme.name) }));
+      actions.append(keepBoth);
+    }
     const cancel = cdsButton("取消");
     cancel.addEventListener("click", () => { importConfirm.hidden = true; });
-    actions.append(ok, cancel);
+    actions.append(cancel);
     box.append(thumb, info, actions);
     importConfirm.appendChild(box);
     importConfirm.hidden = false;
   };
+  const importThemeText = async (text) => {
+    try {
+      const raw = JSON.parse(text);
+      if (![1, 2, 3].includes(raw.schemaVersion)) throw new Error("仅支持 schemaVersion 1 / 2 / 3");
+      const theme = normalizeTheme(raw);
+      if (!theme.id) throw new Error("主题配置缺少合法 id");
+      await showImportConfirm(theme);
+    } catch (error) {
+      alert("主题导入失败：" + error.message);
+    }
+  };
+  const importThemeFile = (file) => {
+    const reader = new FileReader();
+    reader.onload = () => importThemeText(reader.result);
+    reader.readAsText(file);
+  };
   configInput.addEventListener("change", () => {
     const file = configInput.files && configInput.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = async () => {
-      try {
-        const raw = JSON.parse(reader.result);
-        if (![1, 2, 3].includes(raw.schemaVersion)) throw new Error("仅支持 schemaVersion 1 / 2 / 3");
-        const theme = normalizeTheme(raw);
-        if (!theme.id) throw new Error("主题配置缺少合法 id");
-        await showImportConfirm(theme);
-      } catch (error) {
-        alert("主题导入失败：" + error.message);
-      }
-    };
-    reader.readAsText(file);
+    if (file) importThemeFile(file);
     configInput.value = "";
+  });
+
+  // 拖拽导入：图片文件 → 新建皮肤；JSON → 导入流程
+  const createThemeFromImage = async (dataUrl, palette, name) => {
+    const theme = normalizeTheme({
+      id: makeThemeId(name),
+      name: name || "我的皮肤",
+      background: dataUrl,
+      colors: palette || undefined
+    });
+    await putTheme(exportableTheme(theme));
+    await selectTheme(theme);
+    showToast(palette ? "已创建新皮肤 · 已按图片自动取色" : "已创建新皮肤");
+  };
+  panel.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    panel.classList.add("cds-dropping");
+  });
+  panel.addEventListener("dragleave", () => panel.classList.remove("cds-dropping"));
+  panel.addEventListener("drop", async (event) => {
+    event.preventDefault();
+    panel.classList.remove("cds-dropping");
+    const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+    if (!file) return;
+    const baseName = file.name.replace(/\.[^.]+$/, "");
+    if (/\.json$/i.test(file.name) || file.type === "application/json") {
+      importThemeFile(file);
+    } else if (/^image\/(png|jpeg|webp)$/.test(file.type)) {
+      try {
+        const { dataUrl, palette } = await compressImage(file);
+        await createThemeFromImage(dataUrl, palette, baseName);
+      } catch (error) {
+        alert("图片处理失败：" + error.message);
+      }
+    } else {
+      showToast("支持拖入图片（png/jpg/webp）或主题 JSON");
+    }
   });
 
   // ---------- 面板骨架 ----------

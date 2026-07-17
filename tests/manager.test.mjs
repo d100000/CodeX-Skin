@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 
 // 00-core.js 是纯函数片段，直接实例化后测试。
 const coreSource = await readFile(new URL("../installer/manager/00-core.js", import.meta.url), "utf8");
-const core = new Function(`${coreSource}; return { THEME_DEFAULTS, SAFE_ZONES, ANSI_KEYS, TERMINAL_PRESETS, SHADOW_PRESETS, safeColor, cleanFontStack, normalizeTheme, themeCss, backgroundLayerValue, filterValue, themeEquals, dataUrlKilobytes, hslToHex, paletteFromPixels, isVideoBackground };`)();
+const core = new Function(`${coreSource}; return { THEME_DEFAULTS, SAFE_ZONES, ANSI_KEYS, TERMINAL_PRESETS, SHADOW_PRESETS, safeColor, cleanFontStack, normalizeTheme, themeCss, backgroundLayerValue, filterValue, themeEquals, dataUrlKilobytes, hslToHex, paletteFromPixels, paletteCandidatesFromPixels, isVideoBackground, contrastRatio, normalizeTokens, sanitizeCustomCss };`)();
 
 const SAMPLE_IMAGE = "data:image/webp;base64,AAAA";
 
@@ -216,6 +216,51 @@ test("themeCss emits phase B/C rules", () => {
 
   const hidden = core.themeCss(core.normalizeTheme({ id: "h", effects: { scrollbar: "hidden" } }));
   assert.match(hidden, /::-webkit-scrollbar\{width:0!important/);
+});
+
+test("contrastRatio follows WCAG expectations", () => {
+  assert.ok(Math.abs(core.contrastRatio("#000000", "#ffffff") - 21) < .1);
+  assert.ok(core.contrastRatio("#3c2938", "#fff9fb") >= 4.5, "默认配色必须可读");
+  assert.ok(core.contrastRatio("#cccccc", "#ffffff") < 4.5);
+});
+
+test("tokens and customCss are sanitized against injection and external URLs", () => {
+  const tokens = core.normalizeTokens({
+    "--good-token": "#ff0000",
+    "bad-name": "#000",
+    "--evil": "url(https://evil.example/x.png)",
+    "--strip": "red;}body{display:none"
+  });
+  assert.deepEqual(Object.keys(tokens), ["--good-token", "--strip"]);
+  assert.ok(!tokens["--strip"].includes(";") && !tokens["--strip"].includes("}"));
+  const theme = core.normalizeTheme({ id: "a", tokens: { "--good-token": "#ff0000" }, customCss: '@import "x.css"; .a{background:url(https://evil/x.png) url("data:image/png;base64,AA")}' });
+  const css = core.themeCss(theme);
+  assert.match(css, /--good-token:#ff0000!important/);
+  assert.doesNotMatch(css, /@import/);
+  assert.doesNotMatch(css, /evil/);
+  assert.match(css, /url\("data:image\/png;base64,AA"\)/, "data: url 必须保留");
+});
+
+test("sidePanel normalizes with clamped width and stripped markup", () => {
+  const off = core.normalizeTheme({ id: "a" }).sidePanel;
+  assert.deepEqual(off, { enabled: false, width: 240, title: "", image: null, card: "" });
+  const on = core.normalizeTheme({ id: "b", sidePanel: { enabled: 1, width: 900, title: "<b>好友</b>", image: SAMPLE_IMAGE, card: "hi<script>" } }).sidePanel;
+  assert.equal(on.enabled, true);
+  assert.equal(on.width, 320);
+  assert.ok(!on.title.includes("<"));
+  assert.equal(on.image, SAMPLE_IMAGE);
+  assert.ok(!on.card.includes("<"));
+});
+
+test("paletteCandidatesFromPixels returns distinct hue candidates", () => {
+  const pixels = [];
+  for (let i = 0; i < 40; i += 1) pixels.push(230, 150, 180, 255); // 粉
+  for (let i = 0; i < 30; i += 1) pixels.push(120, 170, 235, 255); // 蓝
+  const candidates = core.paletteCandidatesFromPixels(new Uint8ClampedArray(pixels), 4);
+  assert.ok(candidates.length >= 2, "两种主色都应成为候选");
+  for (const palette of candidates) assert.match(palette.accent, /^#[0-9a-f]{6}$/);
+  assert.notEqual(candidates[0].accent, candidates[1].accent);
+  assert.deepEqual(core.paletteCandidatesFromPixels(new Uint8ClampedArray([128, 128, 128, 255]), 4), []);
 });
 
 test("paletteFromPixels derives a readable palette from the dominant hue", () => {

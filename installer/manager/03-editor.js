@@ -321,6 +321,72 @@ function createEditor(handlers) {
     colorFieldRow("文字色", "text", () => draft.colors)
   );
 
+  // WCAG 对比度警告
+  const contrastWarning = document.createElement("p");
+  contrastWarning.className = "cds-warning";
+  syncFns.push(() => {
+    const ratio = contrastRatio(draft.colors.text, draft.colors.surface);
+    contrastWarning.hidden = ratio >= 4.5;
+    contrastWarning.textContent = "⚠ 文字色对表面色对比度 " + ratio.toFixed(1) + ":1，低于 WCAG 4.5:1，正文可能看不清";
+  });
+
+  // 配色预设色板
+  const PALETTE_PRESETS = [
+    ["樱花", { accent: "#76506f", surface: "#fff9fb", text: "#3c2938" }],
+    ["暖阳", { accent: "#8a5a44", surface: "#fff8f2", text: "#3d2f28" }],
+    ["雾蓝", { accent: "#4a6b9a", surface: "#f4f8fc", text: "#243447" }],
+    ["薄荷", { accent: "#3d8a6e", surface: "#f2fbf7", text: "#1f3a30" }],
+    ["紫罗兰", { accent: "#6d5aa8", surface: "#f7f5fd", text: "#2f2a45" }],
+    ["经典蓝", { accent: "#2a6feb", surface: "#eef4fd", text: "#1b2a41" }]
+  ];
+  const paletteChip = (label, colors, apply) => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "cds-pal-chip";
+    chip.title = label;
+    chip.style.background = "linear-gradient(135deg," + colors.accent + " 0 34%," + colors.surface + " 34% 67%," + colors.text + " 67%)";
+    chip.addEventListener("click", apply);
+    return chip;
+  };
+  const paletteRow = document.createElement("div");
+  paletteRow.className = "cds-pal-row";
+  const paletteLabel = document.createElement("span");
+  paletteLabel.textContent = "快速配色";
+  paletteRow.appendChild(paletteLabel);
+  for (const [label, colors] of PALETTE_PRESETS) {
+    paletteRow.appendChild(paletteChip(label, colors, () => {
+      if (!draft) return;
+      draft.colors = { ...colors };
+      applyLive();
+    }));
+  }
+
+  // 按背景图取色候选
+  const extractButton = cdsButton("按背景图取色");
+  extractButton.addEventListener("click", async () => {
+    if (!draft) return;
+    const source = draft.background && draft.background.startsWith("data:image/") ? draft.background : previewImage;
+    if (!source) { if (handlers.notify) handlers.notify("当前皮肤没有可取色的背景图"); return; }
+    const candidates = await handlers.extractPalettes(source);
+    candidateRow.textContent = "";
+    if (!candidates.length) { if (handlers.notify) handlers.notify("图片接近灰度，取不出主色"); return; }
+    const label = document.createElement("span");
+    label.textContent = "候选：";
+    candidateRow.appendChild(label);
+    for (const palette of candidates) {
+      candidateRow.appendChild(paletteChip(palette.accent, palette, () => {
+        if (!draft) return;
+        draft.colors = { ...palette };
+        applyLive();
+      }));
+    }
+  });
+  const candidateRow = document.createElement("div");
+  candidateRow.className = "cds-pal-row";
+  const extractRow = document.createElement("div");
+  extractRow.className = "cds-actions";
+  extractRow.append(extractButton, candidateRow);
+
   const darkToggle = checkRow("暗色模式单独配色", () => draft.colorsDark, (on) => {
     draft.colorsDark = on ? { accent: draft.colors.accent, surface: "#2a2129", text: "#f3e8ef" } : null;
   });
@@ -501,11 +567,91 @@ function createEditor(handlers) {
   shadowRow.append(shadowText, shadowSelect);
   syncFns.push(() => { shadowSelect.value = draft.shape.shadow; });
 
+  // 右侧展示面板
+  const sideEnableToggle = checkRow("启用右侧展示面板", () => draft.sidePanel.enabled, (on) => { draft.sidePanel.enabled = on; });
+  const sideImageInfo = document.createElement("span");
+  sideImageInfo.className = "cds-bg-info";
+  const sideImageUpload = cdsButton("上传形象图");
+  sideImageUpload.addEventListener("click", async () => {
+    const picked = await handlers.pickImage();
+    if (!picked || !draft) return;
+    draft.sidePanel.image = picked.dataUrl;
+    applyLive();
+  });
+  const sideImageBuiltin = cdsButton("使用内置角色");
+  sideImageBuiltin.addEventListener("click", () => {
+    if (!draft || !handlers.builtinCharacter) return;
+    draft.sidePanel.image = handlers.builtinCharacter;
+    applyLive();
+  });
+  const sideImageClear = cdsButton("清除图片");
+  sideImageClear.addEventListener("click", () => { if (!draft) return; draft.sidePanel.image = null; applyLive(); });
+  const sideImageRow = document.createElement("div");
+  sideImageRow.className = "cds-actions";
+  sideImageRow.append(sideImageUpload, sideImageBuiltin, sideImageClear, sideImageInfo);
+  const sidePanelGroup = document.createElement("div");
+  sidePanelGroup.className = "cds-subgroup";
+  sidePanelGroup.append(
+    sideEnableToggle,
+    sliderRow("面板宽度", 200, 320, 5, () => draft.sidePanel.width, (v) => { draft.sidePanel.width = v; }).label,
+    textRow("面板标题", 20, "如：Codex 好友", () => draft.sidePanel.title, (v) => { draft.sidePanel.title = v.replace(/[<>]/g, "").slice(0, 20); }),
+    sideImageRow,
+    textRow("文字卡片", 300, "面板里的一段介绍文字", () => draft.sidePanel.card, (v) => { draft.sidePanel.card = v.replace(/[<>]/g, "").slice(0, 300); })
+  );
+  syncFns.push(() => {
+    sidePanelGroup.classList.toggle("cds-disabled-group", !draft.sidePanel.enabled);
+    sideImageInfo.textContent = draft.sidePanel.image ? "已设置形象图" : "无图片";
+  });
+
   const layoutPaneContent = [
     optionalSliderRow("圆角倍率", 0, 2.5, 0.05, 1.25, null, () => draft.shape.radiusScale, (v) => { draft.shape.radiusScale = v; }),
     optionalSliderRow("侧栏宽度", 220, 420, 5, 275, 0, () => draft.layout.sidebarWidth, (v) => { draft.layout.sidebarWidth = v; }),
     shadowRow,
-    noteRow("圆角 0 = 直角工业风，1.25 = Codex 默认，2+ = 圆润可爱风。")
+    noteRow("圆角 0 = 直角工业风，1.25 = Codex 默认，2+ = 圆润可爱风。"),
+    (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "右侧展示面板"; return t; })(),
+    sidePanelGroup,
+    noteRow("右侧面板是注入的展示区（对标 QQ 好友栏）：主内容自动让位，样式跟随主题色。")
+  ];
+
+  // ---------- 高级页 ----------
+  const tokensArea = document.createElement("textarea");
+  tokensArea.className = "cds-textarea";
+  tokensArea.rows = 6;
+  tokensArea.placeholder = "--color-token-side-bar-background: #fff0f5\n--height-toolbar: 40px\n（每行一条：变量名: 值）";
+  tokensArea.spellcheck = false;
+  tokensArea.addEventListener("change", () => {
+    if (!draft) return;
+    const parsed = {};
+    for (const line of tokensArea.value.split("\n")) {
+      const match = line.match(/^\s*(--[\w-]+)\s*:\s*(.+?)\s*;?\s*$/);
+      if (match) parsed[match[1]] = match[2];
+    }
+    draft.tokens = parsed;
+    applyLive();
+  });
+  const customCssArea = document.createElement("textarea");
+  customCssArea.className = "cds-textarea";
+  customCssArea.rows = 10;
+  customCssArea.placeholder = "/* 自定义 CSS：整容级改版从这里开始（外链 url 会被剔除） */";
+  customCssArea.spellcheck = false;
+  customCssArea.addEventListener("change", () => {
+    if (!draft) return;
+    draft.customCss = customCssArea.value;
+    applyLive();
+  });
+  syncFns.push(() => {
+    if (document.activeElement !== tokensArea) {
+      tokensArea.value = Object.entries(draft.tokens || {}).map(([key, value]) => key + ": " + value).join("\n");
+    }
+    if (document.activeElement !== customCssArea) customCssArea.value = draft.customCss || "";
+  });
+  const advancedPaneContent = [
+    (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "Token 覆盖表"; return t; })(),
+    tokensArea,
+    noteRow("直接覆盖 Codex 的任意 CSS 变量（约 1300 个可用），高级用户专用；非法行自动忽略。"),
+    (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "自定义 CSS"; return t; })(),
+    customCssArea,
+    noteRow("追加在主题样式末尾、优先级最高。@import 与外链 url() 会被剔除，保证注入包零外联。")
   ];
 
   // ---------- Tab 骨架 ----------
@@ -536,11 +682,12 @@ function createEditor(handlers) {
     }
   };
   addPane("bg", "背景", [bgActions, bgSliderBox, veilTitle, veilSliderBox, veilNote, darkBgRow, slideshowRow]);
-  addPane("color", "配色", [lightColorBox, darkToggle, darkColorBox, terminalToggle, terminalPresetRow, terminalGrid]);
+  addPane("color", "配色", [lightColorBox, contrastWarning, paletteRow, extractRow, darkToggle, darkColorBox, terminalToggle, terminalPresetRow, terminalGrid]);
   addPane("font", "字体", fontPaneContent);
   addPane("layout", "布局", layoutPaneContent);
   addPane("ambiance", "氛围", ambiancePaneContent);
   addPane("brand", "品牌", brandPaneContent);
+  addPane("advanced", "高级", advancedPaneContent);
 
   // ---------- 底部动作 ----------
   const actions = document.createElement("div");
@@ -552,19 +699,23 @@ function createEditor(handlers) {
   });
   const revertButton = cdsButton("还原");
   revertButton.addEventListener("click", () => revert());
+  const duplicateButton = cdsButton("复制");
+  duplicateButton.addEventListener("click", async () => {
+    if (draft) await handlers.onDuplicate(structuredClone(draft));
+  });
   const exportButton = cdsButton("导出");
   exportButton.addEventListener("click", () => { if (draft) handlers.onExport(structuredClone(draft)); });
   const deleteButton = cdsButton("删除");
   deleteButton.classList.add("cds-danger");
   deleteButton.addEventListener("click", () => { if (snapshot && !snapshotBuiltin) handlers.onDelete(snapshot.id); });
-  actions.append(saveButton, revertButton, exportButton, deleteButton);
+  actions.append(saveButton, revertButton, duplicateButton, exportButton, deleteButton);
 
   // 双栏：左侧 Tab+设置滚动区，右侧常驻预览与操作
   const main = document.createElement("div");
   main.className = "cds-editor-main";
   const paneScroll = document.createElement("div");
   paneScroll.className = "cds-pane-scroll";
-  paneScroll.append(panes.bg, panes.color, panes.font, panes.layout, panes.ambiance, panes.brand);
+  paneScroll.append(panes.bg, panes.color, panes.font, panes.layout, panes.ambiance, panes.brand, panes.advanced);
   main.append(tabsBar, paneScroll);
   const side = document.createElement("div");
   side.className = "cds-editor-side";
@@ -579,6 +730,7 @@ function createEditor(handlers) {
     saveButton.textContent = snapshotBuiltin ? "另存为副本" : "保存";
     saveButton.disabled = !dirty;
     revertButton.disabled = !dirty;
+    duplicateButton.hidden = snapshotBuiltin;
     deleteButton.hidden = snapshotBuiltin;
   }
 

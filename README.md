@@ -37,7 +37,7 @@ npm run skin:apply
 
 The in-app `D` button opens the Codex Skin Manager without restarting Codex. It supports:
 
-- a thumbnail card library with three built-in example themes (sakura, warm reading room, plain focus);
+- a thumbnail card library with four built-in example themes (sakura, warm reading room, classic-blue 2007 retro IM, plain focus), plus search and one-click duplication;
 - uploading PNG, JPEG, and WebP backgrounds with automatic compression and automatic palette extraction;
 - a live mini preview of the Codex window with drag-to-position backgrounds;
 - optional composition safe-zone guides derived from [BACKGROUND_SPEC.md](BACKGROUND_SPEC.md);
@@ -51,6 +51,10 @@ The in-app `D` button opens the Codex Skin Manager without restarting Codex. It 
   - the global corner-radius scale, shadow intensity, and sidebar width — all riding Codex's own CSS tokens;
   - scrollbar styles, sakura/snow particle layers, a motion kill-switch, and a customizable trigger button (position/icon/auto-hide);
   - best-effort logo replacement/hiding and a window-title prefix (DOM-level, personal use only);
+  - an injected right-side display panel (title / character image / text card) with automatic content reflow — the "QQ friends column" building block;
+  - WCAG contrast warnings, quick palette presets, and re-extractable palette candidates from the background image;
+  - an advanced tab: raw token overrides (any of Codex's ~1300 CSS variables) and custom CSS (external URLs stripped, data: only);
+  - drag-and-drop import of images and theme JSON files, with conflict resolution (overwrite or keep both);
 - a draft model: edits apply live, `保存` persists, `还原` (or closing the panel) rolls back;
 - saving edited built-in themes as copies, and deleting user themes;
 - importing portable theme JSON with a confirmation preview, and exporting `<id>.codexskin.json`;
