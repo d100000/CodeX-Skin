@@ -268,10 +268,12 @@ async function init() {
     frame(); // 同步画首帧：后台/最小化时 rAF 不触发，至少保证有静态画面
   };
 
+  // 按钮样式来自全局设置（getTriggerConfig），刻意不读 theme.trigger：换皮肤按钮保持一致
   const applyTrigger = (theme) => {
-    trigger.textContent = theme.trigger.icon;
-    trigger.dataset.pos = theme.trigger.position;
-    trigger.dataset.autohide = theme.trigger.autoHide ? "1" : "0";
+    const config = getTriggerConfig();
+    trigger.textContent = config.icon;
+    trigger.dataset.pos = config.position;
+    trigger.dataset.autohide = config.autoHide ? "1" : "0";
     // Chrome 开启时把按钮挪进标题栏：右上角被宠物头像悬浮窗（独立原生窗口，页面 z-index 压不过）
     // 和假窗口按钮占用，需要避让
     trigger.style.top = "";
@@ -279,12 +281,12 @@ async function init() {
     trigger.style.bottom = "";
     const chromeOn = theme.chrome && theme.chrome.enabled;
     if (chromeOn) {
-      if (theme.trigger.position === "top-right") {
+      if (config.position === "top-right") {
         trigger.style.top = "2px";
         trigger.style.right = "146px";
-      } else if (theme.trigger.position === "top-center") {
+      } else if (config.position === "top-center") {
         trigger.style.top = "2px";
-      } else if (theme.trigger.position === "bottom-right" && theme.chrome.statusBar) {
+      } else if (config.position === "bottom-right" && theme.chrome.statusBar) {
         trigger.style.bottom = "32px";
       }
     }
@@ -604,6 +606,7 @@ async function init() {
     extractPalettes,
     builtinCharacter: (presetThemes.find((preset) => preset.sidePanel && preset.sidePanel.image) || { sidePanel: {} }).sidePanel.image || null,
     notify: showToast,
+    onTriggerChange: () => { if (lastApplied) applyTrigger(lastApplied); },
     onDuplicate: async (draft) => {
       const theme = normalizeTheme(draft);
       theme.id = makeThemeId(theme.name);

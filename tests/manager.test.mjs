@@ -304,6 +304,13 @@ test("hslToHex produces valid hex colors", () => {
   assert.match(core.hslToHex(345, .34, .42), /^#[0-9a-f]{6}$/);
 });
 
+test("presets never customize the global trigger button", async () => {
+  const presets = JSON.parse(await readFile(new URL("../installer/manager/presets.json", import.meta.url), "utf8"));
+  for (const preset of presets) {
+    assert.equal(preset.trigger, undefined, `${preset.id} 不得携带 trigger 字段：按钮样式是全局用户设置`);
+  }
+});
+
 test("fragments stay framework-free and use no ES module syntax", async () => {
   for (const name of ["00-core.js", "01-store.js", "02-preview.js", "03-editor.js", "04-panel.js"]) {
     const source = await readFile(new URL(`../installer/manager/${name}`, import.meta.url), "utf8");

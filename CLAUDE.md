@@ -46,3 +46,5 @@ Known injected element IDs shared across files (cli/cdp/theme-manager tests refe
 - Security model: no ASAR modification, debugging endpoint bound to loopback only, assets embedded as data URLs so the injected page needs no file access.
 - Background artwork must follow the composition zones and prompts in `BACKGROUND_SPEC.md` (character in right 27%, left 55% low-detail for readability, no text/UI/logos in images).
 - UI strings in the injected manager and preview app are Simplified Chinese.
+- **The skin-manager trigger button is a GLOBAL user setting** (`codexDollTriggerConfig` in localStorage, edited in the 氛围 tab): its icon/position/auto-hide must NEVER be changed by themes or presets — switching skins must not move or restyle the button, to keep user comprehension cost low. `theme.trigger` still exists in the schema for import compatibility but is ignored at apply time; new presets must not include a `trigger` field (a test enforces this).
+- Image generation must go through `tools/image-gen.mjs` (the image-gen skill); credentials stay in gitignored `tools/image-api.local.json`.

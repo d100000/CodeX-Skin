@@ -476,14 +476,65 @@ function createEditor(handlers) {
   ];
 
   // ---------- 氛围页 ----------
+  // 皮肤切换按钮是全局设置：直接读写 localStorage，不进主题草稿——换皮肤按钮样式保持一致
+  const globalTriggerGroup = (() => {
+    const wrap = document.createElement("div");
+    wrap.className = "cds-subgroup";
+    const commit = (mutate) => {
+      const config = getTriggerConfig();
+      mutate(config);
+      setTriggerConfig(config);
+      if (handlers.onTriggerChange) handlers.onTriggerChange();
+    };
+    const posLabel = document.createElement("label");
+    posLabel.className = "cds-field";
+    const posText = document.createElement("span");
+    posText.textContent = "按钮位置";
+    const posSelect = document.createElement("select");
+    posSelect.className = "cds-select";
+    for (const [value, label] of [["top-center", "顶部居中"], ["top-right", "右上角"], ["bottom-right", "右下角"]]) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      posSelect.appendChild(option);
+    }
+    posSelect.addEventListener("change", () => commit((c) => { c.position = posSelect.value; }));
+    posLabel.append(posText, posSelect);
+    const iconLabel = document.createElement("label");
+    iconLabel.className = "cds-field";
+    const iconText = document.createElement("span");
+    iconText.textContent = "按钮图标";
+    const iconInput = document.createElement("input");
+    iconInput.type = "text";
+    iconInput.className = "cds-name-input";
+    iconInput.maxLength = 2;
+    iconInput.placeholder = "D 或 🌸";
+    iconInput.addEventListener("change", () => commit((c) => { c.icon = iconInput.value.trim() ? [...iconInput.value.trim()].slice(0, 2).join("") : "D"; }));
+    iconLabel.append(iconText, iconInput);
+    const hideLabel = document.createElement("label");
+    hideLabel.className = "cds-check-row";
+    const hideCheck = document.createElement("input");
+    hideCheck.type = "checkbox";
+    hideCheck.addEventListener("change", () => commit((c) => { c.autoHide = hideCheck.checked; }));
+    hideLabel.append(hideCheck, document.createTextNode(" 按钮平时半透明，悬停显示"));
+    wrap.append(posLabel, iconLabel, hideLabel);
+    syncFns.push(() => {
+      const config = getTriggerConfig();
+      posSelect.value = config.position;
+      iconInput.value = config.icon;
+      hideCheck.checked = config.autoHide;
+    });
+    return wrap;
+  })();
+
   const ambiancePaneContent = [
     selectRow("滚动条", [["default", "默认"], ["slim", "纤细"], ["hidden", "隐藏"]], () => draft.effects.scrollbar, (v) => { draft.effects.scrollbar = v; }),
     selectRow("氛围粒子", [["none", "无"], ["sakura", "樱花花瓣"], ["snow", "雪花"]], () => draft.effects.particles, (v) => { draft.effects.particles = v; }),
     selectRow("界面动效", [["default", "默认"], ["off", "关闭动效"]], () => draft.effects.motion, (v) => { draft.effects.motion = v; }),
     optionalSliderRow("轮播间隔(分)", 1, 240, 1, 10, 0, () => draft.effects.slideshowMinutes, (v) => { draft.effects.slideshowMinutes = v; }),
-    selectRow("按钮位置", [["top-center", "顶部居中"], ["top-right", "右上角"], ["bottom-right", "右下角"]], () => draft.trigger.position, (v) => { draft.trigger.position = v; }),
-    textRow("按钮图标", 2, "D 或 🌸", () => draft.trigger.icon, (v) => { draft.trigger.icon = v.trim() ? [...v.trim()].slice(0, 2).join("") : "D"; }),
-    checkRow("按钮平时半透明，悬停显示", () => draft.trigger.autoHide, (on) => { draft.trigger.autoHide = on; }),
+    (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "皮肤切换按钮（全局设置）"; return t; })(),
+    globalTriggerGroup,
+    noteRow("按钮样式是全局的：改动立即保存，切换任何皮肤都保持一致，不随皮肤/预设变化。"),
     noteRow("粒子与视频背景在系统开启“减弱动态效果”时自动停用；轮播需在背景页添加至少一张轮播图。")
   ];
 

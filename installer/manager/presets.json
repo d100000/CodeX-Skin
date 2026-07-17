@@ -36,7 +36,6 @@
       "brightBlack": "#41547a", "brightRed": "#e05b4b", "brightGreen": "#2fbf68", "brightYellow": "#f2a83c",
       "brightBlue": "#5a92f5", "brightMagenta": "#ab6bc9", "brightCyan": "#2fb3ca", "brightWhite": "#ffffff"
     },
-    "trigger": { "position": "top-right", "icon": "🐧" },
     "brand": { "startupTint": true },
     "chrome": {
       "enabled": true,
