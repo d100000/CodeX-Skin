@@ -15,7 +15,7 @@
   --color-border: rgba(126, 80, 116, .22) !important;
   --color-border-light: rgba(126, 80, 116, .13) !important;
   --color-border-focus: #76506f !important;
-  --color-token-side-bar-background: rgba(255, 248, 250, .91) !important;
+  --color-token-side-bar-background: rgba(255, 248, 250, .55) !important;
   --color-token-main-surface-primary: rgba(255, 251, 252, .83) !important;
   --color-token-editor-background: rgba(255, 253, 253, .96) !important;
   --font-sans: Inter, "PingFang SC", system-ui, sans-serif !important;
@@ -39,8 +39,9 @@ html, body { background: #f7e8eb !important; }
 
 #root > * { position: relative; z-index: 1; background-color: transparent !important; }
 
+/* 侧栏底色刻意调透：让主题背景图透进左侧列表（可在管理器"布局"页精调） */
 .app-shell-left-panel {
-  background: rgba(255, 248, 250, .88) !important;
+  background: rgba(255, 248, 250, .62) !important;
   border-right: 1px solid rgba(126, 80, 116, .22) !important;
   backdrop-filter: blur(20px) saturate(1.12);
 }
@@ -67,7 +68,7 @@ html, body { background: #f7e8eb !important; }
 
 
 [class*="sidebar" i], [data-slot="sidebar"] {
-  background: rgba(255, 248, 250, .9) !important;
+  background: transparent !important;
   backdrop-filter: blur(22px) saturate(1.12);
 }
 

@@ -117,7 +117,8 @@
             "content": { "type": "number", "minimum": 0, "maximum": 100 }
           }
         },
-        "sidebarWidth": { "type": "number", "minimum": 0, "maximum": 420 }
+        "sidebarWidth": { "type": "number", "minimum": 0, "maximum": 420 },
+        "sidebarOpacity": { "type": "number", "minimum": 0, "maximum": 95 }
       }
     },
     "filters": {

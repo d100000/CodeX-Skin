@@ -304,6 +304,28 @@ test("hslToHex produces valid hex colors", () => {
   assert.match(core.hslToHex(345, .34, .42), /^#[0-9a-f]{6}$/);
 });
 
+test("sidebarOpacity emits themed sidebar wash only when set", () => {
+  const off = core.normalizeTheme({ id: "a" });
+  assert.equal(off.layout.sidebarOpacity, 0);
+  assert.doesNotMatch(core.themeCss(off), /app-shell-left-panel/);
+
+  const on = core.normalizeTheme({ id: "b", colors: { surface: "#eef4fd" }, layout: { sidebarOpacity: 40 } });
+  const css = core.themeCss(on);
+  assert.match(css, /\.app-shell-left-panel\{background:color-mix\(in srgb,#eef4fd 40%,transparent\)!important;backdrop-filter:blur\(5px\)/);
+  assert.match(css, /--color-token-side-bar-background:color-mix\(in srgb,#eef4fd 40%/);
+  assert.match(css, /\[class\*="sidebar" i\],\[data-slot="sidebar"\]\{background:transparent!important\}/);
+
+  const clamped = core.normalizeTheme({ id: "c", layout: { sidebarOpacity: 999 } });
+  assert.equal(clamped.layout.sidebarOpacity, 95);
+});
+
+test("base skin keeps the sidebar wash translucent so backgrounds show through", async () => {
+  const css = await readFile(new URL("../theme/skin.css", import.meta.url), "utf8");
+  const match = css.match(/\.app-shell-left-panel\s*\{[^}]*rgba\(255, 248, 250, (\.\d+)\)/);
+  assert.ok(match, "侧栏底色规则必须存在");
+  assert.ok(Number(match[1]) <= 0.7, "侧栏底色不透明度不得超过 0.7，保证背景图能透进左侧列表");
+});
+
 test("presets never customize the global trigger button", async () => {
   const presets = JSON.parse(await readFile(new URL("../installer/manager/presets.json", import.meta.url), "utf8"));
   for (const preset of presets) {

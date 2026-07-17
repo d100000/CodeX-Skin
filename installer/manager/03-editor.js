@@ -693,8 +693,9 @@ function createEditor(handlers) {
   const layoutPaneContent = [
     optionalSliderRow("圆角倍率", 0, 2.5, 0.05, 1.25, null, () => draft.shape.radiusScale, (v) => { draft.shape.radiusScale = v; }),
     optionalSliderRow("侧栏宽度", 220, 420, 5, 275, 0, () => draft.layout.sidebarWidth, (v) => { draft.layout.sidebarWidth = v; }),
+    optionalSliderRow("侧栏不透明", 15, 95, 1, 62, 0, () => draft.layout.sidebarOpacity, (v) => { draft.layout.sidebarOpacity = v; }),
     shadowRow,
-    noteRow("圆角 0 = 直角工业风，1.25 = Codex 默认，2+ = 圆润可爱风。"),
+    noteRow("圆角 0 = 直角工业风，1.25 = Codex 默认，2+ = 圆润可爱风。侧栏不透明度越低，背景图透进左侧列表越多。"),
     (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "右侧展示面板"; return t; })(),
     sidePanelGroup,
     noteRow("右侧面板是注入的展示区（对标 QQ 好友栏）：主内容自动让位，样式跟随主题色。")

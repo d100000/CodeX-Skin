@@ -166,7 +166,8 @@ function normalizeTheme(theme) {
         left: clampNumber(source.layout && source.layout.veils && source.layout.veils.left, 0, 0, 100),
         content: clampNumber(source.layout && source.layout.veils && source.layout.veils.content, 0, 0, 100)
       },
-      sidebarWidth: sizeOrZero(source.layout && source.layout.sidebarWidth, 220, 420)
+      sidebarWidth: sizeOrZero(source.layout && source.layout.sidebarWidth, 220, 420),
+      sidebarOpacity: sizeOrZero(source.layout && source.layout.sidebarOpacity, 15, 95)
     },
     filters: {
       brightness: clampNumber(source.filters && source.filters.brightness, THEME_DEFAULTS.brightness, 20, 200),
@@ -212,7 +213,14 @@ function filterValue(filters) {
 
 function veilGradientValue(theme) {
   const veil = theme.layout.veil / 100;
-  return "linear-gradient(90deg,rgba(255,249,250," + veil + "),rgba(255,249,250," + Math.max(0, veil - .38) + "))";
+  const tail = Math.max(0, veil - .38);
+  // 启用侧栏透出时，整体遮罩从侧栏右缘才开始变浓：侧栏区域只保留 35% 强度，
+  // 否则"左浓右淡"的默认渐变会和侧栏底色叠成一堵白墙，背景永远透不进左侧列表。
+  if (theme.layout && theme.layout.sidebarOpacity) {
+    const width = theme.layout.sidebarWidth || 275;
+    return "linear-gradient(90deg,rgba(255,249,250," + (veil * .35).toFixed(3) + ") 0 " + width + "px,rgba(255,249,250," + veil + ") " + (width + 80) + "px,rgba(255,249,250," + tail + ") 100%)";
+  }
+  return "linear-gradient(90deg,rgba(255,249,250," + veil + "),rgba(255,249,250," + tail + "))";
 }
 
 // 分区蒙层：顶部 / 底部 / 左侧 / 内容区（回答区）各自独立的可读性提亮层。
@@ -299,6 +307,17 @@ function themeCss(theme) {
   if (theme.backgroundDark) {
     const darkLayer = backgroundLayerValue({ ...theme, background: theme.backgroundDark, colors: theme.colorsDark || theme.colors });
     if (darkLayer) rules.push(":root.electron-dark #root::before{background:" + darkLayer + "!important}");
+  }
+  // 侧栏不透明度：0 = 跟随基础皮肤默认；设置后底色改用主题表面色按比例混合，
+  // 同时把重模糊降为轻模糊——blur(20px) 会把透进来的背景糊成均匀色块
+  if (theme.layout && theme.layout.sidebarOpacity) {
+    const opacity = theme.layout.sidebarOpacity;
+    rules.push(".app-shell-left-panel{background:color-mix(in srgb," + theme.colors.surface + " " + opacity + "%,transparent)!important;backdrop-filter:blur(5px) saturate(1.05)!important}");
+    rules.push('[class*="sidebar" i],[data-slot="sidebar"]{background:transparent!important}');
+    rules.push(":root{--color-token-side-bar-background:color-mix(in srgb," + theme.colors.surface + " " + opacity + "%,transparent)!important}");
+    if (theme.colorsDark) {
+      rules.push(":root.electron-dark .app-shell-left-panel{background:color-mix(in srgb," + theme.colorsDark.surface + " " + opacity + "%,transparent)!important}");
+    }
   }
   // 选中态与输入光标恒随强调色
   rules.push("::selection{background:color-mix(in srgb," + theme.colors.accent + " 28%,transparent)!important}");

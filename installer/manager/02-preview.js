@@ -88,6 +88,8 @@ function createMiniPreview(handlers) {
       el.style.setProperty("--cds-rs", String(radiusScale / 1.25));
       const sidebarWidth = (theme.layout && theme.layout.sidebarWidth) || 275;
       sidebar.style.width = Math.min(30, 18 * sidebarWidth / 275) + "%";
+      const sidebarOpacity = (theme.layout && theme.layout.sidebarOpacity) || 62;
+      sidebar.style.background = "color-mix(in srgb," + theme.colors.surface + " " + sidebarOpacity + "%,transparent)";
       const typography = theme.typography || {};
       sample.style.fontFamily = typography.sans || "";
       sample.style.fontSize = (10.5 * ((typography.chatFontSize || 14) / 14)).toFixed(1) + "px";
