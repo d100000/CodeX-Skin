@@ -60,6 +60,37 @@ try {
   }
   if (!screenshotPath && process.env.CODEX_SKIN_ONCE !== "1") {
     let consecutiveFailures = 0;
+    // 面板"同步云端主题"按钮通过 localStorage 标记发请求，守护进程每 5 秒轮询一次
+    let lastSyncRequest = "0";
+    let syncTick = 0;
+    let syncRunning = false;
+    const pollSyncRequest = async () => {
+      syncTick += 1;
+      if (syncTick % 5 !== 0 || syncRunning || !attached.size) return;
+      const client = attached.values().next().value;
+      try {
+        const response = await client.send("Runtime.evaluate", {
+          expression: `localStorage.getItem("codexDollSyncRequest") || "0"`,
+          returnByValue: true,
+        });
+        const request = response.result.value;
+        if (request === "0" || request === lastSyncRequest) return;
+        lastSyncRequest = request;
+        syncRunning = true;
+        try {
+          const { syncThemes } = await import("./updater.mjs");
+          const result = await syncThemes(port, { notifyAlways: true });
+          console.log(`[updater] 手动同步: ${JSON.stringify(result.pulled)}`);
+        } catch (error) {
+          await client.send("Runtime.evaluate", {
+            expression: `window.__CODEX_DOLL_SKIN_MANAGER__ && window.__CODEX_DOLL_SKIN_MANAGER__.notify && window.__CODEX_DOLL_SKIN_MANAGER__.notify(${JSON.stringify("云端同步失败：")} + ${JSON.stringify(String(error?.message || ""))})`,
+            returnByValue: true,
+          });
+        } finally {
+          syncRunning = false;
+        }
+      } catch {}
+    };
     const timer = setInterval(async () => {
       try {
         await attachAll();
@@ -69,6 +100,7 @@ try {
         if (consecutiveFailures >= 5) stop();
         else console.error(error.message);
       }
+      pollSyncRequest();
     }, 1_000);
     const stop = () => {
       clearInterval(timer);

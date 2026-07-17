@@ -675,7 +675,13 @@ async function init() {
     if (!picked) return;
     await createThemeFromImage(picked.dataUrl, picked.palette, picked.fileName);
   });
-  library.append(libraryTitle, searchInput, cards, emptyHint, newButton);
+  // 云端同步：页面保持零外联——只写 localStorage 标记，由守护进程轮询后在 Node 侧拉取
+  const cloudSyncButton = cdsButton("☁ 同步云端主题");
+  cloudSyncButton.addEventListener("click", () => {
+    localStorage.setItem("codexDollSyncRequest", String(Date.now()));
+    showToast("已请求同步，正在从 GitHub 拉取主题…");
+  });
+  library.append(libraryTitle, searchInput, cards, emptyHint, newButton, cloudSyncButton);
 
   const cardThumbBackground = (theme) => {
     const image = theme.preview || theme.background;

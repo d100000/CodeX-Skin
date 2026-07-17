@@ -94,7 +94,7 @@ export async function selfUpdate() {
 }
 
 // 主题云同步：内置预设 id 跳过；远端新增或哈希变化的主题写入运行中 Codex 的主题库。
-export async function syncThemes(port = 9227) {
+export async function syncThemes(port = 9227, { notifyAlways = false } = {}) {
   const manifest = await localManifest();
   const rawBase = manifest.updates && manifest.updates.rawBase;
   if (!rawBase) return { ok: false, reason: "manifest.updates.rawBase 未配置" };
@@ -141,12 +141,13 @@ export async function syncThemes(port = 9227) {
       if (putResponse.exceptionDetails) throw new Error(`写入主题 ${entry.id} 失败`);
       pulled.push(entry.id);
     }
-    if (pulled.length) {
+    if (pulled.length || notifyAlways) {
+      const message = pulled.length ? `已从云端同步 ${pulled.length} 个主题` : "云端主题已是最新";
       await client.send("Runtime.evaluate", {
         expression: `(async () => {
           if (window.__CODEX_DOLL_SKIN_MANAGER__) {
-            await window.__CODEX_DOLL_SKIN_MANAGER__.refresh();
-            if (window.__CODEX_DOLL_SKIN_MANAGER__.notify) window.__CODEX_DOLL_SKIN_MANAGER__.notify("已从云端同步 " + ${pulled.length} + " 个主题");
+            ${pulled.length ? "await window.__CODEX_DOLL_SKIN_MANAGER__.refresh();" : ""}
+            if (window.__CODEX_DOLL_SKIN_MANAGER__.notify) window.__CODEX_DOLL_SKIN_MANAGER__.notify(${JSON.stringify(message)});
           }
           return true;
         })()`,
