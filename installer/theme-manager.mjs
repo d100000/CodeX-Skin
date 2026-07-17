@@ -27,11 +27,13 @@ export async function embedAssets(text, assetDir = defaultAssetDir) {
 
 // 装配注入脚本：核心/存储/预览/编辑器/面板五个片段拼进同一个 IIFE 作用域。
 export async function buildThemeManagerSource(baseCss) {
-  const [managerCss, presetsJson, ...fragments] = await Promise.all([
+  const [managerCss, presetsJson, manifestJson, ...fragments] = await Promise.all([
     readFile(new URL("manager.css", managerDir), "utf8"),
     readFile(new URL("presets.json", managerDir), "utf8").then((text) => embedAssets(text)),
+    readFile(new URL("../theme/manifest.json", import.meta.url), "utf8"),
     ...FRAGMENTS.map((name) => readFile(new URL(name, managerDir), "utf8"))
   ]);
+  const manifest = JSON.parse(manifestJson);
   return `(() => {
   if (window.__CODEX_DOLL_SKIN_MANAGER__) {
     window.__CODEX_DOLL_SKIN_MANAGER__.refresh();
@@ -39,6 +41,7 @@ export async function buildThemeManagerSource(baseCss) {
   }
   const BASE_CSS = ${JSON.stringify(baseCss)};
   const MANAGER_CSS = ${JSON.stringify(managerCss)};
+  const VERSION = ${JSON.stringify(manifest.version || "0.0.0")};
   const PRESETS = ${presetsJson};
 ${fragments.join("\n")}
   return boot();

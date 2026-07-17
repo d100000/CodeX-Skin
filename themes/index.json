@@ -1,0 +1,39 @@
+{
+  "themes": [
+    {
+      "id": "classic-blue-2007",
+      "name": "经典蓝 · 2007 怀旧",
+      "file": "classic-blue-2007.codexskin.json",
+      "bytes": 121980,
+      "sha256": "d7e890c461bee1383be1e5f49c1cbbc16f2e4f9b52b6196a2004ac131aa0c1b3"
+    },
+    {
+      "id": "cloud-sky-demo",
+      "name": "云端示例 · 晴空",
+      "file": "cloud-sky-demo.codexskin.json",
+      "bytes": 471,
+      "sha256": "81b5564c7eddbdd93dda84339a9f88f8a80b58581bea95d072a6253a2aede464"
+    },
+    {
+      "id": "doll-plain-focus",
+      "name": "素净专注",
+      "file": "doll-plain-focus.codexskin.json",
+      "bytes": 1065,
+      "sha256": "8b83895b63f851c0af110c4c936d583298c5e72df824b3417588285ef208f54c"
+    },
+    {
+      "id": "doll-room-light",
+      "name": "暖光书房",
+      "file": "doll-room-light.codexskin.json",
+      "bytes": 70254,
+      "sha256": "d093e926aca756ec79c67e3d5edd224a4ff787c6dc7500406e9abb9a9af48124"
+    },
+    {
+      "id": "doll-sakura-default",
+      "name": "樱花玩偶 · 默认",
+      "file": "doll-sakura-default.codexskin.json",
+      "bytes": 1062,
+      "sha256": "fb3466273f1f2eaebdd48db428a9f9132f9943a083057631cb5035e9148b26b4"
+    }
+  ]
+}

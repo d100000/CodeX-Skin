@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 3,
+  "id": "cloud-sky-demo",
+  "name": "云端示例 · 晴空",
+  "background": "none",
+  "colors": { "accent": "#3d8ac2", "surface": "#f2f8fd", "text": "#1f3547" },
+  "layout": { "x": 50, "y": 50, "veil": 50 },
+  "typography": { "sans": "\"Source Han Sans SC\", \"PingFang SC\", sans-serif" },
+  "shape": { "radiusScale": 1.25 },
+  "effects": { "scrollbar": "slim" },
+  "brand": { "startupTint": true },
+  "createdAt": "2026-07-18T00:00:00.000Z"
+}

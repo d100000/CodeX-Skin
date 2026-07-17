@@ -11,7 +11,11 @@
     "install-launcher": "node installer/cli.mjs install-launcher",
     "skin:status": "node installer/cli.mjs status",
     "skin:pause": "node installer/cli.mjs pause",
-    "skin:apply": "node installer/cli.mjs apply"
+    "skin:apply": "node installer/cli.mjs apply",
+    "skin:check": "node installer/cli.mjs check-update",
+    "skin:update": "node installer/cli.mjs update",
+    "skin:sync": "node installer/cli.mjs sync-themes",
+    "themes:build": "node tools/build-themes.mjs"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",

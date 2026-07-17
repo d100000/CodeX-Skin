@@ -840,7 +840,7 @@ async function init() {
   const title = document.createElement("strong");
   title.textContent = "Codex 皮肤管理器";
   const subtitle = document.createElement("p");
-  subtitle.textContent = "上传背景、实时预览并管理本地皮肤";
+  subtitle.textContent = "上传背景、实时预览并管理本地皮肤 · v" + (typeof VERSION === "string" ? VERSION : "?");
   headline.append(title, subtitle);
   const headerActions = document.createElement("div");
   headerActions.className = "cds-header-actions";
@@ -917,7 +917,7 @@ async function init() {
     selectedId: currentThemeId()
   });
 
-  window.__CODEX_DOLL_SKIN_MANAGER__ = { refresh, state, applyTheme: (theme) => selectTheme(normalizeTheme(theme), { skipDirtyCheck: true }) };
+  window.__CODEX_DOLL_SKIN_MANAGER__ = { refresh, state, notify: showToast, applyTheme: (theme) => selectTheme(normalizeTheme(theme), { skipDirtyCheck: true }) };
   await refresh();
   return state();
 }

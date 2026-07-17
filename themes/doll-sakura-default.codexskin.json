@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 3,
+  "id": "doll-sakura-default",
+  "name": "樱花玩偶 · 默认",
+  "background": null,
+  "colors": {
+    "accent": "#76506f",
+    "surface": "#fff9fb",
+    "text": "#3c2938"
+  },
+  "layout": {
+    "x": 50,
+    "y": 50,
+    "veil": 50,
+    "sidebarOpacity": 45,
+    "veils": {
+      "content": 12
+    }
+  },
+  "typography": {
+    "sans": "\"LXGW WenKai\", \"PingFang SC\", sans-serif"
+  },
+  "shape": {
+    "radiusScale": 1.6
+  },
+  "terminal": {
+    "black": "#5c4a55",
+    "red": "#c95c78",
+    "green": "#7d9a6e",
+    "yellow": "#c98f4e",
+    "blue": "#6f82bd",
+    "magenta": "#a86bad",
+    "cyan": "#5f9a94",
+    "white": "#f5eef1",
+    "brightBlack": "#8a7482",
+    "brightRed": "#e08ba2",
+    "brightGreen": "#9cba8c",
+    "brightYellow": "#e0b070",
+    "brightBlue": "#93a5d6",
+    "brightMagenta": "#c290c6",
+    "brightCyan": "#82b7b1",
+    "brightWhite": "#fffafc"
+  },
+  "effects": {
+    "particles": "sakura",
+    "scrollbar": "slim"
+  },
+  "brand": {
+    "startupTint": true
+  },
+  "createdAt": "2026-07-16T00:00:00.000Z"
+}

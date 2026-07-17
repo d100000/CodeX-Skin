@@ -52,6 +52,7 @@ function installRuntime() {
     "installer/runtime.mjs",
     "installer/cli.mjs",
     "installer/theme-manager.mjs",
+    "installer/updater.mjs",
     "installer/manager/00-core.js",
     "installer/manager/01-store.js",
     "installer/manager/02-preview.js",
@@ -147,7 +148,17 @@ else if (["status", "pause", "apply"].includes(command)) {
     .then((result) => console.log(JSON.stringify(result, null, 2)))
     .catch((error) => { console.error(error.message); process.exitCode = 1; });
 }
+else if (["check-update", "update", "sync-themes"].includes(command)) {
+  import("./updater.mjs")
+    .then(({ checkUpdate, selfUpdate, syncThemes }) => {
+      if (command === "check-update") return checkUpdate();
+      if (command === "update") return selfUpdate();
+      return syncThemes(DEFAULT_PORT);
+    })
+    .then((result) => console.log(JSON.stringify(result, null, 2)))
+    .catch((error) => { console.error(error.message); process.exitCode = 1; });
+}
 else {
-  console.error(`Unknown command: ${command}. Available: doctor, install-launcher, status, pause, apply`);
+  console.error(`Unknown command: ${command}. Available: doctor, install-launcher, status, pause, apply, check-update, update, sync-themes`);
   process.exitCode = 2;
 }
