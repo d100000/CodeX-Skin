@@ -45,7 +45,12 @@
       "image": "asset://doll-character-side.jpg",
       "card": "代码有问题？找我！我是你的智能伙伴 Codex，陪你写代码、改 Bug、查文档，超可靠哒！"
     },
-    "customCss": "#root::before{background:linear-gradient(180deg,#9dc7f7 0,#cfe4fb 120px,#e9f2fc 320px,#dcebfa 100%)!important} .app-shell-left-panel{background:linear-gradient(180deg,#f4f9ff,#dcebfb 70%,#cfe3f9)!important;border-right:1px solid #7aa2d8!important} .main-surface,.browser-main-surface{background:rgba(255,255,255,.88)!important;border:1px solid #86a9dc!important;box-shadow:0 2px 6px rgba(42,80,150,.18)!important} .composer-surface-chrome{background:#fff!important;border:1px solid #6f9ad6!important;box-shadow:inset 0 1px 3px rgba(52,90,150,.16)!important} .app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(157,199,247,.85),transparent)!important}",
+    "tokens": {
+      "--color-token-side-bar-background": "#d6e7fa",
+      "--color-token-main-surface-primary": "rgba(250,253,255,.85)",
+      "--color-token-editor-background": "rgba(255,255,255,.92)"
+    },
+    "customCss": "#root::before{background:linear-gradient(180deg,#5f9df0 0,#8fc0f6 90px,#cfe4fb 220px,#e3eefb 100%)!important} .app-shell-left-panel{background:linear-gradient(180deg,#eaf3fe,#d3e5fa 55%,#c5dcf7)!important;border-right:1px solid #6f9ad6!important} [class*=\"sidebar\" i],[data-slot=\"sidebar\"]{background:transparent!important} [data-app-action-sidebar-thread-active=\"true\"]{background:linear-gradient(90deg,rgba(42,111,235,.18),rgba(122,162,216,.14))!important} .main-surface,.browser-main-surface{background:rgba(255,255,255,.94)!important;border:1px solid #7aa2d8!important;border-radius:6px!important;box-shadow:0 2px 8px rgba(42,80,150,.22)!important} .composer-surface-chrome{background:#fff!important;border:1px solid #5f8fd0!important;box-shadow:inset 0 1px 3px rgba(52,90,150,.16)!important} .app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(157,199,247,.85),transparent)!important}",
     "createdAt": "2026-07-17T00:00:00.000Z"
   },
   {
