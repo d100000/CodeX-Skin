@@ -513,7 +513,8 @@ async function init() {
       reserveStyle.id = "codex-doll-sidepanel-style";
       document.head.appendChild(reserveStyle);
     }
-    reserveStyle.textContent = ".app-shell-main-content-frame{margin-right:" + (config.width + 16) + "px!important}";
+    // 对 viewport（而非 frame）让位：环境信息等浮层挂在 viewport 上，只推 frame 会导致内容错位
+    reserveStyle.textContent = ".app-shell-main-content-viewport{margin-right:" + (config.width + 16) + "px!important}";
     if (!panelEl) {
       panelEl = document.createElement("aside");
       panelEl.id = "codex-doll-skin-sidepanel";

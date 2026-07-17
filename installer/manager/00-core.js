@@ -262,8 +262,10 @@ function backgroundLayerValue(theme) {
   return veilStackValue(theme) + ",url(" + JSON.stringify(theme.background) + ") " + theme.layout.x + "% " + theme.layout.y + "%/cover no-repeat";
 }
 
-function colorVarBlock(colors) {
-  return "--color-background-accent:" + colors.accent + "!important;--color-background-accent-hover:" + colors.accent + "!important;--color-text-accent:" + colors.accent + "!important;--color-icon-accent:" + colors.accent + "!important;--color-border-focus:" + colors.accent + "!important;--color-text-foreground:" + colors.text + "!important;--color-background-surface:color-mix(in srgb," + colors.surface + " 88%,transparent)!important";
+function colorVarBlock(colors, dark) {
+  // 深色主题的表面透明度更低：深色背景杂色多，气泡太透会看不清
+  const surfaceMix = dark ? 94 : 88;
+  return "--color-background-accent:" + colors.accent + "!important;--color-background-accent-hover:" + colors.accent + "!important;--color-text-accent:" + colors.accent + "!important;--color-icon-accent:" + colors.accent + "!important;--color-border-focus:" + colors.accent + "!important;--color-text-foreground:" + colors.text + "!important;--color-background-surface:color-mix(in srgb," + colors.surface + " " + surfaceMix + "%,transparent)!important";
 }
 
 // v3 新维度的 :root 变量发射。全部搭 Codex 官方 token 的车，未设置的维度不发射。
@@ -300,9 +302,10 @@ function themeCss(theme) {
   for (const face of (theme.typography && theme.typography.fontFaces) || []) {
     rules.push('@font-face{font-family:"' + face.family + '";src:url("' + face.src + '")}');
   }
+  const dark = isDarkTheme(theme);
   const extra = rootExtraVars(theme);
-  rules.push(":root{" + colorVarBlock(theme.colors) + (extra ? ";" + extra : "") + "}");
-  if (theme.colorsDark) rules.push(":root.electron-dark{" + colorVarBlock(theme.colorsDark) + "}");
+  rules.push(":root{" + colorVarBlock(theme.colors, dark) + (extra ? ";" + extra : "") + "}");
+  if (theme.colorsDark) rules.push(":root.electron-dark{" + colorVarBlock(theme.colorsDark, true) + "}");
   if (isVideoBackground(theme.background)) {
     // 视频由 <video> 元素承载：关掉默认英雄图，遮罩用 ::after 盖在视频上、正文之下。
     rules.push("#root::before{background:none!important}");
@@ -334,11 +337,11 @@ function themeCss(theme) {
       + "--color-border:color-mix(in srgb," + text + " 20%,transparent)!important;"
       + "--color-border-light:color-mix(in srgb," + text + " 11%,transparent)!important;"
       + "--color-token-side-bar-background:color-mix(in srgb," + surface + " 55%,transparent)!important;"
-      + "--color-token-main-surface-primary:color-mix(in srgb," + surface + " 50%,transparent)!important;"
+      + "--color-token-main-surface-primary:color-mix(in srgb," + surface + " 82%,transparent)!important;"
       + "--color-token-editor-background:color-mix(in srgb," + surface + " 92%,transparent)!important"
       + "}");
     rules.push(".app-shell-left-panel{background:color-mix(in srgb," + surface + " 55%,transparent)!important;border-right:1px solid color-mix(in srgb," + text + " 14%,transparent)!important;backdrop-filter:blur(6px) saturate(1.05)!important}");
-    rules.push(".main-surface,.browser-main-surface{background:linear-gradient(180deg,color-mix(in srgb," + surface + " 16%,transparent) 0 35%,color-mix(in srgb," + surface + " 62%,transparent) 100%)!important}");
+    rules.push(".main-surface,.browser-main-surface{background:linear-gradient(180deg,color-mix(in srgb," + surface + " 45%,transparent) 0 35%,color-mix(in srgb," + surface + " 88%,transparent) 100%)!important}");
     rules.push(".composer-surface-chrome{background:color-mix(in srgb," + surface + " 93%,transparent)!important;border:1px solid color-mix(in srgb," + text + " 18%,transparent)!important}");
     rules.push(".app-shell-main-content-top-fade{background:transparent!important}");
   }
