@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+appearance-settings-CydiTiiC.js
+generated/*.png
+generated/*.webp
+!generated/final/

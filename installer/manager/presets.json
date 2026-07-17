@@ -1,0 +1,40 @@
+[
+  {
+    "schemaVersion": 3,
+    "id": "doll-sakura-default",
+    "name": "樱花玩偶 · 默认",
+    "background": null,
+    "preview": "asset://doll-sakura-hero.webp",
+    "colors": { "accent": "#76506f", "surface": "#fff9fb", "text": "#3c2938" },
+    "layout": { "x": 50, "y": 50, "veil": 50 },
+    "brand": { "startupTint": true },
+    "createdAt": "2026-07-16T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "doll-room-light",
+    "name": "暖光书房",
+    "background": "asset://doll-room-light.webp",
+    "colors": { "accent": "#8a5a44", "surface": "#fff8f2", "text": "#3d2f28" },
+    "layout": { "x": 62, "y": 42, "veil": 56 },
+    "shape": { "radiusScale": 1.6 },
+    "brand": { "startupTint": true },
+    "createdAt": "2026-07-16T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "doll-plain-focus",
+    "name": "素净专注",
+    "background": "none",
+    "colors": { "accent": "#5c6b8a", "surface": "#f7f8fb", "text": "#2f3542" },
+    "layout": { "x": 50, "y": 50, "veil": 50 },
+    "shape": { "radiusScale": 0.75, "shadow": "none" },
+    "terminal": {
+      "black": "#3b4252", "red": "#bf616a", "green": "#a3be8c", "yellow": "#ebcb8b",
+      "blue": "#81a1c1", "magenta": "#b48ead", "cyan": "#88c0d0", "white": "#e5e9f0",
+      "brightBlack": "#4c566a", "brightRed": "#bf616a", "brightGreen": "#a3be8c", "brightYellow": "#ebcb8b",
+      "brightBlue": "#81a1c1", "brightMagenta": "#b48ead", "brightCyan": "#8fbcbb", "brightWhite": "#eceff4"
+    },
+    "createdAt": "2026-07-16T00:00:00.000Z"
+  }
+]

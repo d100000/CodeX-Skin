@@ -1,0 +1,17 @@
+:root {
+  --doll-shell: #f7e8eb;
+  --doll-text: #3c2938;
+  --doll-text-secondary: #675360;
+  --doll-muted: #7c6876;
+  --doll-accent: #9b6f98;
+  --doll-accent-strong: #76506f;
+  --doll-accent-soft: rgba(155, 111, 152, .12);
+  --doll-hover: rgba(155, 111, 152, .09);
+  --doll-focus: #76506f;
+  --doll-border: rgba(126, 80, 116, .17);
+  --doll-border-strong: rgba(126, 80, 116, .27);
+  --doll-font-ui: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --doll-font-display: "Songti SC", "STSong", Georgia, serif;
+  --doll-workspace-bg: url('/assets/doll-sakura-hero.webp');
+  --doll-character: none;
+}

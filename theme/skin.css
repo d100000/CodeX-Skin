@@ -1,0 +1,78 @@
+/* Runtime payload. The installer embeds packaged image assets as data URLs. */
+:root {
+  --color-background-surface: rgba(255, 250, 251, .88) !important;
+  --color-background-surface-under: #f7e8eb !important;
+  --color-background-elevated-primary: rgba(255, 252, 253, .94) !important;
+  --color-background-elevated-secondary: rgba(249, 236, 241, .92) !important;
+  --color-background-control: rgba(255, 252, 253, .82) !important;
+  --color-background-accent: #76506f !important;
+  --color-background-accent-hover: #694461 !important;
+  --color-text-foreground: #3c2938 !important;
+  --color-text-foreground-secondary: #675360 !important;
+  --color-text-foreground-tertiary: #7c6876 !important;
+  --color-text-accent: #76506f !important;
+  --color-icon-accent: #76506f !important;
+  --color-border: rgba(126, 80, 116, .22) !important;
+  --color-border-light: rgba(126, 80, 116, .13) !important;
+  --color-border-focus: #76506f !important;
+  --color-token-side-bar-background: rgba(255, 248, 250, .91) !important;
+  --color-token-main-surface-primary: rgba(255, 251, 252, .83) !important;
+  --color-token-editor-background: rgba(255, 253, 253, .96) !important;
+  --font-sans: Inter, "PingFang SC", system-ui, sans-serif !important;
+}
+
+html, body { background: #f7e8eb !important; }
+#root { position: relative; isolation: isolate; background: transparent !important; }
+#root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(255,249,250,.5), rgba(255,249,250,.05)),
+    url("asset://doll-sakura-hero.webp") center / cover no-repeat;
+  pointer-events: none;
+}
+#root::after {
+  content: none;
+}
+
+#root > * { position: relative; z-index: 1; background-color: transparent !important; }
+
+.app-shell-left-panel {
+  background: rgba(255, 248, 250, .88) !important;
+  border-right: 1px solid rgba(126, 80, 116, .22) !important;
+  backdrop-filter: blur(20px) saturate(1.12);
+}
+
+.main-surface,
+.browser-main-surface {
+  background: linear-gradient(180deg, rgba(255, 251, 252, .2) 0 35%, rgba(255, 248, 250, .78) 100%) !important;
+}
+
+.composer-surface-chrome,
+[data-user-message-bubble],
+[data-local-conversation-final-assistant],
+[data-codex-approval-surface] {
+  color: var(--color-text-foreground) !important;
+  border-color: rgba(126, 80, 116, .28) !important;
+  background: rgba(255, 251, 252, .9) !important;
+  box-shadow: 0 8px 24px rgba(82, 47, 73, .1) !important;
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+[data-app-action-sidebar-thread-active="true"] {
+  background: linear-gradient(90deg, rgba(155, 111, 152, .2), rgba(217, 182, 210, .16)) !important;
+}
+
+
+[class*="sidebar" i], [data-slot="sidebar"] {
+  background: rgba(255, 248, 250, .9) !important;
+  backdrop-filter: blur(22px) saturate(1.12);
+}
+
+button, [role="button"], textarea, input { border-radius: 7px !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

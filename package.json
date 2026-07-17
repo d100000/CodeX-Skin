@@ -1,0 +1,23 @@
+{
+  "name": "codex-doll-skin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "node --test tests/*.test.mjs",
+    "doctor": "node installer/cli.mjs doctor",
+    "install-launcher": "node installer/cli.mjs install-launcher",
+    "skin:status": "node installer/cli.mjs status",
+    "skin:pause": "node installer/cli.mjs pause",
+    "skin:apply": "node installer/cli.mjs apply"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "lucide-react": "latest"
+  }
+}

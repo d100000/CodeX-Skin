@@ -1,0 +1,17 @@
+{
+  "id": "codex-doll-skin",
+  "name": "玩偶姐姐 · Doll Workspace",
+  "version": "0.1.0",
+  "author": "Doll Skin Studio",
+  "minimumCodexVersion": "26.715.21425",
+  "variants": ["light", "focus"],
+  "assets": {
+    "background": "assets/doll-sakura-hero.webp",
+    "composerRibbon": "assets/ribbon-composer.svg"
+  },
+  "runtime": {
+    "css": "theme/skin.css",
+    "enhancer": "theme/home-enhancer.js",
+    "enhancerEnabledByDefault": false
+  }
+}
