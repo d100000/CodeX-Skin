@@ -442,7 +442,8 @@ async function init() {
       reserveStyle.id = "codex-doll-chrome-style";
       document.head.appendChild(reserveStyle);
     }
-    reserveStyle.textContent = "#root{padding-top:" + headerHeight + "px!important;padding-bottom:" + (config.statusBar ? 26 : 0) + "px!important;box-sizing:border-box!important}";
+    // 第一层容器用 100%（而非 100vh）让内容随 padding 收缩，否则输入框会被顶出屏幕
+    reserveStyle.textContent = "#root{padding-top:" + headerHeight + "px!important;padding-bottom:" + (config.statusBar ? 26 : 0) + "px!important;box-sizing:border-box!important}#root>div{height:100%!important;min-height:0!important}";
     if (!chromeEl) {
       chromeEl = document.createElement("div");
       chromeEl.id = "codex-doll-skin-chrome";
