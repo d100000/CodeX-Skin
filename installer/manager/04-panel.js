@@ -272,6 +272,22 @@ async function init() {
     trigger.textContent = theme.trigger.icon;
     trigger.dataset.pos = theme.trigger.position;
     trigger.dataset.autohide = theme.trigger.autoHide ? "1" : "0";
+    // Chrome 开启时把按钮挪进标题栏：右上角被宠物头像悬浮窗（独立原生窗口，页面 z-index 压不过）
+    // 和假窗口按钮占用，需要避让
+    trigger.style.top = "";
+    trigger.style.right = "";
+    trigger.style.bottom = "";
+    const chromeOn = theme.chrome && theme.chrome.enabled;
+    if (chromeOn) {
+      if (theme.trigger.position === "top-right") {
+        trigger.style.top = "2px";
+        trigger.style.right = "146px";
+      } else if (theme.trigger.position === "top-center") {
+        trigger.style.top = "2px";
+      } else if (theme.trigger.position === "bottom-right" && theme.chrome.statusBar) {
+        trigger.style.bottom = "32px";
+      }
+    }
   };
 
   // 品牌：窗口标题前缀 + 左上角 Logo（尽力而为，失败不影响其余皮肤）
