@@ -413,6 +413,13 @@ async function init() {
       panelEl.appendChild(iconRow);
     }
     if (config.heading) heading(config.heading);
+    if (config.image2) {
+      const image2 = document.createElement("img");
+      image2.src = config.image2;
+      image2.alt = "";
+      image2.style.cssText = "width:100%;border-radius:" + radius + ";object-fit:cover;border:" + accentBorder;
+      panelEl.appendChild(image2);
+    }
     if (config.footer) {
       const footer = document.createElement("div");
       footer.textContent = "🔍 " + config.footer;

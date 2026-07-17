@@ -65,6 +65,8 @@ function installRuntime() {
     "public/assets/doll-sakura-hero.webp",
     "public/assets/doll-room-light.webp",
     "public/assets/doll-character-side.jpg",
+    "public/assets/qq-mascot.jpg",
+    "public/assets/qq-friend.jpg",
   ];
   const temporary = `${INSTALL_ROOT}.tmp-${process.pid}`;
   rmSync(temporary, { recursive: true, force: true });

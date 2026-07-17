@@ -617,6 +617,21 @@ function createEditor(handlers) {
     textRow("文字卡片", 300, "面板里的一段介绍文字", () => draft.sidePanel.card, (v) => { draft.sidePanel.card = v.replace(/[<>]/g, "").slice(0, 300); }),
     textRow("图标行", 24, "一串 emoji，如：🖥⭐✉🧩📁", () => draft.sidePanel.icons, (v) => { draft.sidePanel.icons = v.replace(/[<>]/g, "").slice(0, 24); }),
     textRow("分组标题", 20, "如：我的好友 (2/8)", () => draft.sidePanel.heading, (v) => { draft.sidePanel.heading = v.replace(/[<>]/g, "").slice(0, 20); }),
+    (() => {
+      const upload = cdsButton("上传分组图（好友头像）");
+      upload.addEventListener("click", async () => {
+        const picked = await handlers.pickImage();
+        if (!picked || !draft) return;
+        draft.sidePanel.image2 = picked.dataUrl;
+        applyLive();
+      });
+      const clear = cdsButton("清除分组图");
+      clear.addEventListener("click", () => { if (!draft) return; draft.sidePanel.image2 = null; applyLive(); });
+      const row = document.createElement("div");
+      row.className = "cds-actions";
+      row.append(upload, clear);
+      return row;
+    })(),
     textRow("底部搜索", 20, "如：查找好友…", () => draft.sidePanel.footer, (v) => { draft.sidePanel.footer = v.replace(/[<>]/g, "").slice(0, 20); })
   );
   syncFns.push(() => {

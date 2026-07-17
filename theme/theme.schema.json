@@ -144,6 +144,12 @@
         "card": { "type": "string", "maxLength": 300 },
         "icons": { "type": "string", "maxLength": 24 },
         "heading": { "type": "string", "maxLength": 20 },
+        "image2": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+          ]
+        },
         "footer": { "type": "string", "maxLength": 20 }
       }
     },

@@ -5,3 +5,4 @@ appearance-settings-CydiTiiC.js
 generated/*.png
 generated/*.webp
 !generated/final/
+tools/image-api.local.json

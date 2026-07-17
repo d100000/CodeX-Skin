@@ -49,10 +49,11 @@
       "width": 250,
       "title": "⊕ Codex 好友",
       "subtitle": "Codex 小蓝|LV 07",
-      "image": "asset://doll-character-side.jpg",
+      "image": "asset://qq-mascot.jpg",
       "card": "代码有问题？找我！我是你的智能伙伴 Codex，陪你写代码、改 Bug、查文档，超可靠哒！",
       "icons": "🖥⭐✉🧩📁",
       "heading": "▾ 我的好友 (2/8)",
+      "image2": "asset://qq-friend.jpg",
       "footer": "查找好友…"
     },
     "tokens": {

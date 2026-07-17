@@ -371,6 +371,7 @@ function normalizeSidePanel(source) {
     card: cleanLine(panel.card, 300),
     icons: cleanLine(panel.icons, 24),
     heading: cleanLine(panel.heading, 20),
+    image2: typeof panel.image2 === "string" && BACKGROUND_DATA_URL.test(panel.image2) ? panel.image2 : null,
     footer: cleanLine(panel.footer, 20)
   };
 }

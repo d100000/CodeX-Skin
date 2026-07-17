@@ -243,7 +243,7 @@ test("tokens and customCss are sanitized against injection and external URLs", (
 
 test("sidePanel normalizes with clamped width and stripped markup", () => {
   const off = core.normalizeTheme({ id: "a" }).sidePanel;
-  assert.deepEqual(off, { enabled: false, width: 240, title: "", subtitle: "", image: null, card: "", icons: "", heading: "", footer: "" });
+  assert.deepEqual(off, { enabled: false, width: 240, title: "", subtitle: "", image: null, card: "", icons: "", heading: "", image2: null, footer: "" });
   const on = core.normalizeTheme({ id: "b", sidePanel: { enabled: 1, width: 900, title: "<b>好友</b>", subtitle: "小蓝|LV 07", image: SAMPLE_IMAGE, card: "hi<script>", icons: "🖥⭐", heading: "我的好友", footer: "查找好友…" } }).sidePanel;
   assert.equal(on.enabled, true);
   assert.equal(on.width, 320);
