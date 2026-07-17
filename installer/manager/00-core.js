@@ -338,7 +338,12 @@ function themeCss(theme) {
       + "--color-border-light:color-mix(in srgb," + text + " 11%,transparent)!important;"
       + "--color-token-side-bar-background:color-mix(in srgb," + surface + " 55%,transparent)!important;"
       + "--color-token-main-surface-primary:color-mix(in srgb," + surface + " 82%,transparent)!important;"
-      + "--color-token-editor-background:color-mix(in srgb," + surface + " 92%,transparent)!important"
+      + "--color-token-editor-background:color-mix(in srgb," + surface + " 92%,transparent)!important;"
+      + "--color-background-elevated-primary-opaque:color-mix(in srgb,#fff 8%," + surface + ")!important;"
+      + "--color-background-elevated-secondary-opaque:color-mix(in srgb,#fff 5%," + surface + ")!important;"
+      + "--color-background-editor-opaque:" + surface + "!important;"
+      + "--color-token-dropdown-background:color-mix(in srgb,#fff 8%," + surface + ")!important;"
+      + "--color-token-dropdown-foreground:" + text + "!important"
       + "}");
     rules.push(".app-shell-left-panel{background:color-mix(in srgb," + surface + " 55%,transparent)!important;border-right:1px solid color-mix(in srgb," + text + " 14%,transparent)!important;backdrop-filter:blur(6px) saturate(1.05)!important}");
     rules.push(".main-surface,.browser-main-surface{background:linear-gradient(180deg,color-mix(in srgb," + surface + " 45%,transparent) 0 35%,color-mix(in srgb," + surface + " 88%,transparent) 100%)!important}");
