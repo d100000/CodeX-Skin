@@ -483,9 +483,10 @@ async function init() {
     }
     chromeEl.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:8;font:13px var(--font-sans,system-ui)";
     chromeEl.textContent = "";
-    // 标题栏：保留拖拽；左侧避开 macOS 交通灯
+    // 标题栏：刻意不设 -webkit-app-region:drag——Electron 的拖拽区计算对覆盖元素的
+    // no-drag 豁口不可靠，会吞掉皮肤管理器按钮的点击；窗口拖拽交给下方 Codex 原生顶栏
     const titlebar = document.createElement("div");
-    titlebar.style.cssText = "height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 84px;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,20,60,.45);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 62%,#9cc2ff) 0%," + accent + " 45%,color-mix(in srgb," + accent + " 72%,#08245e) 100%);-webkit-app-region:drag";
+    titlebar.style.cssText = "height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 84px;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,20,60,.45);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 62%,#9cc2ff) 0%," + accent + " 45%,color-mix(in srgb," + accent + " 72%,#08245e) 100%)";
     const titleIcon = document.createElement("span");
     titleIcon.textContent = theme.trigger.icon;
     titleIcon.style.cssText = "font-size:16px;font-weight:400;text-shadow:none";
