@@ -441,6 +441,42 @@ async function init() {
     if (fxConfig.typingFx === "none") fxParticles = [];
   };
 
+  // AI 工作反馈：轮询"停止"按钮是否存在，切换 documentElement 的工作标记（CSS 负责视觉）
+  let workingWatcher = 0;
+  let workingBar = null;
+  let wasWorking = false;
+  const ensureWorkingBar = () => {
+    if (workingBar && workingBar.isConnected) return;
+    workingBar = document.getElementById("codex-doll-working-bar") || document.createElement("div");
+    workingBar.id = "codex-doll-working-bar";
+    workingBar.setAttribute("aria-hidden", "true");
+    if (!workingBar.isConnected) document.body.appendChild(workingBar);
+  };
+  const isCodexWorking = () => Boolean(
+    document.querySelector('[aria-label="停止"],[aria-label="Stop"],[aria-label*="停止"],[aria-label*="Stop"]')
+  );
+  const startWorkingWatcher = () => {
+    ensureWorkingBar();
+    if (workingWatcher) return;
+    workingWatcher = setInterval(() => {
+      ensureWorkingBar();
+      const working = isCodexWorking() && !reducedMotion() && !baseStyle.disabled;
+      const flag = working ? "1" : "0";
+      if (document.documentElement.dataset.codexDollWorking !== flag) {
+        document.documentElement.dataset.codexDollWorking = flag;
+      }
+      // 工作结束瞬间：在输入框上方来一次小庆祝迸发（若配置了输入反馈）
+      if (wasWorking && !working && fxConfig.typingFx !== "none" && !reducedMotion()) {
+        const composer = document.querySelector(".composer-surface-chrome");
+        if (composer) {
+          const rect = composer.getBoundingClientRect();
+          spawnBurst(rect.left + rect.width / 2, rect.top + 8, 14, true);
+        }
+      }
+      wasWorking = working;
+    }, 350);
+  };
+
   const applyTrigger = (theme) => {
     const config = getTriggerConfig();
     trigger.textContent = config.icon;
@@ -742,6 +778,7 @@ async function init() {
     applySlideshow(theme);
     applyChrome(theme);
     applySidePanel(theme);
+    startWorkingWatcher();
   };
   matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", () => { if (lastApplied) applyExtras(lastApplied); });
 

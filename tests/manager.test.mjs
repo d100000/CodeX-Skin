@@ -162,7 +162,7 @@ test("phase B/C dimensions normalize with follow-default values", () => {
   const theme = core.normalizeTheme({ id: "a" });
   assert.deepEqual(theme.backgrounds, []);
   assert.equal(theme.backgroundDark, null);
-  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", typingFx: "none", listFx: "none", bgMotion: "none", slideshowMinutes: 0 });
+  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", typingFx: "none", listFx: "none", bgMotion: "none", thinkingFx: "none", slideshowMinutes: 0 });
   assert.deepEqual(theme.trigger, { position: "top-center", icon: "D", autoHide: false });
   assert.deepEqual(theme.brand, { startupTint: false, logo: null, titlePrefix: "" });
   assert.deepEqual(theme.typography.fontFaces, []);
@@ -325,6 +325,19 @@ test("bgMotion emits GPU keyframes only when appropriate", () => {
   assert.doesNotMatch(off, /@keyframes codexDollBg/);
   const video = core.themeCss(core.normalizeTheme({ id: "d", background: SAMPLE_VIDEO, effects: { bgMotion: "drift" } }));
   assert.doesNotMatch(video, /@keyframes codexDollBg/);
+});
+
+test("thinkingFx emits working-state rules gated by motion", () => {
+  const glow = core.themeCss(core.normalizeTheme({ id: "a", effects: { thinkingFx: "glow" } }));
+  assert.match(glow, /#codex-doll-working-bar\{position:fixed/);
+  assert.match(glow, /codexDollWorkSweep/);
+  assert.match(glow, /data-codex-doll-working="1"\] \.composer-surface-chrome/);
+  assert.match(glow, /codexDollTriggerPulse/);
+  const subtle = core.themeCss(core.normalizeTheme({ id: "b", effects: { thinkingFx: "subtle" } }));
+  assert.match(subtle, /#codex-doll-working-bar/);
+  assert.doesNotMatch(subtle, /codexDollWorkGlow/, "subtle 只发进度条，不发光晕");
+  const off = core.themeCss(core.normalizeTheme({ id: "c", effects: { thinkingFx: "glow", motion: "off" } }));
+  assert.doesNotMatch(off, /codex-doll-working-bar/);
 });
 
 test("paletteFromPixels falls back to luminance-based neutral palettes for grayscale", () => {

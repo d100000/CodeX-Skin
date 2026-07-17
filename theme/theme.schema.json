@@ -209,6 +209,13 @@
             "breathe",
             "drift"
           ]
+        },
+        "thinkingFx": {
+          "enum": [
+            "none",
+            "subtle",
+            "glow"
+          ]
         }
       }
     },

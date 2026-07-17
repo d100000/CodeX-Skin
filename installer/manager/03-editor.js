@@ -533,6 +533,7 @@ function createEditor(handlers) {
     selectRow("滚动条", [["default", "默认"], ["slim", "纤细"], ["hidden", "隐藏"]], () => draft.effects.scrollbar, (v) => { draft.effects.scrollbar = v; }),
     selectRow("氛围粒子", [["none", "无"], ["sakura", "樱花花瓣"], ["snow", "雪花"], ["neon", "霓虹光尘"], ["stardust", "星尘闪烁"]], () => draft.effects.particles, (v) => { draft.effects.particles = v; }),
     selectRow("背景动效", [["none", "静止"], ["breathe", "呼吸缩放"], ["drift", "缓慢漂移"]], () => draft.effects.bgMotion, (v) => { draft.effects.bgMotion = v; }),
+    selectRow("AI 工作反馈", [["none", "无"], ["subtle", "顶部微光进度条"], ["glow", "进度条+输入框光晕"]], () => draft.effects.thinkingFx, (v) => { draft.effects.thinkingFx = v; }),
     selectRow("界面动效", [["default", "默认"], ["off", "关闭动效"]], () => draft.effects.motion, (v) => { draft.effects.motion = v; }),
     selectRow("输入反馈", [["none", "无"], ["sparkle", "星光迸发"], ["petal", "花瓣迸发"]], () => draft.effects.typingFx, (v) => { draft.effects.typingFx = v; }),
     selectRow("列表进入", [["none", "无"], ["slide", "滑入淡入"]], () => draft.effects.listFx, (v) => { draft.effects.listFx = v; }),

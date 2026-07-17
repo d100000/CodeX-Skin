@@ -48,7 +48,8 @@
       "scrollbar": "slim",
       "typingFx": "petal",
       "listFx": "slide",
-      "bgMotion": "breathe"
+      "bgMotion": "breathe",
+      "thinkingFx": "subtle"
     },
     "brand": {
       "startupTint": true
@@ -102,7 +103,8 @@
     "effects": {
       "scrollbar": "slim",
       "listFx": "slide",
-      "bgMotion": "breathe"
+      "bgMotion": "breathe",
+      "thinkingFx": "subtle"
     },
     "brand": {
       "startupTint": true
@@ -186,7 +188,8 @@
     "createdAt": "2026-07-17T00:00:00.000Z",
     "effects": {
       "typingFx": "sparkle",
-      "listFx": "slide"
+      "listFx": "slide",
+      "thinkingFx": "glow"
     }
   },
   {

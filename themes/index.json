@@ -4,8 +4,8 @@
       "id": "classic-blue-2007",
       "name": "经典蓝 · 2007 怀旧",
       "file": "classic-blue-2007.codexskin.json",
-      "bytes": 122049,
-      "sha256": "8b7a0f143f831d8202dfc46dbccbdcbaf70e2a5ca98404758ff90e87a0346c15"
+      "bytes": 122075,
+      "sha256": "60efc648630fd56c889ab7c301eb36a89372717e87e79428372f9001c6ac81dd"
     },
     {
       "id": "cloud-sky-demo",
@@ -25,15 +25,15 @@
       "id": "doll-room-light",
       "name": "暖光书房",
       "file": "doll-room-light.codexskin.json",
-      "bytes": 70304,
-      "sha256": "636bb244cf5b20dd349ca102217ffa0b322abe3b3dc3ee96b85bc3df638ce6b5"
+      "bytes": 70332,
+      "sha256": "42b68d7be1d4af6e958a5b98d216f9b672c39b5ea10768a87cc5ca402b51911e"
     },
     {
       "id": "doll-sakura-default",
       "name": "樱花玩偶 · 默认",
       "file": "doll-sakura-default.codexskin.json",
-      "bytes": 1137,
-      "sha256": "bac5c475171464a78bf3487b9c8c3c2898231e28c2c940442a3c75b842271606"
+      "bytes": 1165,
+      "sha256": "11d32ed13e3f4ed26ab9e40e244da3c819e27704eafdf1ffd3c7dd5e19cb237e"
     }
   ]
 }

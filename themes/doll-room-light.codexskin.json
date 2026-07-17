@@ -45,7 +45,8 @@
   "effects": {
     "scrollbar": "slim",
     "listFx": "slide",
-    "bgMotion": "breathe"
+    "bgMotion": "breathe",
+    "thinkingFx": "subtle"
   },
   "brand": {
     "startupTint": true

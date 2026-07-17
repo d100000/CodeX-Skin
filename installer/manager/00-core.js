@@ -28,6 +28,7 @@ const MOTION_MODES = ["default", "off"];
 const TYPING_FX_KINDS = ["none", "sparkle", "petal"];
 const LIST_FX_KINDS = ["none", "slide"];
 const BG_MOTION_KINDS = ["none", "breathe", "drift"];
+const THINKING_FX_KINDS = ["none", "subtle", "glow"];
 const TRIGGER_POSITIONS = ["top-center", "top-right", "bottom-right"];
 
 function isVideoBackground(background) {
@@ -184,6 +185,7 @@ function normalizeTheme(theme) {
       typingFx: pickEnum(effects.typingFx, TYPING_FX_KINDS),
       listFx: pickEnum(effects.listFx, LIST_FX_KINDS),
       bgMotion: pickEnum(effects.bgMotion, BG_MOTION_KINDS),
+      thinkingFx: pickEnum(effects.thinkingFx, THINKING_FX_KINDS),
       slideshowMinutes: sizeOrZero(effects.slideshowMinutes, 1, 240)
     },
     trigger: {
@@ -374,6 +376,21 @@ function themeCss(theme) {
   }
   if (effects.motion === "off") {
     rules.push("*,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important;animation-delay:0s!important}");
+  }
+  // AI 工作反馈：检测到"停止"按钮时（documentElement[data-codex-doll-working=1]），
+  // 顶部微光进度条流动 + 输入框呼吸光晕 + 触发按钮脉冲。关闭动效时不发射。
+  if (effects.thinkingFx && effects.thinkingFx !== "none" && effects.motion !== "off") {
+    const accent = theme.colors.accent;
+    const glow = "color-mix(in srgb," + accent + " 55%,transparent)";
+    rules.push("@keyframes codexDollWorkSweep{0%{background-position:-35% 0}100%{background-position:135% 0}}");
+    rules.push("#codex-doll-working-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:41;pointer-events:none;opacity:0;transition:opacity .3s;background:linear-gradient(90deg,transparent," + accent + ",transparent);background-size:38% 100%;background-repeat:no-repeat}");
+    rules.push('@media (prefers-reduced-motion: no-preference){:root[data-codex-doll-working="1"] #codex-doll-working-bar{opacity:1;animation:codexDollWorkSweep 1.15s linear infinite}}');
+    if (effects.thinkingFx === "glow") {
+      rules.push("@keyframes codexDollWorkGlow{0%,100%{box-shadow:0 0 0 1px " + glow + ",0 6px 22px " + glow + "}50%{box-shadow:0 0 0 2px " + accent + ",0 10px 34px " + glow + "}}");
+      rules.push('@media (prefers-reduced-motion: no-preference){:root[data-codex-doll-working="1"] .composer-surface-chrome{animation:codexDollWorkGlow 1.7s ease-in-out infinite}}');
+      rules.push("@keyframes codexDollTriggerPulse{0%,100%{box-shadow:0 3px 12px rgba(82,47,73,.14)}50%{box-shadow:0 0 0 4px " + glow + ",0 3px 14px " + glow + "}}");
+      rules.push('@media (prefers-reduced-motion: no-preference){:root[data-codex-doll-working="1"] #codex-doll-skin-menu{animation:codexDollTriggerPulse 1.7s ease-in-out infinite}}');
+    }
   }
   // 背景动效：缓慢呼吸/漂移（GPU 合成 transform，视频背景与关闭动效时不发射）
   if (effects.bgMotion && effects.bgMotion !== "none" && effects.motion !== "off" && !isVideoBackground(theme.background)) {
