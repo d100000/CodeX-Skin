@@ -162,7 +162,7 @@ test("phase B/C dimensions normalize with follow-default values", () => {
   const theme = core.normalizeTheme({ id: "a" });
   assert.deepEqual(theme.backgrounds, []);
   assert.equal(theme.backgroundDark, null);
-  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", slideshowMinutes: 0 });
+  assert.deepEqual(theme.effects, { scrollbar: "default", particles: "none", motion: "default", typingFx: "none", listFx: "none", slideshowMinutes: 0 });
   assert.deepEqual(theme.trigger, { position: "top-center", icon: "D", autoHide: false });
   assert.deepEqual(theme.brand, { startupTint: false, logo: null, titlePrefix: "" });
   assert.deepEqual(theme.typography.fontFaces, []);

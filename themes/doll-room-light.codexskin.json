@@ -43,7 +43,8 @@
     "brightWhite": "#fffaf4"
   },
   "effects": {
-    "scrollbar": "slim"
+    "scrollbar": "slim",
+    "listFx": "slide"
   },
   "brand": {
     "startupTint": true

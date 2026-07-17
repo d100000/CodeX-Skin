@@ -5,18 +5,53 @@
     "name": "樱花玩偶 · 默认",
     "background": null,
     "preview": "asset://doll-sakura-hero.webp",
-    "colors": { "accent": "#76506f", "surface": "#fff9fb", "text": "#3c2938" },
-    "layout": { "x": 50, "y": 50, "veil": 50, "sidebarOpacity": 45, "veils": { "content": 12 } },
-    "typography": { "sans": "\"LXGW WenKai\", \"PingFang SC\", sans-serif" },
-    "shape": { "radiusScale": 1.6 },
-    "terminal": {
-      "black": "#5c4a55", "red": "#c95c78", "green": "#7d9a6e", "yellow": "#c98f4e",
-      "blue": "#6f82bd", "magenta": "#a86bad", "cyan": "#5f9a94", "white": "#f5eef1",
-      "brightBlack": "#8a7482", "brightRed": "#e08ba2", "brightGreen": "#9cba8c", "brightYellow": "#e0b070",
-      "brightBlue": "#93a5d6", "brightMagenta": "#c290c6", "brightCyan": "#82b7b1", "brightWhite": "#fffafc"
+    "colors": {
+      "accent": "#76506f",
+      "surface": "#fff9fb",
+      "text": "#3c2938"
     },
-    "effects": { "particles": "sakura", "scrollbar": "slim" },
-    "brand": { "startupTint": true },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 50,
+      "sidebarOpacity": 45,
+      "veils": {
+        "content": 12
+      }
+    },
+    "typography": {
+      "sans": "\"LXGW WenKai\", \"PingFang SC\", sans-serif"
+    },
+    "shape": {
+      "radiusScale": 1.6
+    },
+    "terminal": {
+      "black": "#5c4a55",
+      "red": "#c95c78",
+      "green": "#7d9a6e",
+      "yellow": "#c98f4e",
+      "blue": "#6f82bd",
+      "magenta": "#a86bad",
+      "cyan": "#5f9a94",
+      "white": "#f5eef1",
+      "brightBlack": "#8a7482",
+      "brightRed": "#e08ba2",
+      "brightGreen": "#9cba8c",
+      "brightYellow": "#e0b070",
+      "brightBlue": "#93a5d6",
+      "brightMagenta": "#c290c6",
+      "brightCyan": "#82b7b1",
+      "brightWhite": "#fffafc"
+    },
+    "effects": {
+      "particles": "sakura",
+      "scrollbar": "slim",
+      "typingFx": "petal",
+      "listFx": "slide"
+    },
+    "brand": {
+      "startupTint": true
+    },
     "createdAt": "2026-07-16T00:00:00.000Z"
   },
   {
@@ -24,18 +59,52 @@
     "id": "doll-room-light",
     "name": "暖光书房",
     "background": "asset://doll-room-light.webp",
-    "colors": { "accent": "#8a5a44", "surface": "#fff8f2", "text": "#3d2f28" },
-    "layout": { "x": 62, "y": 42, "veil": 56, "sidebarOpacity": 40, "veils": { "content": 15 } },
-    "typography": { "sans": "\"Source Han Serif SC\", \"Songti SC\", \"Noto Serif SC\", serif", "chatFontSize": 15 },
-    "shape": { "radiusScale": 1.6 },
-    "terminal": {
-      "black": "#4a3a30", "red": "#c05b47", "green": "#7a8f5a", "yellow": "#d69a4e",
-      "blue": "#7a89b8", "magenta": "#a8748f", "cyan": "#6f9f95", "white": "#f8f0e8",
-      "brightBlack": "#7d6a5c", "brightRed": "#dd8570", "brightGreen": "#9cb37c", "brightYellow": "#e8b878",
-      "brightBlue": "#9fabd0", "brightMagenta": "#c397ae", "brightCyan": "#8fbcb2", "brightWhite": "#fffaf4"
+    "colors": {
+      "accent": "#8a5a44",
+      "surface": "#fff8f2",
+      "text": "#3d2f28"
     },
-    "effects": { "scrollbar": "slim" },
-    "brand": { "startupTint": true },
+    "layout": {
+      "x": 62,
+      "y": 42,
+      "veil": 56,
+      "sidebarOpacity": 40,
+      "veils": {
+        "content": 15
+      }
+    },
+    "typography": {
+      "sans": "\"Source Han Serif SC\", \"Songti SC\", \"Noto Serif SC\", serif",
+      "chatFontSize": 15
+    },
+    "shape": {
+      "radiusScale": 1.6
+    },
+    "terminal": {
+      "black": "#4a3a30",
+      "red": "#c05b47",
+      "green": "#7a8f5a",
+      "yellow": "#d69a4e",
+      "blue": "#7a89b8",
+      "magenta": "#a8748f",
+      "cyan": "#6f9f95",
+      "white": "#f8f0e8",
+      "brightBlack": "#7d6a5c",
+      "brightRed": "#dd8570",
+      "brightGreen": "#9cb37c",
+      "brightYellow": "#e8b878",
+      "brightBlue": "#9fabd0",
+      "brightMagenta": "#c397ae",
+      "brightCyan": "#8fbcb2",
+      "brightWhite": "#fffaf4"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "listFx": "slide"
+    },
+    "brand": {
+      "startupTint": true
+    },
     "createdAt": "2026-07-16T00:00:00.000Z"
   },
   {
@@ -43,21 +112,55 @@
     "id": "classic-blue-2007",
     "name": "经典蓝 · 2007 怀旧",
     "background": "none",
-    "colors": { "accent": "#2a6feb", "surface": "#eef4fd", "text": "#1b2a41" },
-    "layout": { "x": 50, "y": 50, "veil": 50 },
-    "typography": { "sans": "Tahoma, Verdana, \"PingFang SC\", sans-serif" },
-    "shape": { "radiusScale": 0.5, "shadow": "bold" },
-    "terminal": {
-      "black": "#0d1a33", "red": "#c0392b", "green": "#1e8f4d", "yellow": "#d4881e",
-      "blue": "#2a6feb", "magenta": "#8e44ad", "cyan": "#1691a8", "white": "#eef4fd",
-      "brightBlack": "#41547a", "brightRed": "#e05b4b", "brightGreen": "#2fbf68", "brightYellow": "#f2a83c",
-      "brightBlue": "#5a92f5", "brightMagenta": "#ab6bc9", "brightCyan": "#2fb3ca", "brightWhite": "#ffffff"
+    "colors": {
+      "accent": "#2a6feb",
+      "surface": "#eef4fd",
+      "text": "#1b2a41"
     },
-    "brand": { "startupTint": true },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 50
+    },
+    "typography": {
+      "sans": "Tahoma, Verdana, \"PingFang SC\", sans-serif"
+    },
+    "shape": {
+      "radiusScale": 0.5,
+      "shadow": "bold"
+    },
+    "terminal": {
+      "black": "#0d1a33",
+      "red": "#c0392b",
+      "green": "#1e8f4d",
+      "yellow": "#d4881e",
+      "blue": "#2a6feb",
+      "magenta": "#8e44ad",
+      "cyan": "#1691a8",
+      "white": "#eef4fd",
+      "brightBlack": "#41547a",
+      "brightRed": "#e05b4b",
+      "brightGreen": "#2fbf68",
+      "brightYellow": "#f2a83c",
+      "brightBlue": "#5a92f5",
+      "brightMagenta": "#ab6bc9",
+      "brightCyan": "#2fb3ca",
+      "brightWhite": "#ffffff"
+    },
+    "brand": {
+      "startupTint": true
+    },
     "chrome": {
       "enabled": true,
       "title": "Codex 2007",
-      "toolbar": ["📝 新建任务", "📅 已安排", "🧩 插件", "🌐 站点", "🎵 拉取请求", "💬 聊天"],
+      "toolbar": [
+        "📝 新建任务",
+        "📅 已安排",
+        "🧩 插件",
+        "🌐 站点",
+        "🎵 拉取请求",
+        "💬 聊天"
+      ],
       "statusBar": true
     },
     "sidePanel": {
@@ -78,24 +181,58 @@
       "--color-token-editor-background": "rgba(255,255,255,.92)"
     },
     "customCss": "#root::before{background:linear-gradient(180deg,#bcd6f7 0,#dcebfb 200px,#e8f1fc 100%)!important} .app-shell-left-panel{background:#f7fbff!important;border-right:1px solid #6f9ad6!important} [class*=\"sidebar\" i],[data-slot=\"sidebar\"]{background:transparent!important} [data-app-action-sidebar-thread-active=\"true\"]{background:linear-gradient(90deg,rgba(42,111,235,.2),rgba(122,162,216,.15))!important} .main-surface,.browser-main-surface{background:rgba(255,255,255,.96)!important;border:1px solid #6f9ad6!important;border-radius:6px!important;box-shadow:0 2px 8px rgba(42,80,150,.25)!important} .composer-surface-chrome{background:#fff!important;border:1px solid #5f8fd0!important;box-shadow:inset 0 1px 3px rgba(52,90,150,.16)!important} .app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(157,199,247,.6),transparent)!important}",
-    "createdAt": "2026-07-17T00:00:00.000Z"
+    "createdAt": "2026-07-17T00:00:00.000Z",
+    "effects": {
+      "typingFx": "sparkle",
+      "listFx": "slide"
+    }
   },
   {
     "schemaVersion": 3,
     "id": "doll-plain-focus",
     "name": "素净专注",
     "background": "none",
-    "colors": { "accent": "#5c6b8a", "surface": "#f7f8fb", "text": "#2f3542" },
-    "layout": { "x": 50, "y": 50, "veil": 50 },
-    "typography": { "sans": "\"Source Han Sans SC\", \"Noto Sans SC\", \"PingFang SC\", sans-serif", "mono": "\"JetBrains Mono\", ui-monospace, monospace" },
-    "shape": { "radiusScale": 0.75, "shadow": "none" },
-    "effects": { "scrollbar": "hidden" },
-    "brand": { "startupTint": true },
+    "colors": {
+      "accent": "#5c6b8a",
+      "surface": "#f7f8fb",
+      "text": "#2f3542"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 50
+    },
+    "typography": {
+      "sans": "\"Source Han Sans SC\", \"Noto Sans SC\", \"PingFang SC\", sans-serif",
+      "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+    },
+    "shape": {
+      "radiusScale": 0.75,
+      "shadow": "none"
+    },
+    "effects": {
+      "scrollbar": "hidden"
+    },
+    "brand": {
+      "startupTint": true
+    },
     "terminal": {
-      "black": "#3b4252", "red": "#bf616a", "green": "#a3be8c", "yellow": "#ebcb8b",
-      "blue": "#81a1c1", "magenta": "#b48ead", "cyan": "#88c0d0", "white": "#e5e9f0",
-      "brightBlack": "#4c566a", "brightRed": "#bf616a", "brightGreen": "#a3be8c", "brightYellow": "#ebcb8b",
-      "brightBlue": "#81a1c1", "brightMagenta": "#b48ead", "brightCyan": "#8fbcbb", "brightWhite": "#eceff4"
+      "black": "#3b4252",
+      "red": "#bf616a",
+      "green": "#a3be8c",
+      "yellow": "#ebcb8b",
+      "blue": "#81a1c1",
+      "magenta": "#b48ead",
+      "cyan": "#88c0d0",
+      "white": "#e5e9f0",
+      "brightBlack": "#4c566a",
+      "brightRed": "#bf616a",
+      "brightGreen": "#a3be8c",
+      "brightYellow": "#ebcb8b",
+      "brightBlue": "#81a1c1",
+      "brightMagenta": "#b48ead",
+      "brightCyan": "#8fbcbb",
+      "brightWhite": "#eceff4"
     },
     "createdAt": "2026-07-16T00:00:00.000Z"
   }

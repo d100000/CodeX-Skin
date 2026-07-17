@@ -533,6 +533,8 @@ function createEditor(handlers) {
     selectRow("滚动条", [["default", "默认"], ["slim", "纤细"], ["hidden", "隐藏"]], () => draft.effects.scrollbar, (v) => { draft.effects.scrollbar = v; }),
     selectRow("氛围粒子", [["none", "无"], ["sakura", "樱花花瓣"], ["snow", "雪花"]], () => draft.effects.particles, (v) => { draft.effects.particles = v; }),
     selectRow("界面动效", [["default", "默认"], ["off", "关闭动效"]], () => draft.effects.motion, (v) => { draft.effects.motion = v; }),
+    selectRow("输入反馈", [["none", "无"], ["sparkle", "星光迸发"], ["petal", "花瓣迸发"]], () => draft.effects.typingFx, (v) => { draft.effects.typingFx = v; }),
+    selectRow("列表进入", [["none", "无"], ["slide", "滑入淡入"]], () => draft.effects.listFx, (v) => { draft.effects.listFx = v; }),
     optionalSliderRow("轮播间隔(分)", 1, 240, 1, 10, 0, () => draft.effects.slideshowMinutes, (v) => { draft.effects.slideshowMinutes = v; }),
     (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "皮肤切换按钮（全局设置）"; return t; })(),
     globalTriggerGroup,

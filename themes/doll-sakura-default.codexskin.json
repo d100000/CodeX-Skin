@@ -43,7 +43,9 @@
   },
   "effects": {
     "particles": "sakura",
-    "scrollbar": "slim"
+    "scrollbar": "slim",
+    "typingFx": "petal",
+    "listFx": "slide"
   },
   "brand": {
     "startupTint": true

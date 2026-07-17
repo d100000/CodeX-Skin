@@ -3,76 +3,158 @@
   "$id": "https://codex-doll-skin.local/theme.schema.json",
   "title": "Codex Doll Skin Theme",
   "type": "object",
-  "required": ["schemaVersion", "id", "name"],
+  "required": [
+    "schemaVersion",
+    "id",
+    "name"
+  ],
   "properties": {
-    "schemaVersion": { "enum": [1, 2, 3] },
-    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$" },
-    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "schemaVersion": {
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
     "background": {
       "anyOf": [
-        { "type": "null" },
-        { "const": "none" },
-        { "type": "string", "pattern": "^data:(image/(jpeg|png|webp)|video/(mp4|webm));base64," }
+        {
+          "type": "null"
+        },
+        {
+          "const": "none"
+        },
+        {
+          "type": "string",
+          "pattern": "^data:(image/(jpeg|png|webp)|video/(mp4|webm));base64,"
+        }
       ]
     },
     "backgrounds": {
       "type": "array",
       "maxItems": 4,
-      "items": { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+      "items": {
+        "type": "string",
+        "pattern": "^data:image/(jpeg|png|webp);base64,"
+      }
     },
     "backgroundDark": {
       "anyOf": [
-        { "type": "null" },
-        { "const": "none" },
-        { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+        {
+          "type": "null"
+        },
+        {
+          "const": "none"
+        },
+        {
+          "type": "string",
+          "pattern": "^data:image/(jpeg|png|webp);base64,"
+        }
       ]
     },
     "colors": {
       "type": "object",
       "properties": {
-        "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
-        "surface": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
-        "text": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+        "accent": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "text": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
       }
     },
     "colorsDark": {
       "anyOf": [
-        { "type": "null" },
+        {
+          "type": "null"
+        },
         {
           "type": "object",
           "properties": {
-            "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
-            "surface": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
-            "text": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+            "accent": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "surface": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "text": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
           }
         }
       ]
     },
     "terminal": {
       "anyOf": [
-        { "type": "null" },
+        {
+          "type": "null"
+        },
         {
           "type": "object",
-          "additionalProperties": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          }
         }
       ]
     },
     "typography": {
       "type": "object",
       "properties": {
-        "sans": { "type": "string", "maxLength": 200 },
-        "mono": { "type": "string", "maxLength": 200 },
-        "chatFontSize": { "type": "number", "minimum": 0, "maximum": 22 },
-        "editorFontSize": { "type": "number", "minimum": 0, "maximum": 18 },
+        "sans": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "mono": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "chatFontSize": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 22
+        },
+        "editorFontSize": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 18
+        },
         "fontFaces": {
           "type": "array",
           "maxItems": 2,
           "items": {
             "type": "object",
-            "required": ["family", "src"],
+            "required": [
+              "family",
+              "src"
+            ],
             "properties": {
-              "family": { "type": "string", "maxLength": 60 },
-              "src": { "type": "string", "pattern": "^data:(font|application)/" }
+              "family": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "src": {
+                "type": "string",
+                "pattern": "^data:(font|application)/"
+              }
             }
           }
         }
@@ -81,108 +163,284 @@
     "effects": {
       "type": "object",
       "properties": {
-        "scrollbar": { "enum": ["default", "slim", "hidden"] },
-        "particles": { "enum": ["none", "sakura", "snow"] },
-        "motion": { "enum": ["default", "off"] },
-        "slideshowMinutes": { "type": "number", "minimum": 0, "maximum": 240 }
+        "scrollbar": {
+          "enum": [
+            "default",
+            "slim",
+            "hidden"
+          ]
+        },
+        "particles": {
+          "enum": [
+            "none",
+            "sakura",
+            "snow"
+          ]
+        },
+        "motion": {
+          "enum": [
+            "default",
+            "off"
+          ]
+        },
+        "slideshowMinutes": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 240
+        },
+        "typingFx": {
+          "enum": [
+            "none",
+            "sparkle",
+            "petal"
+          ]
+        },
+        "listFx": {
+          "enum": [
+            "none",
+            "slide"
+          ]
+        }
       }
     },
     "trigger": {
       "type": "object",
       "properties": {
-        "position": { "enum": ["top-center", "top-right", "bottom-right"] },
-        "icon": { "type": "string", "maxLength": 8 },
-        "autoHide": { "type": "boolean" }
+        "position": {
+          "enum": [
+            "top-center",
+            "top-right",
+            "bottom-right"
+          ]
+        },
+        "icon": {
+          "type": "string",
+          "maxLength": 8
+        },
+        "autoHide": {
+          "type": "boolean"
+        }
       }
     },
     "shape": {
       "type": "object",
       "properties": {
-        "radiusScale": { "type": ["number", "null"], "minimum": 0, "maximum": 2.5 },
-        "shadow": { "enum": ["default", "none", "bold"] }
+        "radiusScale": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 2.5
+        },
+        "shadow": {
+          "enum": [
+            "default",
+            "none",
+            "bold"
+          ]
+        }
       }
     },
     "layout": {
       "type": "object",
       "properties": {
-        "x": { "type": "number", "minimum": 0, "maximum": 100 },
-        "y": { "type": "number", "minimum": 0, "maximum": 100 },
-        "veil": { "type": "number", "minimum": 0, "maximum": 100 },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "veil": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
         "veils": {
           "type": "object",
           "properties": {
-            "top": { "type": "number", "minimum": 0, "maximum": 100 },
-            "bottom": { "type": "number", "minimum": 0, "maximum": 100 },
-            "left": { "type": "number", "minimum": 0, "maximum": 100 },
-            "content": { "type": "number", "minimum": 0, "maximum": 100 }
+            "top": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "bottom": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "left": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "content": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
           }
         },
-        "sidebarWidth": { "type": "number", "minimum": 0, "maximum": 420 },
-        "sidebarOpacity": { "type": "number", "minimum": 0, "maximum": 95 }
+        "sidebarWidth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 420
+        },
+        "sidebarOpacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 95
+        }
       }
     },
     "filters": {
       "type": "object",
       "properties": {
-        "brightness": { "type": "number", "minimum": 20, "maximum": 200 },
-        "saturate": { "type": "number", "minimum": 0, "maximum": 200 },
-        "blur": { "type": "number", "minimum": 0, "maximum": 20 }
+        "brightness": {
+          "type": "number",
+          "minimum": 20,
+          "maximum": 200
+        },
+        "saturate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 200
+        },
+        "blur": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        }
       }
     },
     "sidePanel": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" },
-        "width": { "type": "number", "minimum": 200, "maximum": 320 },
-        "title": { "type": "string", "maxLength": 20 },
-        "subtitle": { "type": "string", "maxLength": 30 },
+        "enabled": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 200,
+          "maximum": 320
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 30
+        },
         "image": {
           "anyOf": [
-            { "type": "null" },
-            { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^data:image/(jpeg|png|webp);base64,"
+            }
           ]
         },
-        "card": { "type": "string", "maxLength": 300 },
-        "icons": { "type": "string", "maxLength": 24 },
-        "heading": { "type": "string", "maxLength": 20 },
+        "card": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "icons": {
+          "type": "string",
+          "maxLength": 24
+        },
+        "heading": {
+          "type": "string",
+          "maxLength": 20
+        },
         "image2": {
           "anyOf": [
-            { "type": "null" },
-            { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^data:image/(jpeg|png|webp);base64,"
+            }
           ]
         },
-        "footer": { "type": "string", "maxLength": 20 }
+        "footer": {
+          "type": "string",
+          "maxLength": 20
+        }
       }
     },
     "chrome": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" },
-        "title": { "type": "string", "maxLength": 30 },
-        "toolbar": { "type": "array", "maxItems": 8, "items": { "type": "string", "maxLength": 14 } },
-        "statusBar": { "type": "boolean" }
+        "enabled": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "toolbar": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 14
+          }
+        },
+        "statusBar": {
+          "type": "boolean"
+        }
       }
     },
     "tokens": {
       "type": "object",
-      "propertyNames": { "pattern": "^--[a-zA-Z0-9_-]{1,60}$" },
-      "additionalProperties": { "type": "string", "maxLength": 300 }
+      "propertyNames": {
+        "pattern": "^--[a-zA-Z0-9_-]{1,60}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 300
+      }
     },
-    "customCss": { "type": "string", "maxLength": 200000 },
+    "customCss": {
+      "type": "string",
+      "maxLength": 200000
+    },
     "brand": {
       "type": "object",
       "properties": {
-        "startupTint": { "type": "boolean" },
+        "startupTint": {
+          "type": "boolean"
+        },
         "logo": {
           "anyOf": [
-            { "type": "null" },
-            { "const": "hide" },
-            { "type": "string", "pattern": "^data:image/(jpeg|png|webp);base64," }
+            {
+              "type": "null"
+            },
+            {
+              "const": "hide"
+            },
+            {
+              "type": "string",
+              "pattern": "^data:image/(jpeg|png|webp);base64,"
+            }
           ]
         },
-        "titlePrefix": { "type": "string", "maxLength": 12 }
+        "titlePrefix": {
+          "type": "string",
+          "maxLength": 12
+        }
       }
     },
-    "createdAt": { "type": "string" }
+    "createdAt": {
+      "type": "string"
+    }
   }
 }

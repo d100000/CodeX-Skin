@@ -269,6 +269,142 @@ async function init() {
   };
 
   // 按钮样式来自全局设置（getTriggerConfig），刻意不读 theme.trigger：换皮肤按钮保持一致
+  // ---------- 互动动效：输入火花 + 列表进入（页面内纯渲染，无任何网络/数据行为） ----------
+  let fxConfig = { typingFx: "none", listFx: "none", accent: "#76506f" };
+  let fxCanvas = null;
+  let fxContext = null;
+  let fxParticles = [];
+  let fxRaf = 0;
+
+  const ensureFxCanvas = () => {
+    if (fxCanvas && fxCanvas.isConnected) return;
+    fxCanvas = document.createElement("canvas");
+    fxCanvas.id = "codex-doll-skin-fx";
+    fxCanvas.setAttribute("aria-hidden", "true");
+    fxCanvas.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:30;pointer-events:none";
+    document.body.appendChild(fxCanvas);
+    fxContext = fxCanvas.getContext("2d");
+  };
+
+  const fxLoop = () => {
+    if (!fxCanvas) { fxRaf = 0; return; }
+    if (fxCanvas.width !== fxCanvas.clientWidth || fxCanvas.height !== fxCanvas.clientHeight) {
+      fxCanvas.width = fxCanvas.clientWidth || innerWidth;
+      fxCanvas.height = fxCanvas.clientHeight || innerHeight;
+    }
+    fxContext.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+    const now = performance.now();
+    fxParticles = fxParticles.filter((p) => now - p.born < p.life);
+    for (const p of fxParticles) {
+      const t = (now - p.born) / p.life;
+      const x = p.x + p.vx * t * 60;
+      const y = p.y + p.vy * t * 60 + 40 * t * t;
+      fxContext.globalAlpha = 1 - t;
+      fxContext.save();
+      fxContext.translate(x, y);
+      fxContext.rotate(p.rot + t * p.spin);
+      fxContext.fillStyle = p.color;
+      fxContext.beginPath();
+      if (p.kind === "petal") {
+        fxContext.ellipse(0, 0, p.size, p.size * .6, 0, 0, Math.PI * 2);
+      } else {
+        for (let i = 0; i < 8; i += 1) {
+          const radius = i % 2 === 0 ? p.size : p.size * .38;
+          const angle = i * Math.PI / 4;
+          if (i === 0) fxContext.moveTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+          else fxContext.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+        }
+        fxContext.closePath();
+      }
+      fxContext.fill();
+      fxContext.restore();
+    }
+    fxContext.globalAlpha = 1;
+    if (fxParticles.length) fxRaf = requestAnimationFrame(fxLoop);
+    else { fxRaf = 0; fxCanvas.remove(); fxCanvas = null; }
+  };
+
+  const spawnBurst = (x, y, count, big) => {
+    if (fxConfig.typingFx === "none" || reducedMotion()) return;
+    ensureFxCanvas();
+    const petal = fxConfig.typingFx === "petal";
+    const colors = petal ? ["#f4b1c7", "#f8cdd9", fxConfig.accent] : [fxConfig.accent, "#ffd76e", "#ffffff"];
+    for (let i = 0; i < count; i += 1) {
+      const angle = -Math.PI / 2 + (Math.random() - .5) * (big ? Math.PI : 1.6);
+      const speed = (big ? 2.2 : 1.2) + Math.random() * (big ? 2.4 : 1.2);
+      fxParticles.push({
+        kind: petal ? "petal" : "spark",
+        x: x + (Math.random() - .5) * 24,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size: (big ? 4 : 3) + Math.random() * 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rot: Math.random() * Math.PI,
+        spin: (Math.random() - .5) * 4,
+        born: performance.now(),
+        life: 550 + Math.random() * 350
+      });
+    }
+    if (fxParticles.length > 120) fxParticles.splice(0, fxParticles.length - 120);
+    if (!fxRaf) fxRaf = requestAnimationFrame(fxLoop);
+  };
+
+  let lastTypeBurst = 0;
+  const isComposerInput = (el) => el && (el.tagName === "TEXTAREA" || el.isContentEditable) &&
+    el.closest && el.closest('.composer-surface-chrome, [class*="composer"]');
+  document.addEventListener("keydown", (event) => {
+    if (fxConfig.typingFx === "none" || reducedMotion()) return;
+    const target = event.target;
+    if (!isComposerInput(target)) return;
+    const now = performance.now();
+    const isEnter = event.key === "Enter" && !event.shiftKey;
+    if (!isEnter && now - lastTypeBurst < 80) return;
+    lastTypeBurst = now;
+    const rect = target.getBoundingClientRect();
+    const textLength = (target.value !== undefined ? target.value : target.textContent || "").length;
+    const x = rect.left + Math.min(rect.width - 16, 24 + Math.min(textLength * 7, rect.width - 48));
+    spawnBurst(x, rect.top + 10, isEnter ? 18 : 4, isEnter);
+  }, true);
+
+  let listObserver = null;
+  const applyListFx = () => {
+    if (fxConfig.listFx === "slide" && !reducedMotion()) {
+      if (listObserver) return;
+      listObserver = new MutationObserver((mutations) => {
+        let budget = 6;
+        for (const mutation of mutations) {
+          for (const node of mutation.addedNodes) {
+            if (budget <= 0) return;
+            if (node.nodeType !== 1) continue;
+            if (node.id && node.id.startsWith("codex-doll")) continue;
+            if (node.closest && node.closest("#codex-doll-skin-manager,#codex-doll-skin-sidepanel,#codex-doll-skin-chrome")) continue;
+            const rect = node.getBoundingClientRect();
+            if (rect.height < 24 || rect.width < 120) continue;
+            budget -= 1;
+            try {
+              node.animate(
+                [{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "translateY(0)" }],
+                { duration: 260, easing: "cubic-bezier(.2,.7,.3,1)" }
+              );
+            } catch {}
+          }
+        }
+      });
+      const host = document.querySelector(".app-shell-main-content-viewport") || document.getElementById("root");
+      if (host) listObserver.observe(host, { childList: true, subtree: true });
+    } else if (listObserver) {
+      listObserver.disconnect();
+      listObserver = null;
+    }
+  };
+
+  const applyInteractionFx = (theme) => {
+    fxConfig = { typingFx: theme.effects.typingFx, listFx: theme.effects.listFx, accent: theme.colors.accent };
+    applyListFx();
+    if (fxConfig.typingFx === "none") fxParticles = [];
+  };
+
   const applyTrigger = (theme) => {
     const config = getTriggerConfig();
     trigger.textContent = config.icon;
@@ -563,6 +699,7 @@ async function init() {
   const applyExtras = (theme) => {
     applyVideo(theme);
     applyParticles(theme);
+    applyInteractionFx(theme);
     applyTrigger(theme);
     applyBrand(theme);
     applySlideshow(theme);

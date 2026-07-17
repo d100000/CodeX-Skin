@@ -25,6 +25,8 @@ const FONT_DATA_URL = /^data:(?:font|application)\/[\w+.-]+;base64,/i;
 const SCROLLBAR_STYLES = ["default", "slim", "hidden"];
 const PARTICLE_KINDS = ["none", "sakura", "snow"];
 const MOTION_MODES = ["default", "off"];
+const TYPING_FX_KINDS = ["none", "sparkle", "petal"];
+const LIST_FX_KINDS = ["none", "slide"];
 const TRIGGER_POSITIONS = ["top-center", "top-right", "bottom-right"];
 
 function isVideoBackground(background) {
@@ -178,6 +180,8 @@ function normalizeTheme(theme) {
       scrollbar: pickEnum(effects.scrollbar, SCROLLBAR_STYLES),
       particles: pickEnum(effects.particles, PARTICLE_KINDS),
       motion: pickEnum(effects.motion, MOTION_MODES),
+      typingFx: pickEnum(effects.typingFx, TYPING_FX_KINDS),
+      listFx: pickEnum(effects.listFx, LIST_FX_KINDS),
       slideshowMinutes: sizeOrZero(effects.slideshowMinutes, 1, 240)
     },
     trigger: {
