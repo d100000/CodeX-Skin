@@ -6,7 +6,16 @@
     "background": null,
     "preview": "asset://doll-sakura-hero.webp",
     "colors": { "accent": "#76506f", "surface": "#fff9fb", "text": "#3c2938" },
-    "layout": { "x": 50, "y": 50, "veil": 50 },
+    "layout": { "x": 50, "y": 50, "veil": 50, "sidebarOpacity": 45, "veils": { "content": 12 } },
+    "typography": { "sans": "\"LXGW WenKai\", \"PingFang SC\", sans-serif" },
+    "shape": { "radiusScale": 1.6 },
+    "terminal": {
+      "black": "#5c4a55", "red": "#c95c78", "green": "#7d9a6e", "yellow": "#c98f4e",
+      "blue": "#6f82bd", "magenta": "#a86bad", "cyan": "#5f9a94", "white": "#f5eef1",
+      "brightBlack": "#8a7482", "brightRed": "#e08ba2", "brightGreen": "#9cba8c", "brightYellow": "#e0b070",
+      "brightBlue": "#93a5d6", "brightMagenta": "#c290c6", "brightCyan": "#82b7b1", "brightWhite": "#fffafc"
+    },
+    "effects": { "particles": "sakura", "scrollbar": "slim" },
     "brand": { "startupTint": true },
     "createdAt": "2026-07-16T00:00:00.000Z"
   },
@@ -16,8 +25,16 @@
     "name": "暖光书房",
     "background": "asset://doll-room-light.webp",
     "colors": { "accent": "#8a5a44", "surface": "#fff8f2", "text": "#3d2f28" },
-    "layout": { "x": 62, "y": 42, "veil": 56 },
+    "layout": { "x": 62, "y": 42, "veil": 56, "sidebarOpacity": 40, "veils": { "content": 15 } },
+    "typography": { "sans": "\"Source Han Serif SC\", \"Songti SC\", \"Noto Serif SC\", serif", "chatFontSize": 15 },
     "shape": { "radiusScale": 1.6 },
+    "terminal": {
+      "black": "#4a3a30", "red": "#c05b47", "green": "#7a8f5a", "yellow": "#d69a4e",
+      "blue": "#7a89b8", "magenta": "#a8748f", "cyan": "#6f9f95", "white": "#f8f0e8",
+      "brightBlack": "#7d6a5c", "brightRed": "#dd8570", "brightGreen": "#9cb37c", "brightYellow": "#e8b878",
+      "brightBlue": "#9fabd0", "brightMagenta": "#c397ae", "brightCyan": "#8fbcb2", "brightWhite": "#fffaf4"
+    },
+    "effects": { "scrollbar": "slim" },
     "brand": { "startupTint": true },
     "createdAt": "2026-07-16T00:00:00.000Z"
   },
@@ -70,7 +87,10 @@
     "background": "none",
     "colors": { "accent": "#5c6b8a", "surface": "#f7f8fb", "text": "#2f3542" },
     "layout": { "x": 50, "y": 50, "veil": 50 },
+    "typography": { "sans": "\"Source Han Sans SC\", \"Noto Sans SC\", \"PingFang SC\", sans-serif", "mono": "\"JetBrains Mono\", ui-monospace, monospace" },
     "shape": { "radiusScale": 0.75, "shadow": "none" },
+    "effects": { "scrollbar": "hidden" },
+    "brand": { "startupTint": true },
     "terminal": {
       "black": "#3b4252", "red": "#bf616a", "green": "#a3be8c", "yellow": "#ebcb8b",
       "blue": "#81a1c1", "magenta": "#b48ead", "cyan": "#88c0d0", "white": "#e5e9f0",
