@@ -211,23 +211,29 @@ function filterValue(filters) {
   return parts.join(" ");
 }
 
+// 遮罩底色：浅色主题用暖白提亮，深色主题用近黑压暗——目的都是提高正文可读性。
+function veilTint(theme) {
+  return isDarkTheme(theme) ? "10,13,20" : "255,249,250";
+}
+
 function veilGradientValue(theme) {
+  const tint = veilTint(theme);
   const veil = theme.layout.veil / 100;
   const tail = Math.max(0, veil - .38);
   // 启用侧栏透出时，整体遮罩从侧栏右缘才开始变浓：侧栏区域只保留 35% 强度，
   // 否则"左浓右淡"的默认渐变会和侧栏底色叠成一堵白墙，背景永远透不进左侧列表。
   if (theme.layout && theme.layout.sidebarOpacity) {
     const width = theme.layout.sidebarWidth || 275;
-    return "linear-gradient(90deg,rgba(255,249,250," + (veil * .35).toFixed(3) + ") 0 " + width + "px,rgba(255,249,250," + veil + ") " + (width + 80) + "px,rgba(255,249,250," + tail + ") 100%)";
+    return "linear-gradient(90deg,rgba(" + tint + "," + (veil * .35).toFixed(3) + ") 0 " + width + "px,rgba(" + tint + "," + veil + ") " + (width + 80) + "px,rgba(" + tint + "," + tail + ") 100%)";
   }
-  return "linear-gradient(90deg,rgba(255,249,250," + veil + "),rgba(255,249,250," + tail + "))";
+  return "linear-gradient(90deg,rgba(" + tint + "," + veil + "),rgba(" + tint + "," + tail + "))";
 }
 
 // 分区蒙层：顶部 / 底部 / 左侧 / 内容区（回答区）各自独立的可读性提亮层。
 // 区域几何对齐 BACKGROUND_SPEC 的构图分区；0 = 不发射该层。
 function regionalVeilLayers(theme) {
   const veils = (theme.layout && theme.layout.veils) || {};
-  const tint = "255,249,250";
+  const tint = veilTint(theme);
   const layers = [];
   const alpha = (value) => Math.min(1, value / 100);
   if (veils.top) layers.push("linear-gradient(180deg,rgba(" + tint + "," + alpha(veils.top) + ") 0%,rgba(" + tint + "," + alpha(veils.top) * .55 + ") 9%,transparent 20%)");
@@ -308,6 +314,30 @@ function themeCss(theme) {
     const darkLayer = backgroundLayerValue({ ...theme, background: theme.backgroundDark, colors: theme.colorsDark || theme.colors });
     if (darkLayer) rules.push(":root.electron-dark #root::before{background:" + darkLayer + "!important}");
   }
+  // 深色主题：基础皮肤是为浅色设计的（白底/白顶栏/深色图标），表面色为深色时
+  // 整套换成深色系发射，否则会出现白圈、白侧栏、图标对比度不足
+  if (isDarkTheme(theme)) {
+    const surface = theme.colors.surface;
+    const text = theme.colors.text;
+    rules.push("html,body{background:" + surface + "!important}");
+    rules.push(":root{"
+      + "--color-background-surface-under:color-mix(in srgb,#000 25%," + surface + ")!important;"
+      + "--color-background-elevated-primary:color-mix(in srgb,#fff 7%," + surface + ")!important;"
+      + "--color-background-elevated-secondary:color-mix(in srgb,#fff 4%," + surface + ")!important;"
+      + "--color-background-control:color-mix(in srgb,#fff 6%," + surface + ")!important;"
+      + "--color-text-foreground-secondary:color-mix(in srgb," + text + " 72%,transparent)!important;"
+      + "--color-text-foreground-tertiary:color-mix(in srgb," + text + " 52%,transparent)!important;"
+      + "--color-border:color-mix(in srgb," + text + " 20%,transparent)!important;"
+      + "--color-border-light:color-mix(in srgb," + text + " 11%,transparent)!important;"
+      + "--color-token-side-bar-background:color-mix(in srgb," + surface + " 55%,transparent)!important;"
+      + "--color-token-main-surface-primary:color-mix(in srgb," + surface + " 50%,transparent)!important;"
+      + "--color-token-editor-background:color-mix(in srgb," + surface + " 92%,transparent)!important"
+      + "}");
+    rules.push(".app-shell-left-panel{background:color-mix(in srgb," + surface + " 55%,transparent)!important;border-right:1px solid color-mix(in srgb," + text + " 14%,transparent)!important;backdrop-filter:blur(6px) saturate(1.05)!important}");
+    rules.push(".main-surface,.browser-main-surface{background:linear-gradient(180deg,color-mix(in srgb," + surface + " 16%,transparent) 0 35%,color-mix(in srgb," + surface + " 62%,transparent) 100%)!important}");
+    rules.push(".composer-surface-chrome{background:color-mix(in srgb," + surface + " 93%,transparent)!important;border:1px solid color-mix(in srgb," + text + " 18%,transparent)!important}");
+    rules.push(".app-shell-main-content-top-fade{background:transparent!important}");
+  }
   // 侧栏不透明度：0 = 跟随基础皮肤默认；设置后底色改用主题表面色按比例混合，
   // 同时把重模糊降为轻模糊——blur(20px) 会把透进来的背景糊成均匀色块
   if (theme.layout && theme.layout.sidebarOpacity) {
@@ -336,17 +366,23 @@ function themeCss(theme) {
   return rules.join("");
 }
 
+function hexLuminance(hex) {
+  const channel = (i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255;
+    return c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4);
+  };
+  return .2126 * channel(1) + .7152 * channel(3) + .0722 * channel(5);
+}
+
+// 表面色为深色的主题：整套发射切换为深色系（底色/顶栏/输入框/次级文字全部跟随）。
+function isDarkTheme(theme) {
+  return hexLuminance(theme.colors.surface) < .35;
+}
+
 // WCAG 相对亮度对比度（1-21）。文字对表面 ≥4.5 视为可读。
 function contrastRatio(hexA, hexB) {
-  const luminance = (hex) => {
-    const channel = (i) => {
-      const c = parseInt(hex.slice(i, i + 2), 16) / 255;
-      return c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4);
-    };
-    return .2126 * channel(1) + .7152 * channel(3) + .0722 * channel(5);
-  };
-  const a = luminance(hexA);
-  const b = luminance(hexB);
+  const a = hexLuminance(hexA);
+  const b = hexLuminance(hexB);
   return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
 }
 
@@ -421,8 +457,10 @@ function hslToHex(h, s, l) {
 function hueBucketsFromPixels(data) {
   const buckets = new Array(36).fill(0);
   let totalWeight = 0;
+  let luminanceSum = 0;
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
+    luminanceSum += .2126 * r + .7152 * g + .0722 * b;
     const max = Math.max(r, g, b), min = Math.min(r, g, b), delta = max - min;
     if (delta < 0.04 || max < 0.15) continue;
     let hue;
@@ -434,10 +472,19 @@ function hueBucketsFromPixels(data) {
     buckets[Math.floor(hue / 10) % 36] += weight;
     totalWeight += weight;
   }
-  return { buckets, totalWeight, pixelCount: data.length / 4 };
+  const pixelCount = data.length / 4;
+  return { buckets, totalWeight, pixelCount, averageLuminance: pixelCount ? luminanceSum / pixelCount : 1 };
 }
 
-function paletteFromHue(hue) {
+function paletteFromHue(hue, dark) {
+  if (dark) {
+    // 深色图片：深表面 + 亮文字 + 提亮的强调色，保证对比度
+    return {
+      accent: hslToHex(hue, .5, .62),
+      surface: hslToHex(hue, .24, .12),
+      text: hslToHex(hue, .14, .93)
+    };
+  }
   return {
     accent: hslToHex(hue, .34, .42),
     surface: hslToHex(hue, .55, .975),
@@ -448,21 +495,30 @@ function paletteFromHue(hue) {
 // 从缩样像素（RGBA 扁平数组）提取主色调，按可读性公式生成三色：
 // accent 取主色相的中明度色，surface 固定为极浅底色，text 固定为深色——保证对比度可用。
 // 近灰度图返回 null（沿用默认配色）。
+// 近灰度图取不出主色相：按整体亮度给一套中性方案（偏冷灰蓝），深浅自动。
+function neutralPalette(dark) {
+  if (dark) {
+    return { accent: hslToHex(220, .2, .62), surface: hslToHex(220, .14, .12), text: hslToHex(220, .1, .93) };
+  }
+  return { accent: hslToHex(220, .18, .42), surface: hslToHex(220, .3, .975), text: hslToHex(220, .16, .18) };
+}
+
 function paletteFromPixels(data) {
-  const { buckets, totalWeight, pixelCount } = hueBucketsFromPixels(data);
-  if (totalWeight < pixelCount * .02) return null;
+  const { buckets, totalWeight, pixelCount, averageLuminance } = hueBucketsFromPixels(data);
+  if (totalWeight < pixelCount * .02) return neutralPalette(averageLuminance < .42);
   let best = 0, bestScore = -1;
   for (let i = 0; i < 36; i += 1) {
     const score = buckets[(i + 35) % 36] * .5 + buckets[i] + buckets[(i + 1) % 36] * .5;
     if (score > bestScore) { bestScore = score; best = i; }
   }
-  return paletteFromHue(best * 10 + 5);
+  return paletteFromHue(best * 10 + 5, averageLuminance < .42);
 }
 
-// 取色候选：按权重取前 N 个互相间隔 ≥30° 的色相桶，各生成一套配色。
+// 取色候选：按权重取前 N 个互相间隔 ≥30° 的色相桶，各生成一套配色（深浅随图片亮度）。
 function paletteCandidatesFromPixels(data, count = 4) {
-  const { buckets, totalWeight, pixelCount } = hueBucketsFromPixels(data);
-  if (totalWeight < pixelCount * .02) return [];
+  const { buckets, totalWeight, pixelCount, averageLuminance } = hueBucketsFromPixels(data);
+  if (totalWeight < pixelCount * .02) return [neutralPalette(averageLuminance < .42)];
+  const dark = averageLuminance < .42;
   const scored = buckets
     .map((weight, i) => ({ i, score: buckets[(i + 35) % 36] * .5 + weight + buckets[(i + 1) % 36] * .5 }))
     .filter((entry) => entry.score > 0)
@@ -476,7 +532,7 @@ function paletteCandidatesFromPixels(data, count = 4) {
     });
     if (!clash) chosen.push(entry.i);
   }
-  return chosen.map((bucket) => paletteFromHue(bucket * 10 + 5));
+  return chosen.map((bucket) => paletteFromHue(bucket * 10 + 5, dark));
 }
 
 function themeEquals(a, b) {

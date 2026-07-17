@@ -6,6 +6,8 @@ const SANS_FONT_OPTIONS = [
   { label: "霞鹜文楷", value: '"LXGW WenKai", "PingFang SC", sans-serif' },
   { label: "苹方", value: '"PingFang SC", system-ui, sans-serif' },
   { label: "思源黑体", value: '"Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif' },
+  { label: "得意黑（应援海报风）", value: '"Smiley Sans", "Smiley Sans Oblique", "PingFang SC", sans-serif' },
+  { label: "站酷高端黑（标题风）", value: '"站酷高端黑", "ZCOOL GDH", "PingFang SC", sans-serif' },
   { label: "自定义…", value: "__custom__" }
 ];
 const MONO_FONT_OPTIONS = [

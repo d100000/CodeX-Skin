@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 
 // 00-core.js 是纯函数片段，直接实例化后测试。
 const coreSource = await readFile(new URL("../installer/manager/00-core.js", import.meta.url), "utf8");
-const core = new Function(`${coreSource}; return { THEME_DEFAULTS, SAFE_ZONES, ANSI_KEYS, TERMINAL_PRESETS, SHADOW_PRESETS, safeColor, cleanFontStack, normalizeTheme, themeCss, backgroundLayerValue, filterValue, themeEquals, dataUrlKilobytes, hslToHex, paletteFromPixels, paletteCandidatesFromPixels, isVideoBackground, contrastRatio, normalizeTokens, sanitizeCustomCss };`)();
+const core = new Function(`${coreSource}; return { THEME_DEFAULTS, SAFE_ZONES, ANSI_KEYS, TERMINAL_PRESETS, SHADOW_PRESETS, safeColor, cleanFontStack, normalizeTheme, themeCss, backgroundLayerValue, filterValue, themeEquals, dataUrlKilobytes, hslToHex, paletteFromPixels, paletteCandidatesFromPixels, isVideoBackground, contrastRatio, normalizeTokens, sanitizeCustomCss, hexLuminance, isDarkTheme };`)();
 
 const SAMPLE_IMAGE = "data:image/webp;base64,AAAA";
 
@@ -218,6 +218,29 @@ test("themeCss emits phase B/C rules", () => {
   assert.match(hidden, /::-webkit-scrollbar\{width:0!important/);
 });
 
+test("palette extraction goes dark for dark images", () => {
+  const pixels = [];
+  for (let i = 0; i < 64; i += 1) pixels.push(20, 60, 35, 255); // 深绿夜景
+  const palette = core.paletteFromPixels(new Uint8ClampedArray(pixels));
+  assert.ok(palette, "深色但有色相的图必须产出配色");
+  assert.ok(core.hexLuminance(palette.surface) < .35, "深色图的 surface 必须是深色");
+  assert.ok(core.hexLuminance(palette.text) > .6, "深色图的 text 必须是亮色");
+  assert.ok(core.contrastRatio(palette.text, palette.surface) >= 4.5, "自动配色必须满足 WCAG 对比度");
+});
+
+test("dark themes emit a full dark ruleset with dark veils", () => {
+  const dark = core.normalizeTheme({ id: "d", background: SAMPLE_IMAGE, colors: { accent: "#58c47a", surface: "#101418", text: "#eef2ec" } });
+  assert.ok(core.isDarkTheme(dark));
+  const css = core.themeCss(dark);
+  assert.match(css, /html,body\{background:#101418!important\}/);
+  assert.match(css, /--color-background-elevated-primary:color-mix\(in srgb,#fff 7%,#101418\)/);
+  assert.match(css, /\.composer-surface-chrome\{background:color-mix\(in srgb,#101418 93%/);
+  assert.match(css, /rgba\(10,13,20/, "深色主题的遮罩必须用暗色 tint");
+  const light = core.normalizeTheme({ id: "l" });
+  assert.ok(!core.isDarkTheme(light));
+  assert.doesNotMatch(core.themeCss(light), /html,body/);
+});
+
 test("contrastRatio follows WCAG expectations", () => {
   assert.ok(Math.abs(core.contrastRatio("#000000", "#ffffff") - 21) < .1);
   assert.ok(core.contrastRatio("#3c2938", "#fff9fb") >= 4.5, "默认配色必须可读");
@@ -276,7 +299,7 @@ test("paletteCandidatesFromPixels returns distinct hue candidates", () => {
   assert.ok(candidates.length >= 2, "两种主色都应成为候选");
   for (const palette of candidates) assert.match(palette.accent, /^#[0-9a-f]{6}$/);
   assert.notEqual(candidates[0].accent, candidates[1].accent);
-  assert.deepEqual(core.paletteCandidatesFromPixels(new Uint8ClampedArray([128, 128, 128, 255]), 4), []);
+  assert.equal(core.paletteCandidatesFromPixels(new Uint8ClampedArray([128, 128, 128, 255]), 4).length, 1, "灰度图返回一套中性候选");
 });
 
 test("paletteFromPixels derives a readable palette from the dominant hue", () => {
@@ -292,10 +315,16 @@ test("paletteFromPixels derives a readable palette from the dominant hue", () =>
   assert.ok(r > b, "粉色图片的强调色应偏暖");
 });
 
-test("paletteFromPixels returns null for grayscale images", () => {
-  const pixels = [];
-  for (let i = 0; i < 64; i += 1) pixels.push(128, 128, 128, 255);
-  assert.equal(core.paletteFromPixels(new Uint8ClampedArray(pixels)), null);
+test("paletteFromPixels falls back to luminance-based neutral palettes for grayscale", () => {
+  const gray = [];
+  for (let i = 0; i < 64; i += 1) gray.push(128, 128, 128, 255);
+  const light = core.paletteFromPixels(new Uint8ClampedArray(gray));
+  assert.ok(light && core.hexLuminance(light.surface) > .8, "中灰图给浅色中性方案");
+  const darkPixels = [];
+  for (let i = 0; i < 64; i += 1) darkPixels.push(24, 26, 30, 255);
+  const dark = core.paletteFromPixels(new Uint8ClampedArray(darkPixels));
+  assert.ok(dark && core.hexLuminance(dark.surface) < .35, "深灰图给深色中性方案");
+  assert.ok(core.contrastRatio(dark.text, dark.surface) >= 4.5);
 });
 
 test("hslToHex produces valid hex colors", () => {
