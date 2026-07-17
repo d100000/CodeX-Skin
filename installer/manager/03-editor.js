@@ -451,11 +451,28 @@ function createEditor(handlers) {
   syncFns.push(() => {
     logoInfo.textContent = "Logo：" + (draft.brand.logo === "hide" ? "已隐藏" : draft.brand.logo ? "自定义图片" : "默认");
   });
+  // 装饰 Chrome
+  const chromeToggle = checkRow("启用复古窗口 Chrome（标题栏+工具栏）", () => draft.chrome.enabled, (on) => { draft.chrome.enabled = on; });
+  const chromeStatusToggle = checkRow("底部状态栏", () => draft.chrome.statusBar, (on) => { draft.chrome.statusBar = on; });
+  const chromeGroup = document.createElement("div");
+  chromeGroup.className = "cds-subgroup";
+  chromeGroup.append(
+    chromeToggle,
+    textRow("窗口标题", 30, "如：Codex 2007", () => draft.chrome.title, (v) => { draft.chrome.title = v.replace(/[<>]/g, "").slice(0, 30); }),
+    textRow("工具栏项", 120, "逗号分隔，如：📝 新建任务,🧩 插件", () => draft.chrome.toolbar.join(","), (v) => {
+      draft.chrome.toolbar = v.split(/[,，]/).map((item) => item.trim().replace(/[<>]/g, "").slice(0, 14)).filter(Boolean).slice(0, 8);
+    }),
+    chromeStatusToggle
+  );
+  syncFns.push(() => { chromeGroup.classList.toggle("cds-disabled-group", !draft.chrome.enabled); });
+
   const brandPaneContent = [
     startupToggle,
     logoRow,
     textRow("标题前缀", 12, "如：🌸 ", () => draft.brand.titlePrefix, (v) => { draft.brand.titlePrefix = v.replace(/[\n\r<>]/g, "").slice(0, 12); }),
-    noteRow("Logo 替换是尽力而为的 DOM 级操作，Codex 更新后可能暂时失效；仅建议个人使用。")
+    (() => { const t = document.createElement("strong"); t.className = "cds-group-title"; t.textContent = "复古窗口 Chrome"; return t; })(),
+    chromeGroup,
+    noteRow("Chrome 与 Logo 替换同为 DOM 级装饰：纯装饰不可点击，保留窗口拖拽，Codex 更新后可能需要适配；仅建议个人使用。")
   ];
 
   // ---------- 氛围页 ----------
@@ -595,8 +612,12 @@ function createEditor(handlers) {
     sideEnableToggle,
     sliderRow("面板宽度", 200, 320, 5, () => draft.sidePanel.width, (v) => { draft.sidePanel.width = v; }).label,
     textRow("面板标题", 20, "如：Codex 好友", () => draft.sidePanel.title, (v) => { draft.sidePanel.title = v.replace(/[<>]/g, "").slice(0, 20); }),
+    textRow("名片行", 30, "名字|徽章，如：Codex 小蓝|LV 07", () => draft.sidePanel.subtitle, (v) => { draft.sidePanel.subtitle = v.replace(/[<>]/g, "").slice(0, 30); }),
     sideImageRow,
-    textRow("文字卡片", 300, "面板里的一段介绍文字", () => draft.sidePanel.card, (v) => { draft.sidePanel.card = v.replace(/[<>]/g, "").slice(0, 300); })
+    textRow("文字卡片", 300, "面板里的一段介绍文字", () => draft.sidePanel.card, (v) => { draft.sidePanel.card = v.replace(/[<>]/g, "").slice(0, 300); }),
+    textRow("图标行", 24, "一串 emoji，如：🖥⭐✉🧩📁", () => draft.sidePanel.icons, (v) => { draft.sidePanel.icons = v.replace(/[<>]/g, "").slice(0, 24); }),
+    textRow("分组标题", 20, "如：我的好友 (2/8)", () => draft.sidePanel.heading, (v) => { draft.sidePanel.heading = v.replace(/[<>]/g, "").slice(0, 20); }),
+    textRow("底部搜索", 20, "如：查找好友…", () => draft.sidePanel.footer, (v) => { draft.sidePanel.footer = v.replace(/[<>]/g, "").slice(0, 20); })
   );
   syncFns.push(() => {
     sidePanelGroup.classList.toggle("cds-disabled-group", !draft.sidePanel.enabled);

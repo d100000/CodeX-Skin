@@ -78,6 +78,12 @@ async function init() {
     if (sidePanelEl) sidePanelEl.style.display = paused ? "none" : "";
     const sidePanelStyle = document.getElementById("codex-doll-sidepanel-style");
     if (sidePanelStyle) sidePanelStyle.disabled = paused;
+    for (const id of ["codex-doll-skin-chrome", "codex-doll-skin-statusbar"]) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = paused ? "none" : "";
+    }
+    const chromeStyle = document.getElementById("codex-doll-chrome-style");
+    if (chromeStyle) chromeStyle.disabled = paused;
     pauseSwitch.checked = !paused;
     pauseText.textContent = paused ? "皮肤已暂停" : "皮肤已开启";
   };
@@ -354,26 +360,156 @@ async function init() {
       panelEl.setAttribute("aria-label", "皮肤右侧面板");
       document.body.appendChild(panelEl);
     }
-    panelEl.style.cssText = "position:fixed;top:52px;right:10px;bottom:14px;width:" + config.width + "px;z-index:9;display:flex;flex-direction:column;gap:10px;padding:12px;overflow:auto;border:1px solid color-mix(in srgb," + theme.colors.accent + " 32%,transparent);border-radius:calc(10px * var(--corner-radius-scale,1.25) / 1.25);background:color-mix(in srgb," + theme.colors.surface + " 90%,transparent);backdrop-filter:blur(14px) saturate(1.05);color:" + theme.colors.text + ";font:13px/1.55 var(--font-sans,system-ui);-webkit-app-region:no-drag";
+    const chromeOn = theme.chrome && theme.chrome.enabled;
+    const top = chromeOn ? 92 : 52;
+    const bottom = chromeOn && theme.chrome.statusBar ? 40 : 14;
+    const radius = "calc(8px * var(--corner-radius-scale,1.25) / 1.25)";
+    const accentBorder = "1px solid color-mix(in srgb," + theme.colors.accent + " 32%,transparent)";
+    panelEl.style.cssText = "position:fixed;top:" + top + "px;right:10px;bottom:" + bottom + "px;width:" + config.width + "px;z-index:9;display:flex;flex-direction:column;gap:9px;padding:11px;overflow:auto;border:" + accentBorder + ";border-radius:" + radius + ";background:color-mix(in srgb," + theme.colors.surface + " 92%,transparent);backdrop-filter:blur(14px) saturate(1.05);color:" + theme.colors.text + ";font:13px/1.55 var(--font-sans,system-ui);-webkit-app-region:no-drag";
     panelEl.textContent = "";
-    if (config.title) {
-      const title = document.createElement("strong");
-      title.textContent = config.title;
-      title.style.cssText = "font-size:13.5px;color:" + theme.colors.accent + ";border-bottom:1px solid color-mix(in srgb," + theme.colors.accent + " 22%,transparent);padding-bottom:7px";
-      panelEl.appendChild(title);
-    }
+    const heading = (text) => {
+      const el = document.createElement("strong");
+      el.textContent = text;
+      el.style.cssText = "font-size:13px;color:" + theme.colors.accent + ";padding:5px 8px;border-radius:" + radius + ";background:linear-gradient(180deg,color-mix(in srgb," + theme.colors.accent + " 14%,transparent),color-mix(in srgb," + theme.colors.accent + " 7%,transparent))";
+      panelEl.appendChild(el);
+    };
+    if (config.title) heading(config.title);
     if (config.image) {
       const image = document.createElement("img");
       image.src = config.image;
       image.alt = "";
-      image.style.cssText = "width:100%;border-radius:calc(8px * var(--corner-radius-scale,1.25) / 1.25);object-fit:cover";
+      image.style.cssText = "width:100%;border-radius:" + radius + ";object-fit:cover;border:" + accentBorder;
       panelEl.appendChild(image);
+    }
+    if (config.subtitle) {
+      const subtitle = document.createElement("div");
+      const parts = config.subtitle.split("|");
+      const name = document.createElement("b");
+      name.textContent = "✅ " + parts[0].trim();
+      subtitle.appendChild(name);
+      if (parts[1]) {
+        const badge = document.createElement("em");
+        badge.textContent = parts[1].trim();
+        badge.style.cssText = "margin-left:7px;font-style:normal;font-size:10.5px;font-weight:700;color:#fff;padding:1px 7px;border-radius:3px;background:linear-gradient(180deg,#ffb340,#f08c1a)";
+        subtitle.appendChild(badge);
+      }
+      panelEl.appendChild(subtitle);
     }
     if (config.card) {
       const card = document.createElement("p");
       card.textContent = config.card;
-      card.style.cssText = "margin:0;padding:10px;border-radius:calc(8px * var(--corner-radius-scale,1.25) / 1.25);background:color-mix(in srgb," + theme.colors.accent + " 8%,transparent);border:1px solid color-mix(in srgb," + theme.colors.accent + " 18%,transparent)";
+      card.style.cssText = "margin:0;padding:10px;border-radius:" + radius + ";background:#fff;border:" + accentBorder;
       panelEl.appendChild(card);
+    }
+    if (config.icons) {
+      const iconRow = document.createElement("div");
+      iconRow.style.cssText = "display:flex;gap:6px;padding:4px 2px;border-top:1px solid color-mix(in srgb," + theme.colors.accent + " 16%,transparent);border-bottom:1px solid color-mix(in srgb," + theme.colors.accent + " 16%,transparent)";
+      for (const icon of [...config.icons.replace(/\s/g, "")]) {
+        const cell = document.createElement("span");
+        cell.textContent = icon;
+        cell.style.cssText = "font-size:15px;padding:3px 6px;border-radius:4px;cursor:default";
+        iconRow.appendChild(cell);
+      }
+      panelEl.appendChild(iconRow);
+    }
+    if (config.heading) heading(config.heading);
+    if (config.footer) {
+      const footer = document.createElement("div");
+      footer.textContent = "🔍 " + config.footer;
+      footer.style.cssText = "margin-top:auto;padding:7px 10px;border-radius:99px;border:" + accentBorder + ";background:#fff;color:color-mix(in srgb," + theme.colors.text + " 55%,transparent);font-size:12px";
+      panelEl.appendChild(footer);
+    }
+  };
+
+  // 装饰 Chrome：XP 风标题栏 + 图标工具栏 + 底部状态栏。纯装饰，保留系统拖拽。
+  let chromeClockTimer = 0;
+  const applyChrome = (theme) => {
+    const config = theme.chrome;
+    let chromeEl = document.getElementById("codex-doll-skin-chrome");
+    let statusEl = document.getElementById("codex-doll-skin-statusbar");
+    let reserveStyle = document.getElementById("codex-doll-chrome-style");
+    clearInterval(chromeClockTimer);
+    if (!config || !config.enabled) {
+      if (chromeEl) chromeEl.remove();
+      if (statusEl) statusEl.remove();
+      if (reserveStyle) reserveStyle.remove();
+      return;
+    }
+    const accent = theme.colors.accent;
+    const headerHeight = 34 + (config.toolbar.length ? 46 : 0);
+    if (!reserveStyle) {
+      reserveStyle = document.createElement("style");
+      reserveStyle.id = "codex-doll-chrome-style";
+      document.head.appendChild(reserveStyle);
+    }
+    reserveStyle.textContent = "#root{padding-top:" + headerHeight + "px!important;padding-bottom:" + (config.statusBar ? 26 : 0) + "px!important;box-sizing:border-box!important}";
+    if (!chromeEl) {
+      chromeEl = document.createElement("div");
+      chromeEl.id = "codex-doll-skin-chrome";
+      chromeEl.setAttribute("aria-hidden", "true");
+      document.body.appendChild(chromeEl);
+    }
+    chromeEl.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:8;font:13px var(--font-sans,system-ui)";
+    chromeEl.textContent = "";
+    // 标题栏：保留拖拽；左侧避开 macOS 交通灯
+    const titlebar = document.createElement("div");
+    titlebar.style.cssText = "height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 84px;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,20,60,.45);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 62%,#9cc2ff) 0%," + accent + " 45%,color-mix(in srgb," + accent + " 72%,#08245e) 100%);-webkit-app-region:drag";
+    const titleIcon = document.createElement("span");
+    titleIcon.textContent = theme.trigger.icon;
+    titleIcon.style.cssText = "font-size:16px;font-weight:400;text-shadow:none";
+    const titleText = document.createElement("span");
+    titleText.textContent = config.title || document.title;
+    titlebar.append(titleIcon, titleText);
+    const winButtons = document.createElement("div");
+    // 右侧留出 Codex 宠物/头像悬浮按钮的位置，避免重叠
+    winButtons.style.cssText = "margin-left:auto;margin-right:44px;display:flex;gap:3px;-webkit-app-region:no-drag";
+    for (const [glyph, bg] of [["─", "linear-gradient(180deg,#7fb1f7,#2f6fd8)"], ["□", "linear-gradient(180deg,#7fb1f7,#2f6fd8)"], ["✕", "linear-gradient(180deg,#f2937f,#d43518)"]]) {
+      const button = document.createElement("span");
+      button.textContent = glyph;
+      button.style.cssText = "width:26px;height:22px;display:grid;place-items:center;border-radius:4px;border:1px solid rgba(255,255,255,.55);background:" + bg + ";font-size:11px;font-weight:700;cursor:default";
+      winButtons.appendChild(button);
+    }
+    titlebar.appendChild(winButtons);
+    chromeEl.appendChild(titlebar);
+    // 工具栏
+    if (config.toolbar.length) {
+      const toolbar = document.createElement("div");
+      toolbar.style.cssText = "height:46px;display:flex;align-items:center;gap:4px;padding:0 12px;background:linear-gradient(180deg,#fdfeff,color-mix(in srgb," + accent + " 14%,#fff));border-bottom:1px solid color-mix(in srgb," + accent + " 45%,transparent)";
+      for (const item of config.toolbar) {
+        const button = document.createElement("span");
+        button.textContent = item;
+        button.style.cssText = "display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:5px;color:" + theme.colors.text + ";font-size:13px;cursor:default";
+        button.addEventListener("mouseenter", () => { button.style.background = "color-mix(in srgb," + accent + " 14%,transparent)"; });
+        button.addEventListener("mouseleave", () => { button.style.background = "transparent"; });
+        toolbar.appendChild(button);
+      }
+      chromeEl.appendChild(toolbar);
+    }
+    // 状态栏
+    if (config.statusBar) {
+      if (!statusEl) {
+        statusEl = document.createElement("div");
+        statusEl.id = "codex-doll-skin-statusbar";
+        statusEl.setAttribute("aria-hidden", "true");
+        document.body.appendChild(statusEl);
+      }
+      statusEl.style.cssText = "position:fixed;left:0;right:0;bottom:0;height:26px;z-index:8;display:flex;align-items:center;gap:14px;padding:0 12px;color:#fff;font:12px var(--font-sans,system-ui);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 68%,#8cb8ff)," + accent + " 60%,color-mix(in srgb," + accent + " 74%,#0a2a66))";
+      const left = document.createElement("span");
+      left.textContent = "🛡 安全 ✓";
+      const right = document.createElement("span");
+      right.style.marginLeft = "auto";
+      const clock = document.createElement("span");
+      const tick = () => {
+        const now = new Date();
+        clock.textContent = "📶 " + String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+      };
+      tick();
+      chromeClockTimer = setInterval(tick, 30000);
+      right.appendChild(clock);
+      statusEl.textContent = "";
+      statusEl.append(left, right);
+    } else if (statusEl) {
+      statusEl.remove();
     }
   };
 
@@ -397,6 +533,7 @@ async function init() {
     applyTrigger(theme);
     applyBrand(theme);
     applySlideshow(theme);
+    applyChrome(theme);
     applySidePanel(theme);
   };
   matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", () => { if (lastApplied) applyExtras(lastApplied); });

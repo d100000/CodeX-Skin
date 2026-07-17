@@ -185,6 +185,7 @@ function normalizeTheme(theme) {
       autoHide: Boolean(trigger.autoHide)
     },
     sidePanel: normalizeSidePanel(source.sidePanel),
+    chrome: normalizeChrome(source.chrome),
     tokens: normalizeTokens(source.tokens),
     customCss: sanitizeCustomCss(source.customCss),
     brand: {
@@ -355,14 +356,35 @@ function sanitizeCustomCss(value) {
     .replace(/url\(\s*(?!['"]?data:)[^)]*\)/gi, "url()");
 }
 
+function cleanLine(value, max) {
+  return typeof value === "string" ? value.replace(/[<>]/g, "").slice(0, max) : "";
+}
+
 function normalizeSidePanel(source) {
   const panel = source || {};
   return {
     enabled: Boolean(panel.enabled),
     width: clampNumber(panel.width, 240, 200, 320),
-    title: typeof panel.title === "string" ? panel.title.replace(/[<>]/g, "").slice(0, 20) : "",
+    title: cleanLine(panel.title, 20),
+    subtitle: cleanLine(panel.subtitle, 30),
     image: typeof panel.image === "string" && BACKGROUND_DATA_URL.test(panel.image) ? panel.image : null,
-    card: typeof panel.card === "string" ? panel.card.replace(/[<>]/g, "").slice(0, 300) : ""
+    card: cleanLine(panel.card, 300),
+    icons: cleanLine(panel.icons, 24),
+    heading: cleanLine(panel.heading, 20),
+    footer: cleanLine(panel.footer, 20)
+  };
+}
+
+// 装饰 Chrome：假标题栏 / 图标工具栏 / 底部状态栏（纯装饰 DOM，失败自动降级）。
+function normalizeChrome(source) {
+  const chrome = source || {};
+  return {
+    enabled: Boolean(chrome.enabled),
+    title: cleanLine(chrome.title, 30),
+    toolbar: Array.isArray(chrome.toolbar)
+      ? chrome.toolbar.slice(0, 8).map((item) => cleanLine(item, 14)).filter(Boolean)
+      : [],
+    statusBar: Boolean(chrome.statusBar)
   };
 }
 

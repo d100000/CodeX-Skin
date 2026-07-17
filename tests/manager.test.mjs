@@ -243,13 +243,29 @@ test("tokens and customCss are sanitized against injection and external URLs", (
 
 test("sidePanel normalizes with clamped width and stripped markup", () => {
   const off = core.normalizeTheme({ id: "a" }).sidePanel;
-  assert.deepEqual(off, { enabled: false, width: 240, title: "", image: null, card: "" });
-  const on = core.normalizeTheme({ id: "b", sidePanel: { enabled: 1, width: 900, title: "<b>好友</b>", image: SAMPLE_IMAGE, card: "hi<script>" } }).sidePanel;
+  assert.deepEqual(off, { enabled: false, width: 240, title: "", subtitle: "", image: null, card: "", icons: "", heading: "", footer: "" });
+  const on = core.normalizeTheme({ id: "b", sidePanel: { enabled: 1, width: 900, title: "<b>好友</b>", subtitle: "小蓝|LV 07", image: SAMPLE_IMAGE, card: "hi<script>", icons: "🖥⭐", heading: "我的好友", footer: "查找好友…" } }).sidePanel;
   assert.equal(on.enabled, true);
   assert.equal(on.width, 320);
   assert.ok(!on.title.includes("<"));
+  assert.equal(on.subtitle, "小蓝|LV 07");
   assert.equal(on.image, SAMPLE_IMAGE);
   assert.ok(!on.card.includes("<"));
+  assert.equal(on.icons, "🖥⭐");
+});
+
+test("chrome normalizes with capped toolbar and stripped markup", () => {
+  const off = core.normalizeTheme({ id: "a" }).chrome;
+  assert.deepEqual(off, { enabled: false, title: "", toolbar: [], statusBar: false });
+  const on = core.normalizeTheme({
+    id: "b",
+    chrome: { enabled: true, title: "Codex 2007<x>", toolbar: ["📝 新建任务", "<bad>", "", 1, 2, 3, 4, 5, 6, 7], statusBar: 1 }
+  }).chrome;
+  assert.equal(on.enabled, true);
+  assert.ok(!on.title.includes("<"));
+  assert.ok(on.toolbar.length <= 8);
+  assert.ok(on.toolbar.every((item) => !item.includes("<")));
+  assert.equal(on.statusBar, true);
 });
 
 test("paletteCandidatesFromPixels returns distinct hue candidates", () => {
