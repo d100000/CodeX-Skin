@@ -1,8 +1,26 @@
 # Codex Doll Skin
 
-An experimental, reversible skin system for the Codex desktop app. The current milestone provides the visual theme package, responsive preview, compatibility doctor, and opt-in enhancement payload. It does not modify the installed Codex application.
+An experimental, reversible skin system for the Codex desktop app (macOS). It never modifies the installed Codex application — it launches Codex with a loopback-only debugging endpoint and injects CSS/JS at runtime.
 
-## Preview
+## 一键安装（面向使用者）
+
+无需安装 Node / npm / git，直接复制到终端运行（使用 Codex 自带的运行时）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
+```
+
+安装后：退出当前 Codex（⌘Q）→ 从 `~/Applications` 打开 **Codex Doll Skin** → 窗口顶部中间的 **D** 按钮就是皮肤管理器。
+
+卸载：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/uninstall.sh | bash
+```
+
+> 前提：已安装 Codex 桌面版。安装器只在 `~/Applications` 与 `~/.codex` 下写文件，不改动 `/Applications/ChatGPT.app`。
+
+## 开发者预览
 
 ```bash
 npm install
