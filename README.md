@@ -2,9 +2,17 @@
 
 An experimental, reversible skin system for the Codex desktop app (macOS). It never modifies the installed Codex application — it launches Codex with a loopback-only debugging endpoint and injects CSS/JS at runtime.
 
-## 一键安装（面向使用者）
+## 安装（面向使用者）
 
-无需安装 Node / npm / git，直接复制到终端运行（使用 Codex 自带的运行时）：
+### 方式一：双击安装包（推荐给不熟悉终端的人）
+
+下载 **[Codex-Doll-Skin-Installer.dmg](https://github.com/d100000/CodeX-Skin/releases/latest/download/Codex-Doll-Skin-Installer.dmg)** → 双击打开 → **右键点击“Codex 皮肤安装器”→ 打开**（首次因未签名需右键打开一次，之后正常）→ 按提示完成。
+
+> 若提示“已损坏/无法验证开发者”，在终端执行一次 `xattr -dr com.apple.quarantine ~/Downloads/Codex-Doll-Skin-Installer.dmg` 后重试；这是未做苹果付费签名的正常现象。
+
+### 方式二：一行命令（面向开发者）
+
+无需安装 Node / npm / git，使用 Codex 自带运行时：
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
