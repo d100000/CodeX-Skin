@@ -32,6 +32,7 @@ export const RUNTIME_FILES = [
   "public/assets/doll-character-side.jpg",
   "public/assets/qq-mascot.jpg",
   "public/assets/qq-friend.jpg",
+  "public/assets/AppIcon.icns",
 ];
 
 export function compareVersions(a, b) {

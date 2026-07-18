@@ -68,6 +68,7 @@ function installRuntime() {
     "public/assets/doll-character-side.jpg",
     "public/assets/qq-mascot.jpg",
     "public/assets/qq-friend.jpg",
+    "public/assets/AppIcon.icns",
   ];
   const temporary = `${INSTALL_ROOT}.tmp-${process.pid}`;
   rmSync(temporary, { recursive: true, force: true });
@@ -106,11 +107,15 @@ wait "$CODEX_PID"
 `;
   writeFileSync(join(macos, "Codex Doll Skin"), executable);
   chmodSync(join(macos, "Codex Doll Skin"), 0o755);
+  // 应用图标（从安装的运行时目录取，随 install-launcher 一起分发）
+  const iconSource = join(installRoot, "public", "assets", "AppIcon.icns");
+  const hasIcon = existsSync(iconSource);
+  if (hasIcon) copyFileSync(iconSource, join(resources, "AppIcon.icns"));
   const plist = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
 <key>CFBundleDisplayName</key><string>Codex Doll Skin</string>
-<key>CFBundleExecutable</key><string>Codex Doll Skin</string>
+<key>CFBundleExecutable</key><string>Codex Doll Skin</string>${hasIcon ? "\n<key>CFBundleIconFile</key><string>AppIcon</string>" : ""}
 <key>CFBundleIdentifier</key><string>com.dollskin.codex.launcher</string>
 <key>CFBundleName</key><string>Codex Doll Skin</string>
 <key>CFBundlePackageType</key><string>APPL</string>

@@ -25,12 +25,17 @@ FILES=(
   theme/skin.css theme/manifest.json theme/theme.schema.json
   public/assets/doll-sakura-hero.webp public/assets/doll-room-light.webp
   public/assets/doll-character-side.jpg public/assets/qq-mascot.jpg
-  public/assets/qq-friend.jpg
+  public/assets/qq-friend.jpg public/assets/AppIcon.icns
 )
 for f in "${FILES[@]}"; do
   mkdir -p "$APP/Contents/Resources/app/$(dirname "$f")"
   cp "$ROOT/$f" "$APP/Contents/Resources/app/$f"
 done
+
+echo "▶ 写入应用图标…"
+if [ -f "$ROOT/public/assets/AppIcon.icns" ]; then
+  cp "$ROOT/public/assets/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
+fi
 
 echo "▶ 写入安装脚本与 Info.plist…"
 cat > "$APP/Contents/MacOS/installer" <<'SCRIPT'
@@ -70,6 +75,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <key>CFBundleDisplayName</key><string>Codex 皮肤安装器</string>
 <key>CFBundleName</key><string>Codex Doll Skin Installer</string>
 <key>CFBundleExecutable</key><string>installer</string>
+<key>CFBundleIconFile</key><string>AppIcon</string>
 <key>CFBundleIdentifier</key><string>com.dollskin.codex.installer</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleShortVersionString</key><string>${VERSION}</string>
