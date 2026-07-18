@@ -2,10 +2,10 @@
   "themes": [
     {
       "id": "classic-blue-2007",
-      "name": "经典蓝 · 2007 怀旧",
+      "name": "QQ 经典蓝 · 2007",
       "file": "classic-blue-2007.codexskin.json",
-      "bytes": 122075,
-      "sha256": "60efc648630fd56c889ab7c301eb36a89372717e87e79428372f9001c6ac81dd"
+      "bytes": 125939,
+      "sha256": "deb501736de9d1d01f4514184517b724cc666801b238cee8d57dc3846c06759c"
     },
     {
       "id": "cloud-sky-demo",

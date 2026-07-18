@@ -387,6 +387,27 @@ test("presets never customize the global trigger button", async () => {
   }
 });
 
+test("classic blue preset keeps the complete QQ 2007 client frame", async () => {
+  const presets = JSON.parse(await readFile(new URL("../installer/manager/presets.json", import.meta.url), "utf8"));
+  const theme = presets.find((preset) => preset.id === "classic-blue-2007");
+  assert.ok(theme, "必须保留 QQ 经典蓝主题");
+  assert.equal(theme.chrome.enabled, true);
+  assert.equal(theme.chrome.statusBar, true);
+  assert.equal(theme.chrome.toolbar.length, 6);
+  assert.equal(theme.sidePanel.enabled, true);
+  assert.equal(theme.sidePanel.image, "asset://qq-mascot.jpg");
+  assert.equal(theme.sidePanel.image2, "asset://qq-friend.jpg");
+  assert.ok(theme.layout.sidebarWidth >= 280);
+  for (const selector of [".cds-chrome-titlebar", ".cds-chrome-toolbar", ".cds-sidepanel", ".cds-sidepanel-avatar", ".cds-sidepanel-search"]) {
+    assert.ok(theme.customCss.includes(selector), `QQ 主题缺少 ${selector} 样式`);
+  }
+});
+
+test("right contact panel yields space back to Codex at narrow widths", async () => {
+  const panelSource = await readFile(new URL("../installer/manager/04-panel.js", import.meta.url), "utf8");
+  assert.match(panelSource, /@media\(max-width:1119px\)\{\.app-shell-main-content-viewport\{margin-right:0!important\}#codex-doll-skin-sidepanel\{display:none!important\}\}/);
+});
+
 test("fragments stay framework-free and use no ES module syntax", async () => {
   for (const name of ["00-core.js", "01-store.js", "02-preview.js", "03-editor.js", "04-panel.js"]) {
     const source = await readFile(new URL(`../installer/manager/${name}`, import.meta.url), "utf8");

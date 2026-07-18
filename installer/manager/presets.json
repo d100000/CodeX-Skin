@@ -114,7 +114,7 @@
   {
     "schemaVersion": 3,
     "id": "classic-blue-2007",
-    "name": "经典蓝 · 2007 怀旧",
+    "name": "QQ 经典蓝 · 2007",
     "background": "none",
     "colors": {
       "accent": "#2a6feb",
@@ -124,7 +124,9 @@
     "layout": {
       "x": 50,
       "y": 50,
-      "veil": 50
+      "veil": 0,
+      "sidebarWidth": 286,
+      "sidebarOpacity": 95
     },
     "typography": {
       "sans": "Tahoma, Verdana, \"PingFang SC\", sans-serif"
@@ -156,7 +158,7 @@
     },
     "chrome": {
       "enabled": true,
-      "title": "Codex 2007",
+      "title": "Codex 2007 - 代码与任务",
       "toolbar": [
         "📝 新建任务",
         "📅 已安排",
@@ -169,13 +171,13 @@
     },
     "sidePanel": {
       "enabled": true,
-      "width": 250,
-      "title": "⊕ Codex 好友",
+      "width": 258,
+      "title": "Codex 好友",
       "subtitle": "Codex 小蓝|LV 07",
       "image": "asset://qq-mascot.jpg",
       "card": "代码有问题？找我！我是你的智能伙伴 Codex，陪你写代码、改 Bug、查文档，超可靠哒！",
-      "icons": "🖥⭐✉🧩📁",
-      "heading": "▾ 我的好友 (2/8)",
+      "icons": "▣★✉♣▤",
+      "heading": "我的好友 (2/8)",
       "image2": "asset://qq-friend.jpg",
       "footer": "查找好友…"
     },
@@ -184,7 +186,7 @@
       "--color-token-main-surface-primary": "rgba(250,253,255,.85)",
       "--color-token-editor-background": "rgba(255,255,255,.92)"
     },
-    "customCss": "#root::before{background:linear-gradient(180deg,#bcd6f7 0,#dcebfb 200px,#e8f1fc 100%)!important} .app-shell-left-panel{background:#f7fbff!important;border-right:1px solid #6f9ad6!important} [class*=\"sidebar\" i],[data-slot=\"sidebar\"]{background:transparent!important} [data-app-action-sidebar-thread-active=\"true\"]{background:linear-gradient(90deg,rgba(42,111,235,.2),rgba(122,162,216,.15))!important} .main-surface,.browser-main-surface{background:rgba(255,255,255,.96)!important;border:1px solid #6f9ad6!important;border-radius:6px!important;box-shadow:0 2px 8px rgba(42,80,150,.25)!important} .composer-surface-chrome{background:#fff!important;border:1px solid #5f8fd0!important;box-shadow:inset 0 1px 3px rgba(52,90,150,.16)!important} .app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(157,199,247,.6),transparent)!important}",
+    "customCss": "#root{background:#d7e9fb!important}#root::before{background:linear-gradient(180deg,#b3d6f7 0,#ddecfa 90px,#edf6fd 100%)!important;filter:none!important}.app-shell-left-panel{background:#f9fcff!important;border-right:1px solid #6f9ed4!important;box-shadow:inset -1px 0 #fff!important}[class*=\"sidebar\" i],[data-slot=\"sidebar\"]{background:transparent!important}.app-shell-left-panel [role=\"treeitem\"],.app-shell-left-panel button{border-radius:2px!important}.app-shell-left-panel [role=\"treeitem\"]:hover,.app-shell-left-panel button:hover{background:#dbeafb!important}[data-app-action-sidebar-thread-active=\"true\"]{background:linear-gradient(90deg,#b7d5f2,#e7f1fb)!important;box-shadow:inset 2px 0 #3b75ba!important}.main-surface,.browser-main-surface{background:#fff!important;border:1px solid #78a4d3!important;border-radius:4px!important;box-shadow:0 1px 2px rgba(39,94,156,.28)!important}.composer-surface-chrome{background:linear-gradient(180deg,#f8fcff,#e9f4fd)!important;border:1px solid #6f9ed4!important;border-radius:4px!important;box-shadow:inset 0 1px #fff!important}.app-shell-main-content-top-fade{background:linear-gradient(180deg,rgba(186,216,246,.75),transparent)!important}.cds-chrome{box-shadow:0 1px 0 #9cc8ed!important}.cds-chrome-titlebar{height:35px!important;padding-left:12px!important;background:linear-gradient(180deg,#5da7e9 0,#2778c9 48%,#1c63af 100%)!important;border-bottom:1px solid #0f4d93!important}.cds-chrome-title-icon{display:grid!important;place-items:center!important;width:21px!important;height:21px!important;border-radius:4px!important;background:#e9f6ff!important;color:#155ba5!important;border:1px solid #0f4f98!important}.cds-chrome-title-text{font-family:Tahoma,Verdana,\"PingFang SC\",sans-serif!important;font-size:14px!important;letter-spacing:0!important}.cds-chrome-window-controls{gap:2px!important}.cds-chrome-window-control{border-radius:3px 3px 0 0!important;box-shadow:inset 0 1px rgba(255,255,255,.45)!important}.cds-chrome-toolbar{height:50px!important;padding:0 10px!important;gap:1px!important;background:linear-gradient(180deg,#fdfefe 0,#d8eafa 100%)!important;border-bottom:1px solid #7ba7d4!important}.cds-chrome-tool{height:36px!important;padding:5px 11px!important;border-right:1px solid #b3cce5!important;border-radius:0!important;color:#17395d!important;font-family:Tahoma,Verdana,\"PingFang SC\",sans-serif!important;font-size:12px!important}.cds-chrome-tool:first-child{border-left:1px solid #d7e8f8!important}.cds-chrome-statusbar{height:27px!important;padding:0 11px!important;background:linear-gradient(180deg,#4d9ae0,#236db7)!important;border-top:1px solid #8fc2ef!important}.cds-sidepanel{gap:0!important;padding:0!important;overflow:hidden!important;border:1px solid #6f9ed4!important;border-radius:4px!important;background:#f8fcff!important;box-shadow:0 1px 2px rgba(39,94,156,.22)!important;backdrop-filter:none!important}.cds-sidepanel-heading{display:block!important;padding:7px 10px!important;color:#17395d!important;font-family:Tahoma,Verdana,\"PingFang SC\",sans-serif!important;font-size:12px!important;background:linear-gradient(180deg,#f9fdff,#d6eafa)!important;border-bottom:1px solid #a8c8e5!important;border-radius:0!important}.cds-sidepanel-avatar{width:100%!important;height:190px!important;object-fit:cover!important;border:0!important;border-bottom:1px solid #a8c8e5!important;border-radius:0!important}.cds-sidepanel-person{padding:8px 10px 4px!important;color:#17395d!important}.cds-sidepanel-name{font-size:13px!important}.cds-sidepanel-badge{background:linear-gradient(180deg,#f9d365,#cc8c16)!important;border:1px solid #b77c0d!important}.cds-sidepanel-card{margin:5px 9px 8px!important;padding:8px!important;color:#244568!important;line-height:1.55!important;background:linear-gradient(180deg,#fff,#eaf4fc)!important;border:1px solid #9ebfe0!important;border-radius:4px!important}.cds-sidepanel-actions{display:flex!important;justify-content:space-around!important;gap:0!important;margin-top:auto!important;padding:8px!important;background:linear-gradient(180deg,#eef7ff,#d6eafb)!important;border-top:1px solid #a8c8e5!important;border-bottom:0!important}.cds-sidepanel-action{padding:2px 5px!important;color:#2a6fab!important;font-size:16px!important}.cds-sidepanel-friend{width:calc(100% - 18px)!important;max-height:190px!important;margin:8px 9px!important;object-fit:cover!important;border:1px solid #9ebfe0!important;border-radius:3px!important}.cds-sidepanel-search{margin:0!important;padding:8px 10px!important;color:#58738f!important;background:#f6fbff!important;border-top:1px solid #bed5ea!important;border-radius:0!important;font-size:12px!important}",
     "createdAt": "2026-07-17T00:00:00.000Z",
     "effects": {
       "typingFx": "sparkle",

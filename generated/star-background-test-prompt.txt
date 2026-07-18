@@ -1,0 +1,26 @@
+TEST SUBJECT ONLY:
+An original fictional Chinese cinema star with a distinctive, memorable screen presence and refined personal styling. This temporary subject is only for evaluating the background constraints and can be replaced by any user-specified person.
+
+STYLE AND LAYOUT CONSTRAINTS:
+Preserve the specified subject exactly. Do not infer or change gender, age, ethnicity, facial identity, hairstyle, clothing, accessories, or signature personal style.
+
+Create a highly photorealistic celebrity editorial photograph for a Codex desktop background, 1536x1024, 3:2 landscape. It must look like a real RAW photograph captured with a professional full-frame camera and an 85mm portrait lens, not artwork. Use true-to-life skin texture and pores, fine facial detail, individual hair strands, realistic eyes and hands, detailed fabrics, natural optical depth of field, physically accurate daylight and shadows, and restrained cinematic color grading. Retain a strong, unmistakable personal star presence: confident camera expression, recognizable styling, refined fashion-editorial quality, and no generic influencer face.
+
+Use a natural spring palette of restrained cherry-blossom pink, fresh green, pale sky blue, ivory, and neutral highlights. Preserve all colors explicitly specified for the subject. Avoid candy colors, excessive pink cast, oversaturation, and artificial skin tones.
+
+CODEX COMPOSITION AT 1536x1024:
+- Keep x 0-1120 px calm, softly defocused, low-detail, and low-contrast for navigation, text, and task cards.
+- Place the main subject only within x 1120-1536 px, y 100-900 px, facing slightly toward the open center. Keep the face clear in the upper-right region.
+- Keep the composer area x 368-1168 px, y 840-1024 px clean and very low-detail.
+- Keep y 963-1024 px free of faces and important objects.
+- Background may contain softly defocused cherry trees, pale sky, restrained sunlight highlights, and subtle picnic details. Do not clutter the center.
+
+EXACT COUNT: ONE INSTANT PHOTO ONLY.
+Place one and only one physical instant-film print in the bottom-right region, approximately x 1225-1460 px, y 635-920 px. The print shows the same specified subject with identical face, hairstyle, clothing, accessories, colors, and personal identity, but in one clearly different natural pose from the main portrait. The miniature portrait must remain sharp and recognizable.
+
+At this 1536x1024 output size, make the outer print approximately 210x255 px, with a 180x180 px inner image, 15 px white top and side borders, and a 60 px blank bottom border. Use realistic paper thickness, subtle texture, correct perspective, a slight natural rotation, and a soft contact shadow. Leave the white border completely blank.
+
+Do not generate a second photo or any other photograph, print, frame, poster, card, film strip, contact sheet, photo fragment, or photo-like rectangular object anywhere in the image.
+
+NEGATIVE PROMPT:
+anime, manga, cartoon, illustration, drawing, digital painting, cel shading, 3D render, CGI, game art, doll, animation style, cosplay look, plastic skin, waxy skin, airbrushed face, beauty filter, oversized eyes, fantasy proportions, generic influencer face, inconsistent identity, duplicate subject, multiple photos, second instant photo, extra print, blank photo interior, fake UI, readable text, caption, logo, watermark, cluttered center

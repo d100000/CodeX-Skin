@@ -5,10 +5,13 @@
   "author": "Doll Skin Studio",
   "minimumCodexVersion": "26.715.21425",
   "updates": {
-    "rawBase": "https://raw.githubusercontent.com/d100000/codex-doll-skin/main",
+    "rawBase": "https://raw.githubusercontent.com/d100000/CodeX-Skin/main",
     "auto": true
   },
-  "variants": ["light", "focus"],
+  "variants": [
+    "light",
+    "focus"
+  ],
   "assets": {
     "background": "assets/doll-sakura-hero.webp",
     "composerRibbon": "assets/ribbon-composer.svg"

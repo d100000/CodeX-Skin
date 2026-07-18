@@ -585,14 +585,16 @@ async function init() {
       reserveStyle.id = "codex-doll-sidepanel-style";
       document.head.appendChild(reserveStyle);
     }
-    // 对 viewport（而非 frame）让位：环境信息等浮层挂在 viewport 上，只推 frame 会导致内容错位
-    reserveStyle.textContent = ".app-shell-main-content-viewport{margin-right:" + (config.width + 16) + "px!important}";
+    // 对 viewport（而非 frame）让位：环境信息等浮层挂在 viewport 上，只推 frame 会导致内容错位。
+    // 窄窗口优先保留 Codex 正文；联系人栏在宽度不足时自动收起。
+    reserveStyle.textContent = ".app-shell-main-content-viewport{margin-right:" + (config.width + 16) + "px!important}@media(max-width:1119px){.app-shell-main-content-viewport{margin-right:0!important}#codex-doll-skin-sidepanel{display:none!important}}";
     if (!panelEl) {
       panelEl = document.createElement("aside");
       panelEl.id = "codex-doll-skin-sidepanel";
       panelEl.setAttribute("aria-label", "皮肤右侧面板");
       document.body.appendChild(panelEl);
     }
+    panelEl.className = "cds-sidepanel";
     const chromeOn = theme.chrome && theme.chrome.enabled;
     const top = chromeOn ? 92 : 52;
     const bottom = chromeOn && theme.chrome.statusBar ? 40 : 14;
@@ -602,6 +604,7 @@ async function init() {
     panelEl.textContent = "";
     const heading = (text) => {
       const el = document.createElement("strong");
+      el.className = "cds-sidepanel-heading";
       el.textContent = text;
       el.style.cssText = "font-size:13px;color:" + theme.colors.accent + ";padding:5px 8px;border-radius:" + radius + ";background:linear-gradient(180deg,color-mix(in srgb," + theme.colors.accent + " 14%,transparent),color-mix(in srgb," + theme.colors.accent + " 7%,transparent))";
       panelEl.appendChild(el);
@@ -609,6 +612,7 @@ async function init() {
     if (config.title) heading(config.title);
     if (config.image) {
       const image = document.createElement("img");
+      image.className = "cds-sidepanel-avatar";
       image.src = config.image;
       image.alt = "";
       image.style.cssText = "width:100%;border-radius:" + radius + ";object-fit:cover;border:" + accentBorder;
@@ -616,12 +620,15 @@ async function init() {
     }
     if (config.subtitle) {
       const subtitle = document.createElement("div");
+      subtitle.className = "cds-sidepanel-person";
       const parts = config.subtitle.split("|");
       const name = document.createElement("b");
+      name.className = "cds-sidepanel-name";
       name.textContent = "✅ " + parts[0].trim();
       subtitle.appendChild(name);
       if (parts[1]) {
         const badge = document.createElement("em");
+        badge.className = "cds-sidepanel-badge";
         badge.textContent = parts[1].trim();
         badge.style.cssText = "margin-left:7px;font-style:normal;font-size:10.5px;font-weight:700;color:#fff;padding:1px 7px;border-radius:3px;background:linear-gradient(180deg,#ffb340,#f08c1a)";
         subtitle.appendChild(badge);
@@ -630,15 +637,18 @@ async function init() {
     }
     if (config.card) {
       const card = document.createElement("p");
+      card.className = "cds-sidepanel-card";
       card.textContent = config.card;
       card.style.cssText = "margin:0;padding:10px;border-radius:" + radius + ";background:#fff;border:" + accentBorder;
       panelEl.appendChild(card);
     }
     if (config.icons) {
       const iconRow = document.createElement("div");
+      iconRow.className = "cds-sidepanel-actions";
       iconRow.style.cssText = "display:flex;gap:6px;padding:4px 2px;border-top:1px solid color-mix(in srgb," + theme.colors.accent + " 16%,transparent);border-bottom:1px solid color-mix(in srgb," + theme.colors.accent + " 16%,transparent)";
       for (const icon of [...config.icons.replace(/\s/g, "")]) {
         const cell = document.createElement("span");
+        cell.className = "cds-sidepanel-action";
         cell.textContent = icon;
         cell.style.cssText = "font-size:15px;padding:3px 6px;border-radius:4px;cursor:default";
         iconRow.appendChild(cell);
@@ -648,6 +658,7 @@ async function init() {
     if (config.heading) heading(config.heading);
     if (config.image2) {
       const image2 = document.createElement("img");
+      image2.className = "cds-sidepanel-friend";
       image2.src = config.image2;
       image2.alt = "";
       image2.style.cssText = "width:100%;border-radius:" + radius + ";object-fit:cover;border:" + accentBorder;
@@ -655,6 +666,7 @@ async function init() {
     }
     if (config.footer) {
       const footer = document.createElement("div");
+      footer.className = "cds-sidepanel-search";
       footer.textContent = "🔍 " + config.footer;
       footer.style.cssText = "margin-top:auto;padding:7px 10px;border-radius:99px;border:" + accentBorder + ";background:#fff;color:color-mix(in srgb," + theme.colors.text + " 55%,transparent);font-size:12px";
       panelEl.appendChild(footer);
@@ -690,23 +702,29 @@ async function init() {
       chromeEl.setAttribute("aria-hidden", "true");
       document.body.appendChild(chromeEl);
     }
+    chromeEl.className = "cds-chrome";
     chromeEl.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:8;font:13px var(--font-sans,system-ui)";
     chromeEl.textContent = "";
     // 标题栏：刻意不设 -webkit-app-region:drag——Electron 的拖拽区计算对覆盖元素的
     // no-drag 豁口不可靠，会吞掉皮肤管理器按钮的点击；窗口拖拽交给下方 Codex 原生顶栏
     const titlebar = document.createElement("div");
+    titlebar.className = "cds-chrome-titlebar";
     titlebar.style.cssText = "height:34px;display:flex;align-items:center;gap:8px;padding:0 10px 0 84px;color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,20,60,.45);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 62%,#9cc2ff) 0%," + accent + " 45%,color-mix(in srgb," + accent + " 72%,#08245e) 100%)";
     const titleIcon = document.createElement("span");
+    titleIcon.className = "cds-chrome-title-icon";
     titleIcon.textContent = theme.trigger.icon;
     titleIcon.style.cssText = "font-size:16px;font-weight:400;text-shadow:none";
     const titleText = document.createElement("span");
+    titleText.className = "cds-chrome-title-text";
     titleText.textContent = config.title || document.title;
     titlebar.append(titleIcon, titleText);
     const winButtons = document.createElement("div");
+    winButtons.className = "cds-chrome-window-controls";
     // 右侧留出 Codex 宠物/头像悬浮按钮的位置，避免重叠
     winButtons.style.cssText = "margin-left:auto;margin-right:44px;display:flex;gap:3px;-webkit-app-region:no-drag";
     for (const [glyph, bg] of [["─", "linear-gradient(180deg,#7fb1f7,#2f6fd8)"], ["□", "linear-gradient(180deg,#7fb1f7,#2f6fd8)"], ["✕", "linear-gradient(180deg,#f2937f,#d43518)"]]) {
       const button = document.createElement("span");
+      button.className = "cds-chrome-window-control";
       button.textContent = glyph;
       button.style.cssText = "width:26px;height:22px;display:grid;place-items:center;border-radius:4px;border:1px solid rgba(255,255,255,.55);background:" + bg + ";font-size:11px;font-weight:700;cursor:default";
       winButtons.appendChild(button);
@@ -716,9 +734,11 @@ async function init() {
     // 工具栏
     if (config.toolbar.length) {
       const toolbar = document.createElement("div");
+      toolbar.className = "cds-chrome-toolbar";
       toolbar.style.cssText = "height:46px;display:flex;align-items:center;gap:4px;padding:0 12px;background:linear-gradient(180deg,#fdfeff,color-mix(in srgb," + accent + " 14%,#fff));border-bottom:1px solid color-mix(in srgb," + accent + " 45%,transparent)";
       for (const item of config.toolbar) {
         const button = document.createElement("span");
+        button.className = "cds-chrome-tool";
         button.textContent = item;
         button.style.cssText = "display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:5px;color:" + theme.colors.text + ";font-size:13px;cursor:default";
         button.addEventListener("mouseenter", () => { button.style.background = "color-mix(in srgb," + accent + " 14%,transparent)"; });
@@ -735,6 +755,7 @@ async function init() {
         statusEl.setAttribute("aria-hidden", "true");
         document.body.appendChild(statusEl);
       }
+      statusEl.className = "cds-chrome-statusbar";
       statusEl.style.cssText = "position:fixed;left:0;right:0;bottom:0;height:26px;z-index:8;display:flex;align-items:center;gap:14px;padding:0 12px;color:#fff;font:12px var(--font-sans,system-ui);background:linear-gradient(180deg,color-mix(in srgb," + accent + " 68%,#8cb8ff)," + accent + " 60%,color-mix(in srgb," + accent + " 74%,#0a2a66))";
       const left = document.createElement("span");
       left.textContent = "🛡 安全 ✓";
