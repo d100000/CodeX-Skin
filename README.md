@@ -16,6 +16,8 @@
 
 *↑ 实拍：挑一套视频皮肤，实时画布立刻会动 —— 你的 Codex 也一样*
 
+[🎬 点这里观看高清视频演示（1440p / MP4）](https://github.com/d100000/CodeX-Skin/blob/main/docs/media/demo.mp4)
+
 </div>
 
 ---
