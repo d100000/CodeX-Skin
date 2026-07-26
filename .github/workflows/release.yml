@@ -1,10 +1,10 @@
 name: Release Doll Skin Studio
 
+# 发布改为本地手动构建 + gh release 上传（见 UPDATE.md）。
+# CI 构建需要 TAURI_SIGNING_PRIVATE_KEY secrets 和仓库内 Image/ 目录，条件不满足，
+# 因此只保留手动触发，避免每次打 tag 都产生一次失败运行。
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
 
 permissions:
   contents: write
