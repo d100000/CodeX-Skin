@@ -6,6 +6,7 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
+  ListRestart,
   Plus,
   RefreshCw,
   Trash2,
@@ -31,6 +32,7 @@ function profileFromPreset(preset) {
     model: preset.model,
     reasoningEffort: "",
     official: Boolean(preset.official),
+    catalogModels: [],
   };
 }
 
@@ -51,6 +53,9 @@ export default function ModelPanel({ status, notify, restartCodex }) {
   const [showKey, setShowKey] = useState(false);
   const [busy, setBusy] = useState(false);
   const [ready, setReady] = useState(false);
+  const [fetchedModels, setFetchedModels] = useState([]); // 自动拉取的 /v1/models 结果
+  const [fetching, setFetching] = useState(false);
+  const [modelFilter, setModelFilter] = useState("");
 
   const selected = store.providers.find((provider) => provider.id === selectedId) || null;
 
@@ -92,9 +97,41 @@ export default function ModelPanel({ status, notify, restartCodex }) {
   }, []);
 
   useEffect(() => {
-    setDraft(selected ? { ...selected } : null);
+    setDraft(selected ? { catalogModels: [], ...selected } : null);
     setShowKey(false);
+    setFetchedModels([]);
+    setModelFilter("");
   }, [selectedId, store.providers]);
+
+  const fetchModels = async () => {
+    if (!draft?.baseUrl.trim()) { notify("请先填写 Base URL", "error"); return; }
+    if (!draft.apiKey.trim()) { notify("请先填写 API Key 再拉取模型", "error"); return; }
+    setFetching(true);
+    try {
+      const models = await call("fetch_provider_models", { baseUrl: draft.baseUrl, apiKey: draft.apiKey });
+      setFetchedModels(models);
+      if (!models.length) { notify("该供应商返回了空模型列表", "error"); return; }
+      // 默认模型不在列表里（或还没填）时，自动选第一个，用户不用手打
+      if (!draft.model || !models.some((item) => item.id === draft.model)) {
+        setDraft((current) => ({ ...current, model: models[0].id }));
+      }
+      notify(`已拉取 ${models.length} 个模型`);
+    } catch (error) {
+      notify(error.message || String(error), "error");
+    } finally {
+      setFetching(false);
+    }
+  };
+
+  const toggleCatalogModel = (id) => {
+    setDraft((current) => {
+      const list = current.catalogModels || [];
+      return {
+        ...current,
+        catalogModels: list.includes(id) ? list.filter((item) => item !== id) : [...list, id],
+      };
+    });
+  };
 
   const persist = async (next) => {
     setStore(next);
@@ -137,11 +174,15 @@ export default function ModelPanel({ status, notify, restartCodex }) {
       notify("请先填写 API Key", "error");
       return;
     }
+    // 勾选了目录但漏掉当前模型时自动补上，否则 Codex 选择器里反而找不到正在用的模型
+    const catalogModels = (draft.catalogModels || []).length && draft.model && !draft.catalogModels.includes(draft.model)
+      ? [draft.model, ...draft.catalogModels]
+      : draft.catalogModels || [];
     setBusy(true);
     try {
       const next = await saveDraft();
       if (!next) return;
-      await call("apply_model_provider", { profile: { ...draft } });
+      await call("apply_model_provider", { profile: { ...draft, catalogModels } });
       await persist({ ...next, activeId: draft.id });
       setLive(await call("read_live_model_config").catch(() => null));
       if (status.connected) {
@@ -231,8 +272,20 @@ export default function ModelPanel({ status, notify, restartCodex }) {
                   )}
                 </Field>
                 <div className="model-field-row">
-                  <Field label="模型名">
-                    <input value={draft.model} spellCheck={false} placeholder="留空跟随默认" onChange={(event) => setDraft({ ...draft, model: event.target.value.trim() })} />
+                  <Field label="模型" hint={fetchedModels.length ? `已拉取 ${fetchedModels.length} 个` : "点右侧按钮自动拉取"}>
+                    <div className="model-key-row">
+                      {fetchedModels.length ? (
+                        <select value={draft.model} onChange={(event) => setDraft({ ...draft, model: event.target.value })}>
+                          {fetchedModels.map((item) => <option key={item.id} value={item.id}>{item.id}</option>)}
+                          {!fetchedModels.some((item) => item.id === draft.model) && draft.model && <option value={draft.model}>{draft.model}</option>}
+                        </select>
+                      ) : (
+                        <input value={draft.model} spellCheck={false} placeholder="拉取后可下拉选择" onChange={(event) => setDraft({ ...draft, model: event.target.value.trim() })} />
+                      )}
+                      <button onClick={fetchModels} disabled={fetching} title="从供应商拉取模型列表">
+                        {fetching ? <RefreshCw className="spin" size={15} /> : <ListRestart size={15} />}
+                      </button>
+                    </div>
                   </Field>
                   <Field label="接口协议" hint="responses = 原生 / chat = 兼容">
                     <select value={draft.wireApi} onChange={(event) => setDraft({ ...draft, wireApi: event.target.value })}>
@@ -241,6 +294,27 @@ export default function ModelPanel({ status, notify, restartCodex }) {
                     </select>
                   </Field>
                 </div>
+                {fetchedModels.length > 0 && (
+                  <div className="model-field">
+                    <span>Codex 菜单模型<small>勾选后写入模型目录，Codex 的模型选择器里就能直接切换这些模型</small></span>
+                    {fetchedModels.length > 8 && (
+                      <input className="model-catalog-filter" value={modelFilter} placeholder="筛选模型…" onChange={(event) => setModelFilter(event.target.value)} />
+                    )}
+                    <div className="model-catalog-list">
+                      {fetchedModels
+                        .filter((item) => !modelFilter || item.id.toLowerCase().includes(modelFilter.toLowerCase()))
+                        .slice(0, 200)
+                        .map((item) => (
+                          <label key={item.id} className="model-catalog-item">
+                            <input type="checkbox" checked={(draft.catalogModels || []).includes(item.id)} onChange={() => toggleCatalogModel(item.id)} />
+                            <span>{item.id}</span>
+                            {item.ownedBy && <small>{item.ownedBy}</small>}
+                          </label>
+                        ))}
+                    </div>
+                    {(draft.catalogModels || []).length > 0 && <small className="model-catalog-count">已选 {(draft.catalogModels || []).length} 个（上限 50，切换时生效）</small>}
+                  </div>
+                )}
               </>
             )}
             <Field label="推理强度">

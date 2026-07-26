@@ -319,3 +319,15 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .model-actions { display: flex; gap: 9px; margin-top: 3px; }
 .model-footnote { margin: 0; font-size: 11px; line-height: 1.6; color: var(--studio-muted); }
 .model-footnote code { font-size: 10.5px; }
+
+/* 模型目录勾选列表（自动拉取的 /v1/models 结果） */
+.model-catalog-filter { margin-bottom: 2px; }
+.model-catalog-list { display: grid; gap: 2px; max-height: 200px; overflow: auto; padding: 6px; border: 1px solid var(--studio-border); border-radius: 8px; background: var(--studio-panel); }
+.model-catalog-item { display: flex; align-items: center; gap: 7px; padding: 4px 6px; border-radius: 6px; font-size: 12.5px; cursor: pointer; }
+.model-catalog-item:hover { background: var(--studio-hover); }
+/* 盖掉 .model-field input 的 width:100%，否则复选框独占整行、文字被挤出可视区 */
+.model-field .model-catalog-item input { width: auto; padding: 0; margin: 0; flex: none; }
+.model-catalog-item input { accent-color: var(--studio-accent); }
+.model-catalog-item span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.model-catalog-item small { color: var(--studio-muted); font-size: 10.5px; }
+.model-catalog-count { color: var(--studio-muted); font-size: 11px; }

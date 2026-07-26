@@ -25,6 +25,17 @@ const OFFICIAL_AUTH_BACKUP: &str = "auth.json.aha-official.bak";
 const BACKUP_DIR: &str = "backups-aha";
 const BACKUP_KEEP: usize = 5;
 
+/// 我们生成的模型目录文件名（config.toml 的 `model_catalog_json` 相对 CODEX_HOME 解析）。
+/// 只有指针指向这个文件名时才允许清理——用户自己维护的外部目录一律不碰。
+const CATALOG_FILENAME: &str = "aha-codex-model-catalog.json";
+/// 目录条目模板（取自 cc-switch 的 native-responses 干净模板，MIT）：
+/// 无 freeform apply_patch / web_search 工具键，shell_type=shell_command，
+/// 且带 Codex 目录解析器强制要求的 base_instructions 字段。
+const CATALOG_TEMPLATE: &str = include_str!("../resources/codex-model-template.json");
+const CATALOG_DEFAULT_CONTEXT_WINDOW: u64 = 128_000;
+/// 目录条目上限：聚合站 /v1/models 动辄几百个模型，全塞进 Codex 选择器没法用。
+const CATALOG_MAX_MODELS: usize = 50;
+
 fn codex_home() -> Result<PathBuf, String> {
     if let Some(custom) = std::env::var_os("CODEX_HOME").filter(|v| !v.is_empty()) {
         return Ok(PathBuf::from(custom));
@@ -104,6 +115,9 @@ pub struct ModelProviderProfile {
     /// official = 官方登录（不写 model_provider 指针，还原 OAuth 缓存）
     #[serde(default)]
     pub official: bool,
+    /// 写入 Codex 模型选择器目录的模型列表（空 = 不生成目录，Codex 显示默认菜单）
+    #[serde(default)]
+    pub catalog_models: Vec<String>,
 }
 
 fn default_wire_api() -> String {
@@ -207,6 +221,193 @@ pub fn read_live_model_config() -> Result<LiveModelConfig, String> {
     })
 }
 
+// ---------- 模型列表自动拉取（机制取自 cc-switch 的 model_fetch 服务） ----------
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FetchedModel {
+    pub id: String,
+    pub owned_by: Option<String>,
+}
+
+/// 已知的「Anthropic/编码计划兼容子路径」后缀；按长度降序，最长后缀优先剥离。
+const COMPAT_SUFFIXES: &[&str] = &[
+    "/api/claudecode",
+    "/api/anthropic",
+    "/apps/anthropic",
+    "/api/coding",
+    "/claudecode",
+    "/anthropic",
+    "/step_plan",
+    "/coding",
+    "/claude",
+];
+
+/// baseURL 是否以 OpenAI 风格版本段 `/v{N}` 结尾（`/v1`、智谱 `.../paas/v4`）。
+/// 这类 URL 版本号已在路径里，模型端点是 `{base}/models`，不能再补 `/v1`。
+fn ends_with_version_segment(url: &str) -> bool {
+    let last = url.rsplit('/').next().unwrap_or("");
+    last.strip_prefix('v')
+        .is_some_and(|digits| !digits.is_empty() && digits.bytes().all(|b| b.is_ascii_digit()))
+}
+
+/// 构造模型列表端点候选：版本段规则 → 兼容子路径剥离兜底，去重保序。
+fn build_models_url_candidates(base_url: &str) -> Result<Vec<String>, String> {
+    let trimmed = base_url.trim().trim_end_matches('/');
+    if trimmed.is_empty() {
+        return Err("Base URL 为空".into());
+    }
+    let mut candidates: Vec<String> = Vec::new();
+    if ends_with_version_segment(trimmed) {
+        candidates.push(format!("{trimmed}/models"));
+        if !trimmed.ends_with("/v1") {
+            candidates.push(format!("{trimmed}/v1/models"));
+        }
+    } else {
+        candidates.push(format!("{trimmed}/v1/models"));
+    }
+    if let Some(suffix) = COMPAT_SUFFIXES.iter().find(|s| trimmed.ends_with(**s)) {
+        let root = trimmed[..trimmed.len() - suffix.len()].trim_end_matches('/');
+        if !root.is_empty() && root.contains("://") {
+            candidates.push(format!("{root}/v1/models"));
+            candidates.push(format!("{root}/models"));
+        }
+    }
+    let mut unique: Vec<String> = Vec::with_capacity(candidates.len());
+    for url in candidates {
+        if !unique.iter().any(|item| item == &url) {
+            unique.push(url);
+        }
+    }
+    Ok(unique)
+}
+
+/// 从供应商的 OpenAI 兼容 `GET /v1/models` 端点拉取可用模型列表。
+#[tauri::command]
+pub async fn fetch_provider_models(
+    base_url: String,
+    api_key: String,
+) -> Result<Vec<FetchedModel>, String> {
+    let key = api_key.trim().to_owned();
+    if key.is_empty() {
+        return Err("请先填写 API Key 再拉取模型".into());
+    }
+    let candidates = build_models_url_candidates(&base_url)?;
+    let client = reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(15))
+        .build()
+        .map_err(|error| error.to_string())?;
+    let mut last_error: Option<String> = None;
+    for url in &candidates {
+        let response = client
+            .get(url)
+            .header("Authorization", format!("Bearer {key}"))
+            .send()
+            .await
+            .map_err(|error| format!("请求失败：{error}"))?;
+        let status = response.status();
+        if status.is_success() {
+            let body: Value = response
+                .json()
+                .await
+                .map_err(|error| format!("响应解析失败：{error}"))?;
+            let mut models: Vec<FetchedModel> = body
+                .get("data")
+                .and_then(Value::as_array)
+                .map(|items| {
+                    items
+                        .iter()
+                        .filter_map(|item| {
+                            Some(FetchedModel {
+                                id: item.get("id")?.as_str()?.to_owned(),
+                                owned_by: item
+                                    .get("owned_by")
+                                    .and_then(Value::as_str)
+                                    .map(str::to_owned),
+                            })
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+            models.sort_by(|a, b| a.id.cmp(&b.id));
+            return Ok(models);
+        }
+        // 404/405 说明端点路径不对，换下一个候选；其余状态码直接报给用户
+        if status.as_u16() == 404 || status.as_u16() == 405 {
+            last_error = Some(format!("HTTP {status}"));
+            continue;
+        }
+        let body: String = response.text().await.unwrap_or_default();
+        let brief: String = body.chars().take(300).collect();
+        return Err(format!("HTTP {status}: {brief}"));
+    }
+    Err(format!(
+        "该供应商没有可用的模型列表端点（{}）",
+        last_error.unwrap_or_else(|| "无候选".into())
+    ))
+}
+
+// ---------- Codex 模型选择器目录（model_catalog_json，机制取自 cc-switch） ----------
+
+/// 基于内置干净模板为每个模型生成目录条目。
+fn catalog_entry(template: &Value, model: &str, priority: usize) -> Value {
+    let mut entry = template.clone();
+    if let Some(object) = entry.as_object_mut() {
+        object.insert("slug".into(), json!(model));
+        object.insert("display_name".into(), json!(model));
+        object.insert("description".into(), json!(model));
+        object.insert("context_window".into(), json!(CATALOG_DEFAULT_CONTEXT_WINDOW));
+        object.insert("max_context_window".into(), json!(CATALOG_DEFAULT_CONTEXT_WINDOW));
+        object.insert("priority".into(), json!(1000 + priority));
+    }
+    entry
+}
+
+/// 写入/清理模型目录文件与 config.toml 指针。
+/// 所有权规则：`model_catalog_json` 只有为空或指向我们的文件名时才写/清，
+/// 用户自己维护的外部目录绝不覆盖。
+fn sync_model_catalog(
+    doc: &mut DocumentMut,
+    home: &PathBuf,
+    models: &[String],
+) -> Result<(), String> {
+    let pointer = doc
+        .get("model_catalog_json")
+        .and_then(Item::as_str)
+        .map(str::to_owned);
+    let owned = pointer
+        .as_deref()
+        .map_or(true, |current| current.contains(CATALOG_FILENAME));
+    if !owned {
+        return Ok(()); // 外部目录在位：不写也不清，保持现状
+    }
+
+    let catalog_path = home.join(CATALOG_FILENAME);
+    let cleaned: Vec<&String> = models
+        .iter()
+        .filter(|model| !model.trim().is_empty())
+        .take(CATALOG_MAX_MODELS)
+        .collect();
+    if cleaned.is_empty() {
+        doc.remove("model_catalog_json");
+        let _ = fs::remove_file(&catalog_path);
+        return Ok(());
+    }
+
+    let template: Value = serde_json::from_str(CATALOG_TEMPLATE)
+        .map_err(|error| format!("内置目录模板损坏：{error}"))?;
+    let entries: Vec<Value> = cleaned
+        .iter()
+        .enumerate()
+        .map(|(index, model)| catalog_entry(&template, model, index))
+        .collect();
+    let bytes = serde_json::to_vec_pretty(&json!({ "models": entries }))
+        .map_err(|error| error.to_string())?;
+    atomic_write(&catalog_path, &bytes)?;
+    doc["model_catalog_json"] = value(CATALOG_FILENAME);
+    Ok(())
+}
+
 /// 切换供应商：编辑 config.toml（保留一切既有内容）+ 按需写 auth.json。
 #[tauri::command]
 pub fn apply_model_provider(profile: ModelProviderProfile) -> Result<(), String> {
@@ -260,6 +461,14 @@ pub fn apply_model_provider(profile: ModelProviderProfile) -> Result<(), String>
     } else {
         doc["model"] = value(profile.model.trim());
     }
+
+    // 模型目录：官方模式清掉我们的目录（回到 Codex 默认菜单），第三方按配置写入
+    let catalog_models: Vec<String> = if profile.official {
+        Vec::new()
+    } else {
+        profile.catalog_models.clone()
+    };
+    sync_model_catalog(&mut doc, &home, &catalog_models)?;
     match profile.reasoning_effort.as_str() {
         "low" | "medium" | "high" => {
             doc["model_reasoning_effort"] = value(profile.reasoning_effort.as_str());
@@ -371,7 +580,99 @@ mod tests {
             model: "deepseek-v4-flash".into(),
             reasoning_effort: "high".into(),
             official: false,
+            catalog_models: Vec::new(),
         }
+    }
+
+    #[test]
+    fn model_url_candidates_follow_version_and_compat_rules() {
+        // 纯根域 → /v1/models
+        assert_eq!(
+            build_models_url_candidates("https://api.siliconflow.cn").unwrap(),
+            vec!["https://api.siliconflow.cn/v1/models"]
+        );
+        // 已带 /v1 → 不重复补版本段
+        assert_eq!(
+            build_models_url_candidates("https://api.moonshot.cn/v1/").unwrap(),
+            vec!["https://api.moonshot.cn/v1/models"]
+        );
+        // 智谱 /v4 版本段：{base}/models 优先，/v1/models 兜底
+        assert_eq!(
+            build_models_url_candidates("https://open.bigmodel.cn/api/coding/paas/v4").unwrap(),
+            vec![
+                "https://open.bigmodel.cn/api/coding/paas/v4/models",
+                "https://open.bigmodel.cn/api/coding/paas/v4/v1/models",
+            ]
+        );
+        // 兼容子路径剥离兜底（最长后缀优先）
+        assert_eq!(
+            build_models_url_candidates("https://api.z.ai/api/anthropic").unwrap(),
+            vec![
+                "https://api.z.ai/api/anthropic/v1/models",
+                "https://api.z.ai/v1/models",
+                "https://api.z.ai/models",
+            ]
+        );
+        assert!(build_models_url_candidates("  ").is_err());
+    }
+
+    #[test]
+    fn catalog_written_with_pointer_and_cleared_on_official() {
+        with_temp_home(|home| {
+            let mut profile = third_party();
+            profile.catalog_models = vec!["deepseek-v4-flash".into(), "deepseek-reasoner".into(), "  ".into()];
+            apply_model_provider(profile).unwrap();
+
+            let written = fs::read_to_string(home.join("config.toml")).unwrap();
+            assert!(written.contains(&format!("model_catalog_json = \"{CATALOG_FILENAME}\"")), "必须写入目录指针");
+            let catalog: Value = serde_json::from_str(&fs::read_to_string(home.join(CATALOG_FILENAME)).unwrap()).unwrap();
+            let models = catalog["models"].as_array().unwrap();
+            assert_eq!(models.len(), 2, "空白模型名应被过滤");
+            assert_eq!(models[0]["slug"], "deepseek-v4-flash");
+            assert_eq!(models[0]["priority"], 1000);
+            assert_eq!(models[1]["priority"], 1001);
+            // Codex 目录解析器的必填字段必须在
+            assert!(models[0]["base_instructions"].is_string());
+            assert_eq!(models[0]["shell_type"], "shell_command");
+            // 干净模板不允许携带 freeform 工具键
+            assert!(models[0].get("apply_patch_tool_type").is_none());
+            assert!(models[0].get("tools").is_none());
+
+            // 切回官方：指针与目录文件一并清理
+            let official = ModelProviderProfile {
+                id: "o".into(),
+                name: "官方".into(),
+                preset_id: "official".into(),
+                base_url: String::new(),
+                wire_api: "responses".into(),
+                api_key: String::new(),
+                model: String::new(),
+                reasoning_effort: String::new(),
+                official: true,
+                catalog_models: Vec::new(),
+            };
+            apply_model_provider(official).unwrap();
+            let written = fs::read_to_string(home.join("config.toml")).unwrap();
+            assert!(!written.contains("model_catalog_json"), "官方模式应清掉目录指针");
+            assert!(!home.join(CATALOG_FILENAME).exists(), "目录文件应删除");
+        });
+    }
+
+    #[test]
+    fn foreign_model_catalog_pointer_is_never_touched() {
+        with_temp_home(|home| {
+            fs::write(
+                home.join("config.toml"),
+                "model_catalog_json = \"my-own-catalog.json\"\n",
+            )
+            .unwrap();
+            let mut profile = third_party();
+            profile.catalog_models = vec!["m1".into()];
+            apply_model_provider(profile).unwrap();
+            let written = fs::read_to_string(home.join("config.toml")).unwrap();
+            assert!(written.contains("model_catalog_json = \"my-own-catalog.json\""), "用户自己的目录指针必须原样保留");
+            assert!(!home.join(CATALOG_FILENAME).exists(), "外部目录在位时不生成我们的目录");
+        });
     }
 
     #[test]
@@ -427,6 +728,7 @@ mod tests {
                 model: String::new(),
                 reasoning_effort: String::new(),
                 official: true,
+                catalog_models: Vec::new(),
             };
             apply_model_provider(official).unwrap();
             let written = fs::read_to_string(home.join("config.toml")).unwrap();

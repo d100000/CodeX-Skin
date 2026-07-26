@@ -64,7 +64,11 @@ const fallbacks = {
     provider: null, providerName: null, baseUrl: null, wireApi: null,
     model: null, reasoningEffort: null, authMode: "none", apiKey: null, managed: false
   }),
-  apply_model_provider: async () => { throw new Error("桌面构建中才能写入 Codex 配置"); }
+  apply_model_provider: async () => { throw new Error("桌面构建中才能写入 Codex 配置"); },
+  fetch_provider_models: async () => [
+    { id: "demo-model-a", ownedBy: "preview" },
+    { id: "demo-model-b", ownedBy: "preview" },
+  ]
 };
 
 export async function call(command, args = {}) {

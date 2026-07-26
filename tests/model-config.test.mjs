@@ -55,10 +55,33 @@ test("rust writer follows atomic-write + sentinel ownership rules", () => {
 
 test("rust commands are registered and mocked in browser bridge", async () => {
   const libSource = await readFile(new URL("../src-tauri/src/lib.rs", import.meta.url), "utf8");
-  for (const command of ["load_model_providers", "save_model_providers", "read_live_model_config", "apply_model_provider"]) {
+  for (const command of ["load_model_providers", "save_model_providers", "read_live_model_config", "apply_model_provider", "fetch_provider_models"]) {
     assert.match(libSource, new RegExp(`model_config::${command}`), `${command} 未注册`);
     assert.match(bridgeSource, new RegExp(command), `${command} 缺浏览器 fallback`);
   }
+});
+
+test("model catalog ships a clean template and respects ownership", async () => {
+  const template = JSON.parse(await readFile(new URL("../src-tauri/resources/codex-model-template.json", import.meta.url), "utf8"));
+  // Codex 目录解析器的必填字段：缺了整个目录文件会被拒收
+  assert.ok(typeof template.base_instructions === "string" && template.base_instructions.length > 0, "模板必须带 base_instructions");
+  assert.equal(template.shell_type, "shell_command");
+  // 干净模板不允许带 freeform 工具键（原生网关会拒收 type==custom 工具）
+  for (const key of ["apply_patch_tool_type", "web_search_tool_type", "tools", "model_messages"]) {
+    assert.ok(!(key in template), `模板不允许携带 ${key}`);
+  }
+  // Rust 侧：目录指针所有权哨兵 + 上限
+  assert.match(rustSource, /aha-codex-model-catalog\.json/, "目录文件名必须是我们自己的哨兵名");
+  assert.match(rustSource, /CATALOG_MAX_MODELS/, "目录必须有条目上限");
+  const production = rustSource.split("#[cfg(test)]")[0];
+  assert.match(production, /owned/, "外部目录指针必须保持不动（所有权检查）");
+});
+
+test("model fetch flow reaches the panel UI", async () => {
+  const panel = await readFile(new URL("../src/ModelPanel.jsx", import.meta.url), "utf8");
+  assert.match(panel, /fetch_provider_models/, "面板必须调用模型拉取命令");
+  assert.match(panel, /catalogModels/, "面板必须管理目录模型勾选");
+  assert.match(panel, /已拉取 .* 个模型|models\.length/, "拉取结果必须反馈给用户");
 });
 
 test("studio topbar exposes the model view switch next to the brand", async () => {

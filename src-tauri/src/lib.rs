@@ -807,7 +807,8 @@ pub fn run() {
             model_config::load_model_providers,
             model_config::save_model_providers,
             model_config::read_live_model_config,
-            model_config::apply_model_provider
+            model_config::apply_model_provider,
+            model_config::fetch_provider_models
         ])
         .setup(|app| {
             let show = MenuItem::with_id(app, "show", "打开 aha-codex", true, None::<&str>)?;
