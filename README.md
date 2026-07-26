@@ -1,77 +1,86 @@
+<div align="center">
+
 # aha-codex
 
-独立的 Codex 皮肤创作与控制软件。aha-codex 拥有自己的窗口、Rust 运行时、主题库和菜单栏进程；Codex 只作为换肤目标，不再承载皮肤管理界面，也不再向 aha-codex 提供 Node.js 运行时。
+### 你的 Codex，不该只有一种样子。
 
-## 下载安装
+**一键换肤 · 视频背景 · 117 套主题 —— 让 AI 编程工具第一次拥有了审美。**
 
-当前版本 **v0.4.0**（Apple Silicon macOS）。
+[![版本](https://img.shields.io/github/v/release/d100000/CodeX-Skin?label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC&color=e91e8c)](https://github.com/d100000/CodeX-Skin/releases/latest)
+[![平台](https://img.shields.io/badge/macOS-Apple%20Silicon-black?logo=apple)](https://github.com/d100000/CodeX-Skin/releases/latest)
+[![安全](https://img.shields.io/badge/%E9%9B%B6%E4%BF%AE%E6%94%B9-%E4%B8%8D%E7%A2%B0%20Codex%20%E5%AE%89%E8%A3%85%E5%8C%85-2ea44f)](#-安全是底线不是卖点)
 
-**推荐：一行命令安装**（自动下载最新版、安装到“应用程序”并直接启动，无需右键绕过 Gatekeeper）：
+</div>
+
+---
+
+你每天盯着 Codex 十个小时。它是你最常用的软件，却长着一张所有人都一样的脸。
+
+**aha-codex 改变这件事。** 它是一款独立的 macOS 应用：打开它，挑一套主题，点一下"应用皮肤"——你的 Codex 瞬间变成你喜欢的样子。爱豆的照片、动态的视频、樱花色的梦、2007 年的经典蓝……你的工作区，终于开始像"你的"工作区。
+
+## ⚡ 一行命令，30 秒拥有
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
 ```
 
-也可以手动安装：从 [GitHub Releases](https://github.com/d100000/CodeX-Skin/releases/latest) 下载 `aha-codex_<版本号>_aarch64.dmg`，拖入“应用程序”，首次打开时右键 → “打开”（应用未经 Apple 公证，Gatekeeper 会提示一次）。
+不用拖 DMG，不用右键绕过 Gatekeeper，装完直接启动。之后的每次升级都由应用自动完成——**装一次，永远最新**。
 
-装好后无需再手动升级：应用启动时自动检查 GitHub Release，有新版本会提示一键更新并重启。
+> 手动派也可以从 [Releases](https://github.com/d100000/CodeX-Skin/releases/latest) 下载 DMG 安装包（首次打开需右键 → 打开）。
 
-## 产品能力
+## ✨ 为什么是 aha-codex
 
-- Studio 可以单独打开；Codex 未安装或未启动时仍能离线创作、保存、导入和导出主题。
-- 从 Studio 启动 Codex 后，通过仅绑定本机 IPv4/IPv6 回环地址的 Chrome DevTools Protocol 实时应用皮肤。
-- 不修改 `/Applications/ChatGPT.app`、ASAR 或 Codex 用户任务数据。
-- 独立主题库保存在 `~/Library/Application Support/com.dollskin.studio/library.json`。
-- 支持从旧 Codex 内嵌管理器的 IndexedDB 一次性迁移自定义主题。
-- Codex 版本未经验证时自动启用安全兼容模式，关闭高风险 DOM 装饰。
-- 主窗口关闭后驻留 macOS 菜单栏；从菜单栏可重新打开，选择“退出”才结束应用。
-- 自动分析 `Image/` 中的 113 张图片，按人物风格与主色生成 113 套预测主题；构建时压缩为约 9 MB WebP 资产。
-- 可通过 `npm run themes:sync-github` 自动读取 GitHub `Image/` 目录，下载新增图片并重建预测主题。
-- 启动后检查 GitHub Release；发现新版本时提示，确认后自动下载、验证签名、安装并重启。
+### 🎬 会动的桌面，才叫桌面
+别人还在换壁纸，你已经在用**视频背景**写代码。最大 30 MB、按完整时长无缝循环——把演唱会现场、雨夜霓虹、云海延时装进你的编辑器。
 
-编辑器覆盖：
+### 🖼️ 一张图片 = 一套主题
+把任意图片拖进来，aha-codex 自动压缩、**自动提取配色**、自动生成一整套协调的界面主题。你只负责挑图，剩下的交给算法。
 
-- 图片、视频、暗色背景、多图轮播、位置、全局/分区蒙层、亮度、饱和度和模糊；
-- 亮色/暗色配色、WCAG 对比度、终端 ANSI 16 色；
-- UI/代码字体、字号和最多两个嵌入字体；
-- 侧栏宽度与透明度、圆角、阴影；
-- 粒子、背景运动、输入反馈、列表和思考状态；
-- Logo、标题前缀、右侧展示栏、装饰窗口框架；
-- 原始 CSS Token 与自定义 CSS，外链 URL 和 `@import` 会在发射时清洗。
+### 💯 117 套主题开箱即用
+4 套精调基础主题 + 113 套按人物风格与主色智能生成的图片主题，从"暗夜科技·深海盐蓝"到"东方古韵·青瓷冷调"，总有一套是你的本命。
 
-主题文件继续使用 `theme/theme.schema.json` 的 schema v3，兼容导入 v1/v2，导出格式为 `<id>.codexskin.json`。
+### 🔍 所见即所得
+Studio 内置 1:1 的 Codex 模拟画布，改一个参数，预览立刻变；打开"实时预览"，真实的 Codex 窗口同步跟着变。**不用保存、不用重启、不用猜。**
 
-## 使用
+### 🎨 从"换个背景"到"重塑整个界面"
+背景只是起点。亮色/暗色双配色、终端 ANSI 16 色、字体与嵌入字库、圆角与阴影、侧栏宽度、粒子特效、Logo 与标题、多图轮播、自定义 CSS……**每一个像素都听你的。**
 
-1. 安装并单独打开 **aha-codex**。
-2. 在左侧选择主题，或从图片创建主题。
-3. Codex 未运行时点击“启动 Codex”；如果 Codex 已普通启动，确认后由 Studio 重启并接管。
-4. 打开“实时预览”后，编辑参数会同步到 Codex；“保存皮肤”才会写入 Studio 主题库。
-5. 关闭 Studio 窗口后皮肤继续运行，需要管理时点击菜单栏图标。
+### 🧳 主题即文件，审美可分享
+每套主题都能导出为一个 `.codexskin.json` 文件。发给朋友、发到群里、发上网——对方双击导入，拥有和你一模一样的界面。
 
-普通方式启动的 Codex 没有 CDP 端口，Studio 无法直接接管。为了保持可逆且不修改 Codex 安装包，首次连接时必须由 Studio 启动或重新启动 Codex。
+## 🛡️ 安全是底线，不是卖点
 
-## 开发
+很多"美化工具"的原理是改安装包——升级就坏，出事难修。aha-codex 从第一行代码起就选择了另一条路：
 
-环境要求：macOS 12+、Node.js 20+、Rust stable 和 Xcode Command Line Tools。
+| 承诺 | 实现 |
+|---|---|
+| **零修改** | 从不碰 `/Applications` 里的 Codex 安装包、ASAR 或你的任务数据 |
+| **可逆** | 皮肤随时暂停、随时卸载，Codex 立刻回到原样 |
+| **仅限本机** | 换肤通道只绑定本机回环地址，外部网络无法触碰 |
+| **签名更新** | 每个更新包都经 minisign 签名校验，来源可验证 |
+| **自动降级** | 遇到未验证的 Codex 版本，自动切换安全兼容模式，只应用稳定样式 |
+
+## 🚀 上手只要三步
+
+1. **打开 aha-codex** —— 独立应用，Codex 没装、没开都能先创作主题
+2. **挑一套主题**，或从图片一键创建
+3. **点"启动 Codex"** —— 皮肤实时应用，关掉 Studio 窗口皮肤也继续生效（应用驻留菜单栏）
+
+> 普通方式启动的 Codex 没有换肤通道。为了保持可逆、不修改安装包，首次连接需要由 aha-codex 启动或重启 Codex——这是设计，不是限制。
+
+## 🖥️ 开发者入口
+
+<details>
+<summary>展开：本地开发、测试与构建</summary>
+
+环境要求：macOS 12+、Node.js 20+、Rust stable、Xcode Command Line Tools。
 
 ```bash
 npm install
-npm run dev
-```
-
-只启动浏览器预览：
-
-```bash
-npm run web:dev
-```
-
-运行测试与构建：
-
-```bash
-npm test
-npm run build
-npm run app:build
+npm run dev          # Tauri Studio 开发模式
+npm run web:dev      # 仅浏览器预览（127.0.0.1:5173）
+npm test             # node --test
+npm run app:build    # 构建 .app + .dmg
 npm run release:check
 ```
 
@@ -81,20 +90,18 @@ npm run release:check
 GITHUB_TOKEN="<你的 GitHub Token>" npm run themes:sync-github -- --ref main --prune
 ```
 
-仓库为公开仓库时可以省略 `GITHUB_TOKEN`；私有仓库需要具有 `Contents: Read` 权限的 Token。同步器会保存远端文件清单，只下载新增或发生变化的图片。
+公开仓库可省略 `GITHUB_TOKEN`；私有仓库需要 `Contents: Read` 权限。同步器只下载新增或变化的图片，之后自动重建预测主题。
 
 macOS 产物位于：
 
 ```text
 src-tauri/target/release/bundle/macos/aha-codex.app
-src-tauri/target/release/bundle/dmg/aha-codex_0.4.0_aarch64.dmg
+src-tauri/target/release/bundle/dmg/aha-codex_<版本号>_aarch64.dmg
 ```
 
-未配置 Apple Developer ID 时构建产物为本地/测试签名，首次在其他电脑打开会触发 Gatekeeper。正式分发前需要配置 Developer ID Application、notarization 和 stapling。
+未配置 Apple Developer ID 时为本地签名，其他电脑首次打开会触发 Gatekeeper（一键安装脚本已处理）。签名密钥与发布流程见 [UPDATE.md](./UPDATE.md)。
 
-GitHub 自动更新的密钥和发布流程见 [UPDATE.md](./UPDATE.md)。
-
-## 架构
+### 架构
 
 ```text
 React Studio UI
@@ -109,11 +116,25 @@ React Studio UI
                     └── 可降级 DOM 装饰
 ```
 
-- `src/`：独立 Studio React 界面、预览与桌面桥接。
-- `src-tauri/`：macOS 应用、菜单栏、进程管理、独立存储和原生 CDP 客户端。
-- `tools/build-skin-agent.mjs`：从现有纯函数核心生成自包含 Skin Agent。
-- `tools/build-image-themes.py`：分类 `Image/` 的风格与主色，并生成压缩背景和预测主题清单。
-- `installer/manager/00-core.js`：Studio 和注入端共用的主题归一化、校验和 CSS 编译核心。
-- `theme/`：基础皮肤、manifest 和可移植主题 schema。
+- `src/`：独立 Studio React 界面、预览与桌面桥接
+- `src-tauri/`：macOS 应用、菜单栏、进程管理、独立存储和原生 CDP 客户端
+- `tools/build-skin-agent.mjs`：从纯函数核心生成自包含 Skin Agent
+- `tools/build-image-themes.py`：分析 `Image/` 风格与主色，生成压缩背景和预测主题清单
+- `installer/manager/00-core.js`：Studio 和注入端共用的主题归一化、校验与 CSS 编译核心
+- `theme/`：基础皮肤、manifest 和可移植主题 schema（v3，兼容导入 v1/v2）
 
-运行时仍遵循 loopback-only、no-ASAR、data-URL 资产和可逆退出四项安全约束。
+主题库保存在 `~/Library/Application Support/com.dollskin.studio/library.json`，支持从旧版内嵌管理器的 IndexedDB 一次性迁移。运行时始终遵循 loopback-only、no-ASAR、data-URL 资产、可逆退出四项安全约束。
+
+</details>
+
+---
+
+<div align="center">
+
+**工具决定效率，审美决定心情。**
+
+两者你都值得拥有。
+
+[⬇️ 立即安装](https://github.com/d100000/CodeX-Skin/releases/latest) · [🐛 反馈问题](https://github.com/d100000/CodeX-Skin/issues)
+
+</div>
