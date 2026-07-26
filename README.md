@@ -10,6 +10,12 @@
 [![平台](https://img.shields.io/badge/macOS-Apple%20Silicon-black?logo=apple)](https://github.com/d100000/CodeX-Skin/releases/latest)
 [![安全](https://img.shields.io/badge/%E9%9B%B6%E4%BF%AE%E6%94%B9-%E4%B8%8D%E7%A2%B0%20Codex%20%E5%AE%89%E8%A3%85%E5%8C%85-2ea44f)](#-安全是底线不是卖点)
 
+<br/>
+
+![aha-codex 实拍演示：视频皮肤实时应用](docs/media/demo.gif)
+
+*↑ 实拍：挑一套视频皮肤，实时画布立刻会动 —— 你的 Codex 也一样*
+
 </div>
 
 ---
@@ -41,6 +47,14 @@ curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh 
 
 ### 🔍 所见即所得
 Studio 内置 1:1 的 Codex 模拟画布，改一个参数，预览立刻变；打开"实时预览"，真实的 Codex 窗口同步跟着变。**不用保存、不用重启、不用猜。**
+
+<div align="center">
+
+![aha-codex 主界面：左侧皮肤库，中间实时画布，右侧参数编辑器](docs/media/screenshot.png)
+
+*左手皮肤库，右手编辑器，中间是你的 Codex —— 一屏搞定所有创作*
+
+</div>
 
 ### 🎨 从"换个背景"到"重塑整个界面"
 背景只是起点。亮色/暗色双配色、终端 ANSI 16 色、字体与嵌入字库、圆角与阴影、侧栏宽度、粒子特效、Logo 与标题、多图轮播、自定义 CSS……**每一个像素都听你的。**
