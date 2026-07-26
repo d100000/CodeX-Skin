@@ -347,6 +347,60 @@ pub async fn fetch_provider_models(
     ))
 }
 
+// ---------- 预设主题资产：GitHub 托管，按需下载并缓存 ----------
+// 安装包不再捆绑 113 套预测主题的背景图（~15MB）；用户首次启动选择同步后，
+// 背景按需从固定仓库地址下载，落盘缓存到 App Support/preset-assets/。
+
+const PRESET_ASSET_BASE: &str =
+    "https://raw.githubusercontent.com/d100000/CodeX-Skin/main/preset-assets/";
+
+/// 下载并缓存一张预设背景，返回 data URL。
+/// 文件名白名单校验 + 固定下载域名：不存在路径穿越或任意 URL 拉取的口子。
+#[tauri::command]
+pub async fn cache_preset_asset(app: AppHandle, name: String) -> Result<String, String> {
+    let valid = name.strip_prefix("predicted-").is_some_and(|rest| {
+        rest.strip_suffix(".webp")
+            .is_some_and(|hex| hex.len() == 12 && hex.bytes().all(|b| b.is_ascii_hexdigit()))
+    });
+    if !valid {
+        return Err(format!("非法资产名：{name}"));
+    }
+    let cache_dir = app
+        .path()
+        .app_data_dir()
+        .map_err(|error| error.to_string())?
+        .join("preset-assets");
+    let cached = cache_dir.join(&name);
+    let bytes = if cached.exists() {
+        fs::read(&cached).map_err(|error| error.to_string())?
+    } else {
+        let url = format!("{PRESET_ASSET_BASE}{name}");
+        let response = reqwest::Client::builder()
+            .timeout(std::time::Duration::from_secs(30))
+            .build()
+            .map_err(|error| error.to_string())?
+            .get(&url)
+            .send()
+            .await
+            .map_err(|error| format!("下载预设背景失败：{error}"))?;
+        if !response.status().is_success() {
+            return Err(format!("下载预设背景失败：HTTP {}", response.status()));
+        }
+        let bytes = response
+            .bytes()
+            .await
+            .map_err(|error| error.to_string())?
+            .to_vec();
+        atomic_write(&cached, &bytes)?;
+        bytes
+    };
+    use base64::Engine as _;
+    Ok(format!(
+        "data:image/webp;base64,{}",
+        base64::engine::general_purpose::STANDARD.encode(bytes)
+    ))
+}
+
 // ---------- Codex 模型选择器目录（model_catalog_json，机制取自 cc-switch） ----------
 
 /// 基于内置干净模板为每个模型生成目录条目。

@@ -68,7 +68,20 @@ const fallbacks = {
   fetch_provider_models: async () => [
     { id: "demo-model-a", ownedBy: "preview" },
     { id: "demo-model-b", ownedBy: "preview" },
-  ]
+  ],
+  // 浏览器预览没有 Rust 缓存层：presets.js 会直接 fetch GitHub 直链，不会走到这里；
+  // 兜底实现仅为防止未来调用点变化时静默缺 fallback。
+  cache_preset_asset: async ({ name }) => {
+    const response = await fetch(`https://raw.githubusercontent.com/d100000/CodeX-Skin/main/preset-assets/${name}`);
+    if (!response.ok) throw new Error(`预设背景下载失败：HTTP ${response.status}`);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(blob);
+    });
+  }
 };
 
 export async function call(command, args = {}) {

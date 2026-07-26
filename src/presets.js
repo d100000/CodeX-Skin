@@ -1,27 +1,42 @@
 import presetSource from "../installer/manager/presets.json";
 import predictedSource from "./generated-image-themes.json";
+import { call, isDesktop } from "./bridge";
 import { normalizeTheme } from "./theme-core";
 
 const assetCache = new Map();
 
+// 113 套预测主题的背景不再打进安装包（省 ~15MB），托管在 GitHub 上按需拉取。
+// 桌面端经 Rust 下载并落盘缓存；浏览器预览直接抓远程。4 套基础主题的资产仍然内置。
+export const PRESET_REMOTE_BASE = "https://raw.githubusercontent.com/d100000/CodeX-Skin/main/preset-assets/";
+
+function isRemotePresetAsset(name) {
+  return name.startsWith("predicted-");
+}
+
 function publicAsset(reference) {
-  return reference.startsWith("asset://") ? `/assets/${reference.slice("asset://".length)}` : reference;
+  if (!reference.startsWith("asset://")) return reference;
+  const name = reference.slice("asset://".length);
+  return isRemotePresetAsset(name) ? `${PRESET_REMOTE_BASE}${name}` : `/assets/${name}`;
 }
 
 async function assetDataUrl(reference) {
   if (!reference.startsWith("asset://")) return reference;
   if (assetCache.has(reference)) return assetCache.get(reference);
-  const promise = fetch(publicAsset(reference))
-    .then((response) => {
-      if (!response.ok) throw new Error(`无法加载内置素材：${reference}`);
-      return response.blob();
-    })
-    .then((blob) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(reader.error);
-      reader.readAsDataURL(blob);
-    }));
+  const name = reference.slice("asset://".length);
+  const promise = isDesktop && isRemotePresetAsset(name)
+    ? call("cache_preset_asset", { name })
+    : fetch(publicAsset(reference))
+        .then((response) => {
+          if (!response.ok) throw new Error(`无法加载内置素材：${reference}`);
+          return response.blob();
+        })
+        .then((blob) => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(reader.error);
+          reader.readAsDataURL(blob);
+        }));
+  promise.catch(() => assetCache.delete(reference)); // 失败不缓存，允许重试
   assetCache.set(reference, promise);
   return promise;
 }

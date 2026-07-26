@@ -16,7 +16,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "Image"
-ASSET_DIR = ROOT / "public" / "assets"
+ASSET_DIR = ROOT / "preset-assets"
 OUTPUT_JSON = ROOT / "src" / "generated-image-themes.json"
 CWEBP = shutil.which("cwebp")
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}

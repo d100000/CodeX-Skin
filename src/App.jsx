@@ -61,6 +61,8 @@ const DEFAULT_SETTINGS = {
   showZones: false,
   paused: false,
   autoUpdate: true,
+  // null = 尚未选择（首次启动弹窗询问）；true/false = 用户已决定是否同步 GitHub 预设主题
+  presetSync: null,
 };
 
 // connection_status 每 2 秒返回一个新对象；内容一致时必须复用旧引用，
@@ -547,8 +549,13 @@ function App() {
   const liveTimer = useRef(0);
   const toastTimer = useRef(0);
 
-  const themes = useMemo(() => [...builtins, ...customThemes], [builtins, customThemes]);
-  const categories = useMemo(() => ["all", "基础主题", ...new Set(builtins.filter((theme) => theme.predicted).map((theme) => theme.category))], [builtins]);
+  // 预测主题背景托管在 GitHub：用户未选择同步时不显示这 113 套，只留 4 套内置基础主题
+  const visibleBuiltins = useMemo(
+    () => settings.presetSync ? builtins : builtins.filter((theme) => !theme.predicted),
+    [builtins, settings.presetSync],
+  );
+  const themes = useMemo(() => [...visibleBuiltins, ...customThemes], [visibleBuiltins, customThemes]);
+  const categories = useMemo(() => ["all", "基础主题", ...new Set(visibleBuiltins.filter((theme) => theme.predicted).map((theme) => theme.category))], [visibleBuiltins]);
   const selectedTheme = themes.find((theme) => theme.id === settings.selectedId) || draft;
   // 视频主题下 themeEquals 也不便宜，别让每次无关渲染都重算一遍。
   const dirty = useMemo(() => Boolean(draft && snapshotTheme && !themeEquals(draft, snapshotTheme)), [draft, snapshotTheme]);
@@ -1046,7 +1053,7 @@ function App() {
       {settingsOpen && <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSettingsOpen(false)}><section className="settings-modal" role="dialog" aria-modal="true" aria-label="Studio 设置"><header><div><strong>Studio 设置</strong><small>连接、兼容性与独立数据</small></div><IconButton label="关闭" onClick={() => setSettingsOpen(false)}><X size={18} /></IconButton></header><div className="settings-body">
         <Section title="Codex 连接"><div className="diagnostic-grid"><span>安装状态</span><strong>{status.codexInstalled ? "已安装" : "未安装"}</strong><span>当前版本</span><code>{status.codexVersion || "-"}</code><span>已验证版本</span><code>{status.testedVersion || "-"}</code><span>控制端口</span><code>localhost:{status.port || 9227}</code><span>窗口数量</span><strong>{status.targetCount || 0}</strong></div><button className="primary-button full" onClick={status.connected ? () => applyFull() : launch}>{status.connected ? <RefreshCw size={15} /> : <Play size={15} />}{status.connected ? "重新同步当前皮肤" : "启动 Codex 并连接"}</button></Section>
         <Section title="兼容与安全"><Toggle label="安全兼容模式" description="关闭 DOM 装饰，只应用稳定 CSS Token" checked={safeMode} onChange={(value) => setSetting("safeMode", value)} /><p className="settings-note">Codex 版本未经验证时会强制启用安全模式。调试端口仅绑定到本机回环地址。</p></Section>
-        <Section title="独立数据"><button className="secondary-button full" onClick={migrateLegacy} disabled={!status.connected}><CloudDownload size={15} />从旧 Codex 面板迁移主题</button><button className="secondary-button full" onClick={() => call("open_data_folder").catch((error) => notify(String(error), "error"))}><FolderOpen size={15} />打开 aha-codex 数据目录</button><p className="settings-note">主题库由 aha-codex 独立保存，不再依赖 Codex 的 IndexedDB。</p></Section>
+        <Section title="独立数据"><Toggle label="同步 GitHub 预设主题" description="113 套预测主题的背景按需从 GitHub 下载并缓存（约 15 MB）" checked={Boolean(settings.presetSync)} onChange={(value) => setSetting("presetSync", value)} /><button className="secondary-button full" onClick={migrateLegacy} disabled={!status.connected}><CloudDownload size={15} />从旧 Codex 面板迁移主题</button><button className="secondary-button full" onClick={() => call("open_data_folder").catch((error) => notify(String(error), "error"))}><FolderOpen size={15} />打开 aha-codex 数据目录</button><p className="settings-note">主题库由 aha-codex 独立保存，不再依赖 Codex 的 IndexedDB。</p></Section>
         <Section title="版本与更新"><div className="diagnostic-grid"><span>当前版本</span><strong>v{updateState.currentVersion}</strong><span>更新状态</span><strong>{updateState.checking ? "正在检查" : updateState.available ? `发现 v${updateState.version}` : updateState.error ? "检查失败" : "已是最新"}</strong></div><Toggle label="自动检查更新" description="启动后检查 GitHub Release，有新版本时提示" checked={settings.autoUpdate} onChange={(value) => setSetting("autoUpdate", value)} />{updateState.error && <p className="settings-note update-error">{updateState.error}</p>}<button className="secondary-button full" disabled={updateState.checking} onClick={() => checkForUpdate(true)}>{updateState.checking ? <RefreshCw className="spin" size={15} /> : <CloudDownload size={15} />}{updateState.checking ? "正在检查 GitHub" : updateState.available ? "查看并安装更新" : "检查更新"}</button></Section>
         <Section title="运行环境"><div className="diagnostic-grid"><span>应用模式</span><strong>{isDesktop ? "Tauri 独立应用" : "浏览器预览"}</strong><span>运行时</span><strong>{isDesktop ? "内置 Rust" : "Web Mock"}</strong><span>修改 Codex</span><strong>从不</strong></div></Section>
       </div></section></div>}
@@ -1056,6 +1063,20 @@ function App() {
       {pendingTheme && <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setPendingTheme(null)}><section className="confirm-modal theme-switch-modal" role="alertdialog" aria-modal="true" aria-label="切换皮肤"><span className="modal-icon"><CircleAlert size={22} /></span><strong>当前皮肤尚未保存</strong><p>{isVideoBackground(draft?.background) ? "视频背景仍在草稿中。切换后将丢失这段视频及其他未保存修改。" : "切换到“" + pendingTheme.name + "”会丢失当前未保存的修改。"}</p><div><button className="secondary-button" disabled={saving} onClick={() => setPendingTheme(null)}>取消</button><button className="secondary-button" disabled={saving} onClick={async () => { const theme = pendingTheme; const result = await saveTheme(); if (result.ok) { setPendingTheme(null); await applySelectedTheme(theme, result.themes); } }}>{saving ? "正在保存" : "保存并切换"}</button><button className="primary-button" disabled={applying} onClick={() => { const theme = pendingTheme; setPendingTheme(null); applySelectedTheme(theme); }}>放弃并切换</button></div></section></div>}
 
       {updateOpen && updateState.available && <div className="modal-backdrop"><section className="confirm-modal update-modal" role="alertdialog" aria-modal="true" aria-label="aha-codex 更新"><span className="modal-icon update"><CloudDownload size={22} /></span><strong>发现 aha-codex v{updateState.version}</strong><p>当前版本 v{updateState.currentVersion}。更新包将从 GitHub Release 下载、校验签名并自动安装，完成后 aha-codex 会重新启动。</p>{updateState.notes && <div className="update-notes">{updateState.notes}</div>}<div><button className="secondary-button" disabled={updateInstalling} onClick={() => setUpdateOpen(false)}>稍后</button><button className="primary-button" disabled={updateInstalling} onClick={installUpdate}>{updateInstalling ? <RefreshCw className="spin" size={15} /> : <CloudDownload size={15} />}{updateInstalling ? "下载并安装中" : "立即更新并重启"}</button></div></section></div>}
+
+      {ready && settings.presetSync === null && (
+        <div className="modal-backdrop">
+          <section className="confirm-modal preset-sync-modal" role="alertdialog" aria-modal="true" aria-label="同步预设主题">
+            <span className="modal-icon"><CloudDownload size={22} /></span>
+            <strong>要同步 113 套预设主题吗？</strong>
+            <p>预设主题的背景图托管在 GitHub（共约 15 MB），不占安装包体积。开启后按需下载并缓存到本地；也可以稍后在"设置"里再开启。</p>
+            <div>
+              <button className="secondary-button" onClick={() => setSetting("presetSync", false)}>暂不需要</button>
+              <button className="primary-button" onClick={() => setSetting("presetSync", true)}><CloudDownload size={15} />同步预设主题</button>
+            </div>
+          </section>
+        </div>
+      )}
 
       {toast && <div className={`toast ${toast.kind}`}>{toast.kind === "error" ? <CircleAlert size={16} /> : <Check size={16} />}{toast.message}</div>}
     </div>
