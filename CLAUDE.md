@@ -4,12 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-A reversible skin/theme system for the Codex desktop app (macOS, installed at `/Applications/ChatGPT.app`). It never modifies the installed app — instead it launches Codex with a loopback-only Chrome DevTools Protocol (CDP) endpoint (`127.0.0.1:9227`) and injects CSS/JS at runtime. Injection is gated to the exact verified Codex version in `theme/manifest.json` (`minimumCodexVersion`).
+The primary product is now **Doll Skin Studio**, an independent Tauri 2 + React macOS app. It owns its UI, Rust runtime, theme storage, process lifecycle, tray icon, and CDP client. Codex is only the skin target. The legacy `installer/` launcher remains as a compatibility renderer/source but is no longer the main product surface. The project never modifies the installed Codex app or ASAR.
 
 ## Commands
 
 ```bash
-npm run dev              # Vite preview of the theme (mock Codex UI at 127.0.0.1)
+npm run dev              # Tauri Studio in development mode
+npm run web:dev          # browser-only Studio preview at 127.0.0.1:5173
+npm run app:build        # build standalone .app + .dmg
 npm test                 # node --test tests/*.test.mjs
 node --test tests/cdp.test.mjs   # run a single test file
 npm run doctor           # check installed Codex version compatibility
@@ -19,7 +21,9 @@ npm run skin:status | skin:pause | skin:apply   # control a running skinned Code
 
 ## Architecture
 
-Two independent halves:
+0. **Standalone Studio** (`src/`, `src-tauri/`): React owns the theme library/editor/preview. Rust owns Codex discovery and launch, loopback CDP, App Support storage, native export, legacy migration, and the menu-bar lifecycle. `tools/build-skin-agent.mjs` builds `src-tauri/resources/skin-agent.js` before dev/release builds. The Studio shares `installer/manager/00-core.js` with the injected agent so normalization and CSS output stay identical.
+
+Legacy and shared implementation halves:
 
 1. **Preview app** (`src/`, `index.html`, Vite + React): a mock of the Codex home screen used to design the theme visually. It is never shipped to Codex; it only mirrors the real app's DOM/class names so `theme/skin.css` can be checked.
 

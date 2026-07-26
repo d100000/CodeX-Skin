@@ -1,0 +1,21 @@
+{
+  "themes": [
+    {
+      "schemaVersion": 3,
+      "id": "studio-restart-a",
+      "name": "Studio Restart A",
+      "background": null,
+      "colors": {
+        "accent": "#7c3aed",
+        "surface": "#faf7ff",
+        "text": "#201633"
+      }
+    }
+  ],
+  "settings": {
+    "selectedId": "studio-restart-a",
+    "livePreview": true,
+    "safeMode": true,
+    "paused": false
+  }
+}

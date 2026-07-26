@@ -360,6 +360,31 @@
 .cds-import-info code { font-size: 11px; color: #7c6876; }
 .cds-import-info p { font-size: 12px; color: #675360; }
 
+/* 自绘问询框：面板永远运行在 CDP 会话下，原生 confirm/alert 会被调试端拦走，只能自己画。 */
+.cds-ask {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(60, 41, 56, .34);
+  backdrop-filter: blur(4px);
+  -webkit-app-region: no-drag;
+}
+.cds-ask-box {
+  width: min(320px, 84vw);
+  padding: 16px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(118, 80, 111, .2);
+  box-shadow: 0 14px 40px rgba(82, 47, 73, .25);
+  display: grid;
+  gap: 12px;
+}
+.cds-ask-box p { margin: 0; font-size: 13px; line-height: 1.6; color: #4a3844; }
+.cds-ask-box .cds-actions { margin-top: 0; justify-content: flex-end; }
+
 .cds-toast {
   position: sticky;
   bottom: 4px;

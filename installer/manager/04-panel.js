@@ -36,6 +36,8 @@ async function init() {
   trigger.textContent = "D";
   trigger.title = "打开 Codex 皮肤管理器";
   trigger.setAttribute("aria-label", trigger.title);
+  // 独立 Studio 模式只复用渲染引擎，不在 Codex 内暴露旧管理器入口。
+  trigger.hidden = Boolean(window.__DOLL_SKIN_EXTERNAL__);
 
   const backdrop = document.createElement("div");
   backdrop.className = "cds-backdrop";
@@ -60,6 +62,58 @@ async function init() {
     toastTimer = setTimeout(() => { toast.hidden = true; }, 2200);
   };
 
+  // 视频背景单例：元素脱离文档后 getElementById 会返回 null，必须自己持有引用才能复用而不是重建。
+  let videoState = null;
+
+  // ---------- 自绘问询框 ----------
+  // 皮肤靠 CDP 注入，Codex 里因此常驻着启用了 Page 域的调试会话；Chromium 一旦发现这种会话，
+  // 就把 confirm/alert 转交给调试端而不再弹原生框。调试端不应答 → 调用永不返回，整个渲染进程卡死
+  // （表现就是"点了卡片没反应、皮肤切不动"）。所以面板里一律用自绘弹窗，绝不碰原生对话框。
+  const ask = document.createElement("div");
+  ask.className = "cds-ask";
+  ask.hidden = true;
+  let askActive = null;
+  const askDialog = (message, { okText = "确定", cancelText = "取消" } = {}) => new Promise((resolve) => {
+    if (askActive) askActive(false); // 同一时刻只留一个问询框
+    ask.textContent = "";
+    const box = document.createElement("div");
+    box.className = "cds-ask-box";
+    const text = document.createElement("p");
+    text.textContent = message;
+    const actions = document.createElement("div");
+    actions.className = "cds-actions";
+    const settle = (value) => {
+      if (askActive !== settle) return;
+      askActive = null;
+      ask.hidden = true;
+      document.removeEventListener("keydown", onKey, true);
+      resolve(value);
+    };
+    // 捕获阶段拦下按键，否则 Esc 会先被面板的全局监听拿去关闭整个面板
+    const onKey = (event) => {
+      if (event.key !== "Escape" && event.key !== "Enter") return;
+      event.preventDefault();
+      event.stopPropagation();
+      settle(event.key === "Enter");
+    };
+    askActive = settle;
+    if (cancelText) {
+      const cancel = cdsButton(cancelText);
+      cancel.addEventListener("click", () => settle(false));
+      actions.append(cancel);
+    }
+    const ok = cdsButton(okText, true);
+    ok.addEventListener("click", () => settle(true));
+    actions.append(ok);
+    box.append(text, actions);
+    ask.appendChild(box);
+    ask.hidden = false;
+    document.addEventListener("keydown", onKey, true);
+    ok.focus();
+  });
+  const askConfirm = (message) => askDialog(message);
+  const askAlert = (message) => askDialog(message, { cancelText: "" });
+
   // ---------- 暂停 ----------
   const setPaused = (paused) => {
     baseStyle.disabled = paused;
@@ -67,7 +121,7 @@ async function init() {
     localStorage.setItem(PAUSED_KEY, paused ? "1" : "0");
     trigger.classList.toggle("cds-trigger-paused", paused);
     trigger.style.opacity = ""; // CLI 的 skin:pause/apply 会写内联透明度，这里清除避免残留
-    const video = document.getElementById("codex-doll-skin-video");
+    const video = videoState && videoState.el;
     if (video) {
       video.style.display = paused ? "none" : "";
       if (paused) video.pause(); else video.play().catch(() => {});
@@ -132,7 +186,7 @@ async function init() {
     video: "video/mp4,video/webm",
     font: ".woff2,.ttf,.otf,font/woff2"
   };
-  const FILE_MAX_BYTES = { video: 8 * 1024 * 1024, font: 2 * 1024 * 1024 };
+  const FILE_MAX_BYTES = { video: 30 * 1024 * 1024, font: 2 * 1024 * 1024 };
   const readAsDataUrl = (file) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = () => reject(reader.error);
@@ -173,7 +227,7 @@ async function init() {
         waiter({ dataUrl, palette: null, fileName });
       }
     } catch (error) {
-      alert("文件处理失败：" + error.message);
+      askAlert("文件处理失败：" + error.message);
       waiter(null);
     }
   });
@@ -182,23 +236,137 @@ async function init() {
   const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   let lastApplied = null;
 
+  // data URL 直接喂 <video> 会中途跳回开头：data: 源不支持 range 请求，媒体管线在缓冲压力下
+  // 会整串重新解析。转成 blob URL 后可 seek、可 range，30MB 级别的视频才能连续播完。
+  const dataUrlToBlob = (dataUrl) => {
+    const comma = dataUrl.indexOf(",");
+    const mime = (dataUrl.slice(5, comma).split(";")[0]) || "video/mp4";
+    const binary = atob(dataUrl.slice(comma + 1));
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+    return new Blob([bytes], { type: mime });
+  };
+
+  const loadVideoSource = (state, dataUrl) => {
+    if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+    state.objectUrl = null;
+    state.duration = 0;
+    state.resumeAt = 0;
+    state.probing = false;
+    state.retries = 0;
+    state.loadToken += 1;
+    try {
+      state.objectUrl = URL.createObjectURL(dataUrlToBlob(dataUrl));
+      state.el.src = state.objectUrl;
+    } catch {
+      state.el.src = dataUrl; // 解码失败就退回 data URL，画面在比播放连续性更重要
+    }
+  };
+
+  const destroyVideo = () => {
+    if (!videoState) return;
+    videoState.el.remove();
+    videoState.el.removeAttribute("src");
+    if (videoState.objectUrl) URL.revokeObjectURL(videoState.objectUrl);
+    videoState = null;
+  };
+
+  // 按真实时长循环：容器时长缺失（MediaRecorder 产的 WebM、非 faststart MP4）时 loop 会在
+  // 缓冲边界提前触发，所以自己接管 ended / 尾帧回卷，并在解码出错时恢复。
+  const bindVideoLoop = (state) => {
+    const el = state.el;
+    const rewind = () => {
+      state.resumeAt = 0;
+      try { el.currentTime = 0; } catch {}
+      el.play().catch(() => {});
+    };
+    el.addEventListener("loadedmetadata", () => {
+      if (Number.isFinite(el.duration) && el.duration > 0) { state.duration = el.duration; return; }
+      // duration 是 Infinity/NaN：seek 到极大值迫使浏览器读完索引，拿到真实时长后再回到开头。
+      // 探测期间会短暂停在尾帧，先隐藏避免闪一下最后一帧。
+      state.probing = true;
+      el.style.visibility = "hidden";
+      try { el.currentTime = 1e101; } catch { state.probing = false; el.style.visibility = ""; }
+      // 探测失败（索引读不出来）时别把画面一直藏着，退回 native loop
+      setTimeout(() => {
+        if (!state.probing) return;
+        state.probing = false;
+        el.style.visibility = "";
+        rewind();
+      }, 3000);
+    });
+    el.addEventListener("durationchange", () => {
+      if (!Number.isFinite(el.duration) || el.duration <= 0) return;
+      state.duration = el.duration;
+      if (!state.probing) return;
+      state.probing = false;
+      el.style.visibility = "";
+      rewind();
+    });
+    el.addEventListener("ended", rewind);
+    el.addEventListener("timeupdate", () => {
+      if (state.probing || el.seeking || !state.duration) return;
+      if (el.currentTime >= state.duration - 0.06) rewind();
+    });
+    // 只挂 error/stalled：emptied 在每次正常换源时都会触发，跟着重载会把刚开始的 30MB 加载打断
+    for (const type of ["error", "stalled"]) {
+      el.addEventListener(type, () => {
+        if (state.recovering || !state.objectUrl || el.readyState >= 3) return;
+        if (state.retries >= 3) return; // 视频本身损坏时不要 400ms 一次无限重试
+        state.recovering = true;
+        state.retries += 1;
+        state.resumeAt = el.currentTime || 0;
+        const token = state.loadToken;
+        setTimeout(() => {
+          state.recovering = false;
+          if (token !== state.loadToken || !state.objectUrl) return;
+          el.load();
+          el.play().catch(() => {});
+        }, 400);
+      });
+    }
+    // 成功播起来就清零重试计数，长时间播放中的偶发 stall 不该被早先的失败拖累
+    el.addEventListener("playing", () => { state.retries = 0; });
+    // 恢复加载后回到中断处，而不是从头开始
+    el.addEventListener("canplay", () => {
+      if (!state.resumeAt) return;
+      const at = state.resumeAt;
+      state.resumeAt = 0;
+      if (Number.isFinite(at) && at > 0.2 && (!state.duration || at < state.duration - 0.2)) {
+        try { el.currentTime = at; } catch {}
+      }
+    });
+  };
+
   const applyVideo = (theme) => {
     const root = document.getElementById("root");
-    let video = document.getElementById("codex-doll-skin-video");
     const src = isVideoBackground(theme.background) ? theme.background : null;
-    if (!src || !root) { if (video) video.remove(); return; }
-    if (!video) {
-      video = document.createElement("video");
-      video.id = "codex-doll-skin-video";
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.setAttribute("aria-hidden", "true");
+    if (!src || !root) { destroyVideo(); return; }
+    if (!videoState) {
+      const el = document.createElement("video");
+      el.id = "codex-doll-skin-video";
+      el.muted = true;
+      el.loop = true; // 最省电的主路径；下面的时长循环只在它失灵时兜底
+      el.autoplay = true;
+      el.playsInline = true;
+      el.preload = "auto";
+      el.setAttribute("aria-hidden", "true");
+      // fixed 而非 absolute：不依赖 #root 盒子高度；仍在 #root 隔离堆叠上下文内，z-index 0 低于内容
+      el.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none";
+      videoState = { el, srcKey: "", objectUrl: null, duration: 0, loadToken: 0, resumeAt: 0, probing: false, recovering: false, retries: 0 };
+      bindVideoLoop(videoState);
     }
-    // fixed 而非 absolute：不依赖 #root 盒子高度；仍在 #root 隔离堆叠上下文内，z-index 0 低于内容
-    video.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:0;pointer-events:none;object-position:" + theme.layout.x + "% " + theme.layout.y + "%;filter:" + (filterValue(theme.filters) || "none");
-    if (video.getAttribute("src") !== src) video.setAttribute("src", src);
+    const video = videoState.el;
+    // 只增量改会变的两个属性：整串重写 cssText 会连带清掉 setPaused 写的 display，暂停态会被意外恢复
+    video.style.objectPosition = theme.layout.x + "% " + theme.layout.y + "%";
+    video.style.filter = filterValue(theme.filters) || "none";
+    // 比对原始 data URL 而不是 video.src：src 上挂的是 blob URL，永远不等于主题里的 data URL，
+    // 那样每次 applyExtras 都会重新 load，视频就会跳回开头。
+    if (videoState.srcKey !== src) {
+      videoState.srcKey = src;
+      loadVideoSource(videoState, src);
+    }
+    // React 重绘会把节点从 #root 摘掉；挂回同一个元素而不是重建，currentTime 天然保住
     if (!video.isConnected) root.prepend(video);
     if (reducedMotion() || baseStyle.disabled) video.pause();
     else video.play().catch(() => {});
@@ -812,7 +980,7 @@ async function init() {
   };
 
   const selectTheme = async (theme, { skipDirtyCheck = false } = {}) => {
-    if (!skipDirtyCheck && editor.isDirty() && !confirm("当前皮肤有未保存的修改，放弃并切换？")) return false;
+    if (!skipDirtyCheck && editor.isDirty() && !(await askConfirm("当前皮肤有未保存的修改，放弃并切换？"))) return false;
     setCurrentThemeId(theme.id);
     applyLive(theme);
     editor.load(theme);
@@ -867,7 +1035,7 @@ async function init() {
       showToast(asCopy ? "已另存为副本" : "已保存");
     },
     onDelete: async (id) => {
-      if (!confirm("确定删除该皮肤？此操作不可撤销。")) return;
+      if (!(await askConfirm("确定删除该皮肤？此操作不可撤销。"))) return;
       await deleteTheme(id);
       showToast("已删除");
       if (currentThemeId() === id) await selectTheme(presetThemes[0], { skipDirtyCheck: true });
@@ -876,7 +1044,7 @@ async function init() {
     onExport: (theme) => {
       const clean = exportableTheme(normalizeTheme(theme));
       const payload = JSON.stringify(clean, null, 2);
-      if (payload.length > 5 * 1024 * 1024) showToast("主题包较大（含视频/字体），分享请留意体积");
+      if (payload.length > 16 * 1024 * 1024) showToast("主题包较大（含视频/字体），分享请留意体积");
       const blob = new Blob([payload], { type: "application/json" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
@@ -1020,7 +1188,7 @@ async function init() {
       if (!theme.id) throw new Error("主题配置缺少合法 id");
       await showImportConfirm(theme);
     } catch (error) {
-      alert("主题导入失败：" + error.message);
+      askAlert("主题导入失败：" + error.message);
     }
   };
   const importThemeFile = (file) => {
@@ -1064,7 +1232,7 @@ async function init() {
         const { dataUrl, palette } = await compressImage(file);
         await createThemeFromImage(dataUrl, palette, baseName);
       } catch (error) {
-        alert("图片处理失败：" + error.message);
+        askAlert("图片处理失败：" + error.message);
       }
     } else {
       showToast("支持拖入图片（png/jpg/webp）或主题 JSON");
@@ -1123,15 +1291,25 @@ async function init() {
     if (event.key === "Escape" && !panel.hidden) closePanel();
   });
 
-  document.body.append(backdrop, trigger, panel);
+  document.body.append(backdrop, trigger, panel, ask);
 
   // ---------- 自愈：Codex 重绘 DOM 时恢复注入元素 ----------
+  let watchedRoot = null;
   const keepAlive = new MutationObserver(() => {
     if (document.head && !baseStyle.isConnected) document.head.append(baseStyle, overrideStyle, managerStyle);
-    if (document.body && !trigger.isConnected) document.body.append(backdrop, trigger, panel);
+    if (document.body && !trigger.isConnected) document.body.append(backdrop, trigger, panel, ask);
+    const root = document.getElementById("root");
+    if (root && root !== watchedRoot) { watchedRoot = root; keepAlive.observe(root, { childList: true }); }
+    // React 摘掉视频后立刻挂回同一个元素，不等下一次 applyExtras——否则播放进度会丢
+    if (root && videoState && !videoState.el.isConnected) {
+      root.prepend(videoState.el);
+      if (!reducedMotion() && !baseStyle.disabled) videoState.el.play().catch(() => {});
+    }
   });
   keepAlive.observe(document.documentElement, { childList: true, subtree: false });
   if (document.body) keepAlive.observe(document.body, { childList: true });
+  const initialRoot = document.getElementById("root");
+  if (initialRoot) { watchedRoot = initialRoot; keepAlive.observe(initialRoot, { childList: true }); }
 
   // ---------- 状态 ----------
   async function refresh() {
@@ -1155,7 +1333,13 @@ async function init() {
     selectedId: currentThemeId()
   });
 
-  window.__CODEX_DOLL_SKIN_MANAGER__ = { refresh, state, notify: showToast, applyTheme: (theme) => selectTheme(normalizeTheme(theme), { skipDirtyCheck: true }) };
+  window.__CODEX_DOLL_SKIN_MANAGER__ = {
+    refresh,
+    state,
+    notify: showToast,
+    pause: setPaused,
+    applyTheme: (theme) => selectTheme(normalizeTheme(theme), { skipDirtyCheck: true })
+  };
   await refresh();
   return state();
 }

@@ -1,0 +1,60 @@
+name: Release Doll Skin Studio
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  publish-macos:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          python -m pip install Pillow
+          brew install webp
+
+      - name: Build predicted image themes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run themes:sync-github -- --repo d100000/CodeX-Skin --ref "$GITHUB_REF_NAME" --prune
+
+      - name: Test
+        run: npm test
+
+      - name: Build, sign and publish GitHub Release
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: v__VERSION__
+          releaseName: "Doll Skin Studio v__VERSION__"
+          releaseBody: |
+            独立的 Codex 皮肤创作与控制软件。
+
+            本版本包含签名更新包；已安装的 Studio 会在启动后自动检查并提示更新。
+          releaseDraft: false
+          prerelease: false
+          args: --target aarch64-apple-darwin

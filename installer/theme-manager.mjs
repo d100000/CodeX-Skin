@@ -36,7 +36,9 @@ export async function buildThemeManagerSource(baseCss) {
   const manifest = JSON.parse(manifestJson);
   return `(() => {
   if (window.__CODEX_DOLL_SKIN_MANAGER__) {
-    window.__CODEX_DOLL_SKIN_MANAGER__.refresh();
+    if (!window.__DOLL_SKIN_EXTERNAL__) {
+      window.__CODEX_DOLL_SKIN_MANAGER__.refresh();
+    }
     return window.__CODEX_DOLL_SKIN_MANAGER__.state();
   }
   const BASE_CSS = ${JSON.stringify(baseCss)};

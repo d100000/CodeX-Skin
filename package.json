@@ -1,11 +1,14 @@
 {
-  "name": "codex-doll-skin",
-  "version": "0.1.0",
+  "name": "aha-codex",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "dev": "tauri dev",
+    "build": "npm run build:agent && vite build",
+    "web:dev": "vite --host 127.0.0.1 --port 5173",
+    "app:build": "tauri build",
+    "build:agent": "node tools/build-skin-agent.mjs",
     "test": "node --test tests/*.test.mjs",
     "doctor": "node installer/cli.mjs doctor",
     "install-launcher": "node installer/cli.mjs install-launcher",
@@ -15,13 +18,21 @@
     "skin:check": "node installer/cli.mjs check-update",
     "skin:update": "node installer/cli.mjs update",
     "skin:sync": "node installer/cli.mjs sync-themes",
-    "themes:build": "node tools/build-themes.mjs"
+    "themes:build": "node tools/build-themes.mjs",
+    "themes:predict": "python3 tools/build-image-themes.py",
+    "themes:sync-github": "node tools/sync-github-image-themes.mjs",
+    "themes:sync": "npm run themes:sync-github",
+    "release:check": "npm run themes:predict && npm test && cargo test --manifest-path src-tauri/Cargo.toml && npm run build"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest"
+    "vite": "latest"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.11.1"
   }
 }

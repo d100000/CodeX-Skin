@@ -576,8 +576,24 @@ function paletteCandidatesFromPixels(data, count = 4) {
   return chosen.map((bucket) => paletteFromHue(bucket * 10 + 5, dark));
 }
 
+// 背景、暗色背景、轮播、logo、内嵌字体都是 data URL，视频更是能到 30 MB。
+// 直接 JSON.stringify 整个主题来比较，30 MB 视频实测单次 146ms、顺带制造上百 MB 垃圾；
+// 而 isDirty/dirty 是每次渲染都要算的，2 秒一次的连接轮询就足够把界面拖死。
+// 所以长字符串先换成占位符，只对结构做序列化比较，再按位置逐个比字符串本身：
+// 没改动时两边是同一个字符串实例，引擎走指针短路，代价 O(1)。
+const HEAVY_STRING_MIN = 2048;
+// NUL 开头，正常主题内容不可能撞上这个占位符。
+const HEAVY_MARK = "\u0000heavy:";
+
 function themeEquals(a, b) {
-  return JSON.stringify({ ...a, createdAt: 0 }) === JSON.stringify({ ...b, createdAt: 0 });
+  const heavyA = [];
+  const heavyB = [];
+  const shrink = (bucket) => (key, value) => (
+    typeof value === "string" && value.length >= HEAVY_STRING_MIN ? HEAVY_MARK + bucket.push(value) : value
+  );
+  if (JSON.stringify({ ...a, createdAt: 0 }, shrink(heavyA)) !== JSON.stringify({ ...b, createdAt: 0 }, shrink(heavyB))) return false;
+  // 结构相同意味着占位符一一对应，两个数组长度必然一致。
+  return heavyA.every((value, index) => value === heavyB[index]);
 }
 
 function dataUrlKilobytes(dataUrl) {

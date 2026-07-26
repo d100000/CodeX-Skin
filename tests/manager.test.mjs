@@ -129,6 +129,27 @@ test("themeEquals ignores createdAt so drafts only dirty on real edits", () => {
   assert.ok(!core.themeEquals(a, b));
 });
 
+test("themeEquals stays cheap on video-sized payloads", () => {
+  // 30 MB 视频背景：老实现每次调用 ~146ms，dirty 又是每次渲染都算，界面必然卡死。
+  const video = "data:video/mp4;base64," + "A".repeat(30 * 1024 * 1024);
+  const a = core.normalizeTheme({ id: "a", name: "x", background: video });
+  const b = structuredClone(a);
+  const started = process.hrtime.bigint();
+  for (let index = 0; index < 20; index += 1) assert.ok(core.themeEquals(a, b));
+  const perCall = Number(process.hrtime.bigint() - started) / 1e6 / 20;
+  assert.ok(perCall < 20, `themeEquals 单次 ${perCall.toFixed(1)}ms，长 data URL 必须走短路比较`);
+});
+
+test("themeEquals still sees changes inside heavy data urls", () => {
+  const long = "data:image/webp;base64," + "A".repeat(4096);
+  const a = core.normalizeTheme({ id: "a", name: "x", background: long });
+  const sameLength = { ...structuredClone(a), background: long.slice(0, -1) + "B" };
+  assert.ok(!core.themeEquals(a, sameLength), "同长度但内容不同的背景必须判为已修改");
+  const shorter = { ...structuredClone(a), background: "data:image/webp;base64,AAAA" };
+  assert.ok(!core.themeEquals(a, shorter));
+  assert.ok(core.themeEquals(a, structuredClone(a)));
+});
+
 test("dataUrlKilobytes estimates payload size", () => {
   assert.equal(core.dataUrlKilobytes(null), 0);
   const kb = core.dataUrlKilobytes("data:image/webp;base64," + "A".repeat(4096));
@@ -406,6 +427,52 @@ test("classic blue preset keeps the complete QQ 2007 client frame", async () => 
 test("right contact panel yields space back to Codex at narrow widths", async () => {
   const panelSource = await readFile(new URL("../installer/manager/04-panel.js", import.meta.url), "utf8");
   assert.match(panelSource, /@media\(max-width:1119px\)\{\.app-shell-main-content-viewport\{margin-right:0!important\}#codex-doll-skin-sidepanel\{display:none!important\}\}/);
+});
+
+test("video background accepts 30MB and both halves agree on the limit", async () => {
+  const panelSource = await readFile(new URL("../installer/manager/04-panel.js", import.meta.url), "utf8");
+  const appSource = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+  assert.match(panelSource, /FILE_MAX_BYTES\s*=\s*\{\s*video:\s*30\s*\*\s*1024\s*\*\s*1024/);
+  assert.match(appSource, /file\.size\s*>\s*30\s*\*\s*1024\s*\*\s*1024/, "Studio 上传闸门必须和注入端一致");
+});
+
+test("video background plays from a blob URL, not the raw data URL", async () => {
+  const panelSource = await readFile(new URL("../installer/manager/04-panel.js", import.meta.url), "utf8");
+  // data: 源不支持 range 请求，媒体管线会整串重解析导致中途跳回开头
+  assert.match(panelSource, /URL\.createObjectURL/, "视频源必须转成 blob URL");
+  assert.match(panelSource, /URL\.revokeObjectURL/, "换源/销毁时必须释放旧的 blob URL");
+  // src 上挂的是 blob URL，比对必须用主题里的原始 data URL，否则每次 apply 都会重新 load
+  assert.match(panelSource, /videoState\.srcKey\s*!==\s*src/, "换源判定必须比对原始 data URL");
+});
+
+test("video background loops on real duration and survives DOM rebuilds", async () => {
+  const panelSource = await readFile(new URL("../installer/manager/04-panel.js", import.meta.url), "utf8");
+  for (const event of ["loadedmetadata", "durationchange", "ended", "timeupdate"]) {
+    assert.match(panelSource, new RegExp(`addEventListener\\("${event}"`), `时长循环需要 ${event}`);
+  }
+  assert.match(panelSource, /currentTime = 1e101/, "容器时长缺失时需探测真实时长");
+  // 元素脱离文档后 getElementById 返回 null，必须靠自持引用复用而不是重建（重建会归零 currentTime）
+  assert.match(panelSource, /videoState\.el\.isConnected/, "自愈路径必须复用同一个 video 元素");
+});
+
+test("manager never calls native confirm/alert/prompt", async () => {
+  // 皮肤靠 CDP 注入，Codex 里因此常驻着启用 Page 域的调试会话。Chromium 会把 confirm/alert
+  // 交给调试端而不再弹原生框，一旦无人应答，调用就永远不返回、整个渲染进程卡死——症状正是
+  // "有未保存修改时点卡片没反应、皮肤切不动"。面板必须一律走自绘问询框。
+  for (const name of ["00-core.js", "01-store.js", "02-preview.js", "03-editor.js", "04-panel.js"]) {
+    const source = await readFile(new URL(`../installer/manager/${name}`, import.meta.url), "utf8");
+    const hits = source.match(/(?<![\w.$])(confirm|alert|prompt)\s*\(/g) || [];
+    assert.deepEqual(hits, [], `${name} 不允许调用原生对话框，请改用 askConfirm/askAlert`);
+  }
+});
+
+test("injection clients answer javascript dialogs so Codex can never freeze", async () => {
+  const cdp = await readFile(new URL("../installer/cdp.mjs", import.meta.url), "utf8");
+  assert.match(cdp, /Page\.javascriptDialogOpening/, "常驻注入会话必须应答对话框");
+  assert.match(cdp, /Page\.handleJavaScriptDialog/, "常驻注入会话必须应答对话框");
+  const rust = await readFile(new URL("../src-tauri/src/lib.rs", import.meta.url), "utf8");
+  assert.match(rust, /Page\.javascriptDialogOpening/, "Studio 常驻会话必须应答对话框");
+  assert.match(rust, /Page\.handleJavaScriptDialog/, "Studio 常驻会话必须应答对话框");
 });
 
 test("fragments stay framework-free and use no ES module syntax", async () => {

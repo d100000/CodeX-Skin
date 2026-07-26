@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "aha-codex",
+  "version": "0.4.0",
+  "identifier": "com.dollskin.studio",
+  "build": {
+    "beforeDevCommand": "npm run build:agent && npm run web:dev",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "aha-codex",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1080,
+        "minHeight": 720,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/d100000/CodeX-Skin/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEMyQUI4MzFENzU5ODg2RjcKUldUM2hwaDFIWU9yd2lSN0M3VVF6OGRZZUwwQ25jdG5ERUFsRFNUVmVoWjYrUnh0ZHlVMFBGR1AK"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app", "dmg"],
+    "createUpdaterArtifacts": true,
+    "category": "DeveloperTool",
+    "shortDescription": "独立的 Codex 皮肤创作与控制软件",
+    "longDescription": "aha-codex：离线创作、管理并实时应用 Codex 皮肤，不修改 Codex 安装包。",
+    "icon": ["icons/icon.icns"],
+    "macOS": {
+      "minimumSystemVersion": "12.0"
+    }
+  }
+}

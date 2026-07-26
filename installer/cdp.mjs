@@ -39,6 +39,13 @@ export function connect(webSocketDebuggerUrl) {
   const pending = new Map();
   socket.addEventListener("message", (event) => {
     const message = JSON.parse(event.data);
+    // Page 域启用后 Chromium 把 confirm/alert 转交给调试端，不再弹原生框。注入会话为了保住
+    // addScriptToEvaluateOnNewDocument 必须常驻，没人应答的话页面会永远阻塞在 confirm() 上，
+    // 整个 Codex 渲染进程卡死。统一按"取消"应答兜底。
+    if (message.method === "Page.javascriptDialogOpening") {
+      socket.send(JSON.stringify({ id: nextId++, method: "Page.handleJavaScriptDialog", params: { accept: false } }));
+      return;
+    }
     if (!message.id) return;
     const waiter = pending.get(message.id);
     if (!waiter) return;

@@ -1,111 +1,114 @@
-# Codex Doll Skin
+# aha-codex
 
-An experimental, reversible skin system for the Codex desktop app (macOS). It never modifies the installed Codex application — it launches Codex with a loopback-only debugging endpoint and injects CSS/JS at runtime.
+独立的 Codex 皮肤创作与控制软件。aha-codex 拥有自己的窗口、Rust 运行时、主题库和菜单栏进程；Codex 只作为换肤目标，不再承载皮肤管理界面，也不再向 aha-codex 提供 Node.js 运行时。
 
-## 安装（面向使用者）
+## 下载安装
 
-### 方式一：双击安装包（推荐给不熟悉终端的人）
+当前版本 **v0.4.0**（Apple Silicon macOS）：
 
-下载 **[Codex-Doll-Skin-Installer.dmg](https://github.com/d100000/CodeX-Skin/releases/latest/download/Codex-Doll-Skin-Installer.dmg)** → 双击打开 → **右键点击“Codex 皮肤安装器”→ 打开**（首次因未签名需右键打开一次，之后正常）→ 按提示完成。
+1. 从 [GitHub Releases](https://github.com/d100000/CodeX-Skin/releases/latest) 下载 `aha-codex_0.4.0_aarch64.dmg`。
+2. 双击 DMG，把 **aha-codex** 拖入“应用程序”。
+3. 首次打开时右键 → “打开”（应用未经 Apple 公证，Gatekeeper 会提示一次）。
+4. 之后无需手动升级：应用启动时自动检查 GitHub Release，有新版本会提示一键更新并重启。
 
-> 若提示“已损坏/无法验证开发者”，在终端执行一次 `xattr -dr com.apple.quarantine ~/Downloads/Codex-Doll-Skin-Installer.dmg` 后重试；这是未做苹果付费签名的正常现象。
+## 产品能力
 
-### 方式二：一行命令（面向开发者）
+- Studio 可以单独打开；Codex 未安装或未启动时仍能离线创作、保存、导入和导出主题。
+- 从 Studio 启动 Codex 后，通过仅绑定本机 IPv4/IPv6 回环地址的 Chrome DevTools Protocol 实时应用皮肤。
+- 不修改 `/Applications/ChatGPT.app`、ASAR 或 Codex 用户任务数据。
+- 独立主题库保存在 `~/Library/Application Support/com.dollskin.studio/library.json`。
+- 支持从旧 Codex 内嵌管理器的 IndexedDB 一次性迁移自定义主题。
+- Codex 版本未经验证时自动启用安全兼容模式，关闭高风险 DOM 装饰。
+- 主窗口关闭后驻留 macOS 菜单栏；从菜单栏可重新打开，选择“退出”才结束应用。
+- 自动分析 `Image/` 中的 113 张图片，按人物风格与主色生成 113 套预测主题；构建时压缩为约 9 MB WebP 资产。
+- 可通过 `npm run themes:sync-github` 自动读取 GitHub `Image/` 目录，下载新增图片并重建预测主题。
+- 启动后检查 GitHub Release；发现新版本时提示，确认后自动下载、验证签名、安装并重启。
 
-无需安装 Node / npm / git，使用 Codex 自带运行时：
+编辑器覆盖：
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
-```
+- 图片、视频、暗色背景、多图轮播、位置、全局/分区蒙层、亮度、饱和度和模糊；
+- 亮色/暗色配色、WCAG 对比度、终端 ANSI 16 色；
+- UI/代码字体、字号和最多两个嵌入字体；
+- 侧栏宽度与透明度、圆角、阴影；
+- 粒子、背景运动、输入反馈、列表和思考状态；
+- Logo、标题前缀、右侧展示栏、装饰窗口框架；
+- 原始 CSS Token 与自定义 CSS，外链 URL 和 `@import` 会在发射时清洗。
 
-安装后：退出当前 Codex（⌘Q）→ 从 `~/Applications` 打开 **Codex Doll Skin** → 窗口顶部中间的 **D** 按钮就是皮肤管理器。
+主题文件继续使用 `theme/theme.schema.json` 的 schema v3，兼容导入 v1/v2，导出格式为 `<id>.codexskin.json`。
 
-卸载：
+## 使用
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/uninstall.sh | bash
-```
+1. 安装并单独打开 **aha-codex**。
+2. 在左侧选择主题，或从图片创建主题。
+3. Codex 未运行时点击“启动 Codex”；如果 Codex 已普通启动，确认后由 Studio 重启并接管。
+4. 打开“实时预览”后，编辑参数会同步到 Codex；“保存皮肤”才会写入 Studio 主题库。
+5. 关闭 Studio 窗口后皮肤继续运行，需要管理时点击菜单栏图标。
 
-> 前提：已安装 Codex 桌面版。安装器只在 `~/Applications` 与 `~/.codex` 下写文件，不改动 `/Applications/ChatGPT.app`。
+普通方式启动的 Codex 没有 CDP 端口，Studio 无法直接接管。为了保持可逆且不修改 Codex 安装包，首次连接时必须由 Studio 启动或重新启动 Codex。
 
-## 开发者预览
+## 开发
+
+环境要求：macOS 12+、Node.js 20+、Rust stable 和 Xcode Command Line Tools。
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Compatibility Check
+只启动浏览器预览：
 
 ```bash
-npm run doctor
+npm run web:dev
 ```
 
-Runtime injection is verified for Codex `26.707.72221`. Other versions stay in diagnostic mode until their compatibility is confirmed.
-
-## Install the reversible launcher
+运行测试与构建：
 
 ```bash
-npm run install-launcher
+npm test
+npm run build
+npm run app:build
+npm run release:check
 ```
 
-This creates `~/Applications/Codex Doll Skin.app`. It launches the signed Codex app with a localhost-only debugging endpoint and injects the theme at runtime. It never edits `/Applications/ChatGPT.app`.
-
-The installer also creates a self-contained runtime at `~/.codex/codex-doll-skin` and uses the Node.js runtime bundled with Codex. The launcher does not depend on this source checkout or a separately installed Node.js.
-
-Runtime controls:
+从 GitHub 同步预设图片主题：
 
 ```bash
-npm run skin:status
-npm run skin:pause
-npm run skin:apply
+GITHUB_TOKEN="<你的 GitHub Token>" npm run themes:sync-github -- --ref main --prune
 ```
 
-The in-app `D` button opens the Codex Skin Manager without restarting Codex. It supports:
+仓库为公开仓库时可以省略 `GITHUB_TOKEN`；私有仓库需要具有 `Contents: Read` 权限的 Token。同步器会保存远端文件清单，只下载新增或发生变化的图片。
 
-- a thumbnail card library with four built-in example themes (sakura, warm reading room, classic-blue 2007 retro IM, plain focus), plus search and one-click duplication;
-- uploading PNG, JPEG, and WebP backgrounds with automatic compression and automatic palette extraction;
-- a live mini preview of the Codex window with drag-to-position backgrounds;
-- optional composition safe-zone guides derived from [BACKGROUND_SPEC.md](BACKGROUND_SPEC.md);
-- a modal editor (背景 / 配色 / 字体 / 布局 / 氛围 / 品牌 tabs, with an always-visible live preview column) covering:
-  - accent / surface / text color pickers plus brightness, saturation, and blur filters;
-  - a global veil plus four regional veils (top / bottom / left sidebar / center content) with independent opacity;
-  - video backgrounds (mp4/webm, muted loop, paused under reduced-motion), a separate dark-mode background, and multi-image slideshows;
-  - an optional separate dark-mode palette and a themed startup splash;
-  - the full terminal ANSI 16-color palette with 樱花 / Nord presets;
-  - UI and code font stacks, chat and editor font sizes, and embeddable font files (woff2/ttf/otf packed into the theme);
-  - the global corner-radius scale, shadow intensity, and sidebar width — all riding Codex's own CSS tokens;
-  - scrollbar styles, sakura/snow particle layers, a motion kill-switch, and a customizable trigger button (position/icon/auto-hide);
-  - best-effort logo replacement/hiding and a window-title prefix (DOM-level, personal use only);
-  - an injected right-side display panel (title / character image / text card) with automatic content reflow — the "QQ friends column" building block;
-  - WCAG contrast warnings, quick palette presets, and re-extractable palette candidates from the background image;
-  - an advanced tab: raw token overrides (any of Codex's ~1300 CSS variables) and custom CSS (external URLs stripped, data: only);
-  - drag-and-drop import of images and theme JSON files, with conflict resolution (overwrite or keep both);
-- a draft model: edits apply live, `保存` persists, `还原` (or closing the panel) rolls back;
-- saving edited built-in themes as copies, and deleting user themes;
-- importing portable theme JSON with a confirmation preview, and exporting `<id>.codexskin.json`;
-- pausing the skin while preserving the library;
-- storing multiple themes in IndexedDB instead of the smaller localStorage image quota.
+macOS 产物位于：
 
-Theme files follow [theme/theme.schema.json](theme/theme.schema.json) (schema v3; v1/v2 files import transparently). A portable theme embeds its compressed background as a Data URL, or uses `"none"` for a plain color background. All v3 dimensions are optional and default to "follow Codex":
-
-```json
-{
-  "schemaVersion": 3,
-  "id": "my-sakura-theme",
-  "name": "My Sakura Theme",
-  "background": "data:image/jpeg;base64,...",
-  "colors": { "accent": "#76506f", "surface": "#fff9fb", "text": "#3c2938" },
-  "colorsDark": null,
-  "terminal": null,
-  "typography": { "sans": "", "mono": "", "chatFontSize": 0, "editorFontSize": 0 },
-  "shape": { "radiusScale": null, "shadow": "default" },
-  "layout": { "x": 50, "y": 50, "veil": 50, "sidebarWidth": 0 },
-  "filters": { "brightness": 100, "saturate": 100, "blur": 0 },
-  "brand": { "startupTint": false }
-}
+```text
+src-tauri/target/release/bundle/macos/aha-codex.app
+src-tauri/target/release/bundle/dmg/aha-codex_0.4.0_aarch64.dmg
 ```
 
-## Acknowledgements
+未配置 Apple Developer ID 时构建产物为本地/测试签名，首次在其他电脑打开会触发 Gatekeeper。正式分发前需要配置 Developer ID Application、notarization 和 stapling。
 
-The installation and CDP hardening work was informed by [HeiGe Codex Skin Studio](https://github.com/HeiGeAi/heige-codex-skin-studio), an MIT-licensed Codex theming project. This project keeps its own visual system and implementation while adopting the same no-ASAR, loopback-only security model.
+GitHub 自动更新的密钥和发布流程见 [UPDATE.md](./UPDATE.md)。
+
+## 架构
+
+```text
+React Studio UI
+  ├── 独立主题库与草稿状态
+  ├── Codex 模拟预览
+  └── Tauri invoke
+        ├── Rust 进程控制器
+        ├── 本地文件存储
+        └── Rust CDP WebSocket 客户端
+              └── Codex Skin Agent
+                    ├── CSS Token / 背景
+                    └── 可降级 DOM 装饰
+```
+
+- `src/`：独立 Studio React 界面、预览与桌面桥接。
+- `src-tauri/`：macOS 应用、菜单栏、进程管理、独立存储和原生 CDP 客户端。
+- `tools/build-skin-agent.mjs`：从现有纯函数核心生成自包含 Skin Agent。
+- `tools/build-image-themes.py`：分类 `Image/` 的风格与主色，并生成压缩背景和预测主题清单。
+- `installer/manager/00-core.js`：Studio 和注入端共用的主题归一化、校验和 CSS 编译核心。
+- `theme/`：基础皮肤、manifest 和可移植主题 schema。
+
+运行时仍遵循 loopback-only、no-ASAR、data-URL 资产和可逆退出四项安全约束。

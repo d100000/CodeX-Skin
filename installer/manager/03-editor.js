@@ -191,7 +191,7 @@ function createEditor(handlers) {
     const picked = await handlers.pickFile("video");
     if (!picked || !draft) return;
     draft.background = picked.dataUrl;
-    if (handlers.notify) handlers.notify("视频背景已应用：静音循环播放，系统减弱动效时自动暂停");
+    if (handlers.notify) handlers.notify("视频背景已应用：静音、按完整时长循环，系统减弱动效时自动暂停");
     applyLive();
   });
   const bgActions = document.createElement("div");

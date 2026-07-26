@@ -1,8 +1,12 @@
 node_modules/
 dist/
+src-tauri/target/
+src-tauri/gen/
 .DS_Store
 appearance-settings-CydiTiiC.js
 generated/*.png
 generated/*.webp
 !generated/final/
 tools/image-api.local.json
+.release-secrets/
+.cache/

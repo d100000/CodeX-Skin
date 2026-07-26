@@ -1,0 +1,6104 @@
+[
+  {
+    "schemaVersion": 3,
+    "id": "image-da369d7a8a7a",
+    "name": "张凌赫 · 冷感西装总裁",
+    "background": "asset://predicted-da369d7a8a7a.webp",
+    "preview": "asset://predicted-da369d7a8a7a.webp",
+    "colors": {
+      "accent": "#8b8f92",
+      "surface": "#f7f7f7",
+      "text": "#23272e"
+    },
+    "colorsDark": {
+      "accent": "#b0b3b5",
+      "surface": "#1c2027",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "暗夜科技",
+      "深海盐蓝调",
+      "张凌赫_冷感西装总裁_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-39847bcd3ba5",
+    "name": "张凌赫 · 古装清雅公子",
+    "background": "asset://predicted-39847bcd3ba5.webp",
+    "preview": "asset://predicted-39847bcd3ba5.webp",
+    "colors": {
+      "accent": "#a1a5a0",
+      "surface": "#f8f9f8",
+      "text": "#262a30"
+    },
+    "colorsDark": {
+      "accent": "#bfc2be",
+      "surface": "#1f2329",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深森系绿调",
+    "tags": [
+      "张凌赫",
+      "东方古韵",
+      "深森系绿调",
+      "张凌赫_古装清雅公子_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-922df55da406",
+    "name": "张凌赫 · 复古针织背心",
+    "background": "asset://predicted-922df55da406.webp",
+    "preview": "asset://predicted-922df55da406.webp",
+    "colors": {
+      "accent": "#b49d85",
+      "surface": "#faf8f6",
+      "text": "#29292c"
+    },
+    "colorsDark": {
+      "accent": "#ccbcac",
+      "surface": "#222226",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "温柔日常",
+      "深琥珀橙调",
+      "张凌赫_复古针织背心_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-5b0e723078c4",
+    "name": "张凌赫 · 奇幻战甲造型",
+    "background": "asset://predicted-5b0e723078c4.webp",
+    "preview": "asset://predicted-5b0e723078c4.webp",
+    "colors": {
+      "accent": "#f2eee5",
+      "surface": "#fefefd",
+      "text": "#31343a"
+    },
+    "colorsDark": {
+      "accent": "#f6f3ed",
+      "surface": "#2a2d33",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "stardust",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "奇幻梦境",
+      "琥珀橙调",
+      "张凌赫_奇幻战甲造型_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-926d1cf00f07",
+    "name": "张凌赫 · 居家温柔毛衣",
+    "background": "asset://predicted-926d1cf00f07.webp",
+    "preview": "asset://predicted-926d1cf00f07.webp",
+    "colors": {
+      "accent": "#5c564f",
+      "surface": "#f4f3f3",
+      "text": "#1c1f25"
+    },
+    "colorsDark": {
+      "accent": "#908c87",
+      "surface": "#15181e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "温柔日常",
+      "深琥珀橙调",
+      "张凌赫_居家温柔毛衣_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-bdb815daf3b3",
+    "name": "张凌赫 · 战损古风",
+    "background": "asset://predicted-bdb815daf3b3.webp",
+    "preview": "asset://predicted-bdb815daf3b3.webp",
+    "colors": {
+      "accent": "#979898",
+      "surface": "#f8f8f8",
+      "text": "#25282f"
+    },
+    "colorsDark": {
+      "accent": "#b8b9b9",
+      "surface": "#1e2128",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深青瓷冷调",
+    "tags": [
+      "张凌赫",
+      "东方古韵",
+      "深青瓷冷调",
+      "张凌赫_战损古风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-ca65765b24ad",
+    "name": "张凌赫 · 推理学院风",
+    "background": "asset://predicted-ca65765b24ad.webp",
+    "preview": "asset://predicted-ca65765b24ad.webp",
+    "colors": {
+      "accent": "#d5c0af",
+      "surface": "#fcfbf9",
+      "text": "#2d2e32"
+    },
+    "colorsDark": {
+      "accent": "#e2d4c9",
+      "surface": "#26272b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "都市人像",
+      "深琥珀橙调",
+      "张凌赫_推理学院风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-3284f0b1f3e7",
+    "name": "张凌赫 · 条纹衬衫知性",
+    "background": "asset://predicted-3284f0b1f3e7.webp",
+    "preview": "asset://predicted-3284f0b1f3e7.webp",
+    "colors": {
+      "accent": "#bab7af",
+      "surface": "#fafaf9",
+      "text": "#2a2d32"
+    },
+    "colorsDark": {
+      "accent": "#d0cec9",
+      "surface": "#23262b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深鎏金黄调",
+    "tags": [
+      "张凌赫",
+      "商务雅致",
+      "深鎏金黄调",
+      "张凌赫_条纹衬衫知性_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-f25496d7b10b",
+    "name": "张凌赫 · 海边度假清爽",
+    "background": "asset://predicted-f25496d7b10b.webp",
+    "preview": "asset://predicted-f25496d7b10b.webp",
+    "colors": {
+      "accent": "#c4d4dc",
+      "surface": "#fbfcfd",
+      "text": "#2b3139"
+    },
+    "colorsDark": {
+      "accent": "#d7e2e7",
+      "surface": "#242a32",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "清新自然",
+      "深海盐蓝调",
+      "张凌赫_海边度假清爽_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-fc042fbdb210",
+    "name": "张凌赫 · 皮革西装前卫",
+    "background": "asset://predicted-fc042fbdb210.webp",
+    "preview": "asset://predicted-fc042fbdb210.webp",
+    "colors": {
+      "accent": "#757372",
+      "surface": "#f5f5f5",
+      "text": "#20232a"
+    },
+    "colorsDark": {
+      "accent": "#a1a09f",
+      "surface": "#191c23",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "街头潮酷",
+      "深琥珀橙调",
+      "张凌赫_皮革西装前卫_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-edbcd518da18",
+    "name": "张凌赫 · 米色大衣樱花暖男",
+    "background": "asset://predicted-edbcd518da18.webp",
+    "preview": "asset://predicted-edbcd518da18.webp",
+    "colors": {
+      "accent": "#e6dac8",
+      "surface": "#fdfcfb",
+      "text": "#303136"
+    },
+    "colorsDark": {
+      "accent": "#eee6da",
+      "surface": "#292b2f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "商务雅致",
+      "琥珀橙调",
+      "张凌赫_米色大衣樱花暖男_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-8c41c344eedd",
+    "name": "张凌赫 · 粉色衬衫浪漫",
+    "background": "asset://predicted-8c41c344eedd.webp",
+    "preview": "asset://predicted-8c41c344eedd.webp",
+    "colors": {
+      "accent": "#daae95",
+      "surface": "#fcf9f8",
+      "text": "#2e2b2f"
+    },
+    "colorsDark": {
+      "accent": "#e6c8b7",
+      "surface": "#272428",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "张凌赫",
+      "温柔日常",
+      "琥珀橙调",
+      "张凌赫_粉色衬衫浪漫_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-29f3173f707d",
+    "name": "张凌赫 · 红色背景时尚大片",
+    "background": "asset://predicted-29f3173f707d.webp",
+    "preview": "asset://predicted-29f3173f707d.webp",
+    "colors": {
+      "accent": "#7e1f1b",
+      "surface": "#f6efef",
+      "text": "#21171e"
+    },
+    "colorsDark": {
+      "accent": "#a76764",
+      "surface": "#1a1017",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 48,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "张凌赫",
+      "杂志时装",
+      "赤红暖调",
+      "张凌赫_红色背景时尚大片_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-247063b40af9",
+    "name": "张凌赫 · 舞台亮片造型",
+    "background": "asset://predicted-247063b40af9.webp",
+    "preview": "asset://predicted-247063b40af9.webp",
+    "colors": {
+      "accent": "#5b596a",
+      "surface": "#f4f3f5",
+      "text": "#1c1f29"
+    },
+    "colorsDark": {
+      "accent": "#8f8e9a",
+      "surface": "#151822",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "舞台戏剧",
+      "深海盐蓝调",
+      "张凌赫_舞台亮片造型_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-34636d5cab4b",
+    "name": "张凌赫 · 街头叠穿潮流",
+    "background": "asset://predicted-34636d5cab4b.webp",
+    "preview": "asset://predicted-34636d5cab4b.webp",
+    "colors": {
+      "accent": "#525963",
+      "surface": "#f3f3f4",
+      "text": "#1b1f28"
+    },
+    "colorsDark": {
+      "accent": "#898e95",
+      "surface": "#141821",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "街头潮酷",
+      "深海盐蓝调",
+      "张凌赫_街头叠穿潮流_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-dba2463d76f2",
+    "name": "张凌赫 · 运动少年风",
+    "background": "asset://predicted-dba2463d76f2.webp",
+    "preview": "asset://predicted-dba2463d76f2.webp",
+    "colors": {
+      "accent": "#121a25",
+      "surface": "#eeeff0",
+      "text": "#12171f"
+    },
+    "colorsDark": {
+      "accent": "#5e636b",
+      "surface": "#0b1018",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "张凌赫",
+      "清新自然",
+      "黑白灰阶",
+      "张凌赫_运动少年风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-269cd9e90cf9",
+    "name": "张凌赫 · 都市休闲白T",
+    "background": "asset://predicted-269cd9e90cf9.webp",
+    "preview": "asset://predicted-269cd9e90cf9.webp",
+    "colors": {
+      "accent": "#d8d9db",
+      "surface": "#fcfcfc",
+      "text": "#2e3138"
+    },
+    "colorsDark": {
+      "accent": "#e4e5e7",
+      "surface": "#272a32",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "温柔日常",
+      "深海盐蓝调",
+      "张凌赫_都市休闲白T_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-0f9f83257f6b",
+    "name": "张凌赫 · 雪山户外机能风",
+    "background": "asset://predicted-0f9f83257f6b.webp",
+    "preview": "asset://predicted-0f9f83257f6b.webp",
+    "colors": {
+      "accent": "#8eabc0",
+      "surface": "#f7f9fb",
+      "text": "#232b35"
+    },
+    "colorsDark": {
+      "accent": "#b2c6d4",
+      "surface": "#1c242e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "snow",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "张凌赫",
+      "清新自然",
+      "深海盐蓝调",
+      "张凌赫_雪山户外机能风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-a487bfda2e2a",
+    "name": "张凌赫 · 黑皮衣酷感",
+    "background": "asset://predicted-a487bfda2e2a.webp",
+    "preview": "asset://predicted-a487bfda2e2a.webp",
+    "colors": {
+      "accent": "#590d0f",
+      "surface": "#f3eeee",
+      "text": "#1c151c"
+    },
+    "colorsDark": {
+      "accent": "#8e5a5c",
+      "surface": "#150e15",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 48,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "张凌赫",
+      "街头潮酷",
+      "赤红暖调",
+      "张凌赫_黑皮衣酷感_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-7aef50b918ed",
+    "name": "张凌赫 · 黑色高领简约",
+    "background": "asset://predicted-7aef50b918ed.webp",
+    "preview": "asset://predicted-7aef50b918ed.webp",
+    "colors": {
+      "accent": "#0b0e14",
+      "surface": "#eeeeef",
+      "text": "#11151d"
+    },
+    "colorsDark": {
+      "accent": "#595b5f",
+      "surface": "#0a0e16",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "张凌赫",
+      "暗夜科技",
+      "黑白灰阶",
+      "张凌赫_黑色高领简约_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-aa9632bd2c86",
+    "name": "李现 · Prada科技风",
+    "background": "asset://predicted-aa9632bd2c86.webp",
+    "preview": "asset://predicted-aa9632bd2c86.webp",
+    "colors": {
+      "accent": "#d2dbe5",
+      "surface": "#fcfcfd",
+      "text": "#2d323a"
+    },
+    "colorsDark": {
+      "accent": "#e0e7ed",
+      "surface": "#262b33",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "李现",
+      "暗夜科技",
+      "深海盐蓝调",
+      "李现_Prada科技风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-3b3f3e583930",
+    "name": "李现 · 古装剑客",
+    "background": "asset://predicted-3b3f3e583930.webp",
+    "preview": "asset://predicted-3b3f3e583930.webp",
+    "colors": {
+      "accent": "#121c2a",
+      "surface": "#eeeff0",
+      "text": "#121720"
+    },
+    "colorsDark": {
+      "accent": "#5e656e",
+      "surface": "#0b1019",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "李现",
+      "东方古韵",
+      "海盐蓝调",
+      "李现_古装剑客_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-bc693b2d6d8f",
+    "name": "李现 · 文艺男青年",
+    "background": "asset://predicted-bc693b2d6d8f.webp",
+    "preview": "asset://predicted-bc693b2d6d8f.webp",
+    "colors": {
+      "accent": "#a07c54",
+      "surface": "#f8f6f3",
+      "text": "#262426"
+    },
+    "colorsDark": {
+      "accent": "#bea68b",
+      "surface": "#1f1d1f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "李现",
+      "温柔日常",
+      "深琥珀橙调",
+      "李现_文艺男青年_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-eb23dfc76abe",
+    "name": "李现 · 暖男毛衣",
+    "background": "asset://predicted-eb23dfc76abe.webp",
+    "preview": "asset://predicted-eb23dfc76abe.webp",
+    "colors": {
+      "accent": "#9b8575",
+      "surface": "#f8f6f5",
+      "text": "#25262a"
+    },
+    "colorsDark": {
+      "accent": "#bbaca1",
+      "surface": "#1e1f23",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "李现",
+      "温柔日常",
+      "深琥珀橙调",
+      "李现_暖男毛衣_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-7c7295659865",
+    "name": "李现 · 条纹衬衫日常",
+    "background": "asset://predicted-7c7295659865.webp",
+    "preview": "asset://predicted-7c7295659865.webp",
+    "colors": {
+      "accent": "#c8c5ca",
+      "surface": "#fbfbfb",
+      "text": "#2b2e36"
+    },
+    "colorsDark": {
+      "accent": "#dad8db",
+      "surface": "#25282f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深暮色紫调",
+    "tags": [
+      "李现",
+      "温柔日常",
+      "深暮色紫调",
+      "李现_条纹衬衫日常_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-1e85d9f8ab21",
+    "name": "李现 · 泳池清凉夏日",
+    "background": "asset://predicted-1e85d9f8ab21.webp",
+    "preview": "asset://predicted-1e85d9f8ab21.webp",
+    "colors": {
+      "accent": "#bebcb5",
+      "surface": "#fafafa",
+      "text": "#2a2d33"
+    },
+    "colorsDark": {
+      "accent": "#d3d1cd",
+      "surface": "#23262c",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深鎏金黄调",
+    "tags": [
+      "李现",
+      "清新自然",
+      "深鎏金黄调",
+      "李现_泳池清凉夏日_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-7ffaa64e45af",
+    "name": "李现 · 海边棕色T恤休闲",
+    "background": "asset://predicted-7ffaa64e45af.webp",
+    "preview": "asset://predicted-7ffaa64e45af.webp",
+    "colors": {
+      "accent": "#c6d4dd",
+      "surface": "#fbfcfd",
+      "text": "#2b3139"
+    },
+    "colorsDark": {
+      "accent": "#d8e2e8",
+      "surface": "#242a32",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "李现",
+      "清新自然",
+      "深海盐蓝调",
+      "李现_海边棕色T恤休闲_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-c63e5af575b4",
+    "name": "李现 · 牛仔外套随性",
+    "background": "asset://predicted-c63e5af575b4.webp",
+    "preview": "asset://predicted-c63e5af575b4.webp",
+    "colors": {
+      "accent": "#253f57",
+      "surface": "#f0f2f3",
+      "text": "#151c26"
+    },
+    "colorsDark": {
+      "accent": "#6b7c8d",
+      "surface": "#0e151f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "李现",
+      "都市人像",
+      "海盐蓝调",
+      "李现_牛仔外套随性_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-2902390ca324",
+    "name": "李现 · 白衬衫眼镜儒雅",
+    "background": "asset://predicted-2902390ca324.webp",
+    "preview": "asset://predicted-2902390ca324.webp",
+    "colors": {
+      "accent": "#372718",
+      "surface": "#f1f0ef",
+      "text": "#17181d"
+    },
+    "colorsDark": {
+      "accent": "#776c62",
+      "surface": "#101216",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "李现",
+      "商务雅致",
+      "琥珀橙调",
+      "李现_白衬衫眼镜儒雅_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-2e6f126408a8",
+    "name": "李现 · 皮衣机车风",
+    "background": "asset://predicted-2e6f126408a8.webp",
+    "preview": "asset://predicted-2e6f126408a8.webp",
+    "colors": {
+      "accent": "#a9abab",
+      "surface": "#f9f9f9",
+      "text": "#272b32"
+    },
+    "colorsDark": {
+      "accent": "#c5c6c6",
+      "surface": "#20242b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深青瓷冷调",
+    "tags": [
+      "李现",
+      "街头潮酷",
+      "深青瓷冷调",
+      "李现_皮衣机车风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-9231a74c9da7",
+    "name": "李现 · 红毯礼服",
+    "background": "asset://predicted-9231a74c9da7.webp",
+    "preview": "asset://predicted-9231a74c9da7.webp",
+    "colors": {
+      "accent": "#894a3e",
+      "surface": "#f7f2f1",
+      "text": "#231d22"
+    },
+    "colorsDark": {
+      "accent": "#af847c",
+      "surface": "#1c161c",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "李现",
+      "舞台戏剧",
+      "赤红暖调",
+      "李现_红毯礼服_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-3a722a1ee48f",
+    "name": "李现 · 美式复古工装",
+    "background": "asset://predicted-3a722a1ee48f.webp",
+    "preview": "asset://predicted-3a722a1ee48f.webp",
+    "colors": {
+      "accent": "#ded3c0",
+      "surface": "#fdfcfb",
+      "text": "#2f3035"
+    },
+    "colorsDark": {
+      "accent": "#e9e1d4",
+      "surface": "#282a2e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "李现",
+      "都市人像",
+      "深琥珀橙调",
+      "李现_美式复古工装_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-b681ee1eff8e",
+    "name": "李现 · 老钱风大衣",
+    "background": "asset://predicted-b681ee1eff8e.webp",
+    "preview": "asset://predicted-b681ee1eff8e.webp",
+    "colors": {
+      "accent": "#b79e82",
+      "surface": "#faf8f6",
+      "text": "#29292c"
+    },
+    "colorsDark": {
+      "accent": "#cebdaa",
+      "surface": "#222225",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "李现",
+      "商务雅致",
+      "深琥珀橙调",
+      "李现_老钱风大衣_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-911b534990cb",
+    "name": "李现 · 街头墨镜潮男",
+    "background": "asset://predicted-911b534990cb.webp",
+    "preview": "asset://predicted-911b534990cb.webp",
+    "colors": {
+      "accent": "#6a6c6f",
+      "surface": "#f5f5f5",
+      "text": "#1e2229"
+    },
+    "colorsDark": {
+      "accent": "#9a9b9d",
+      "surface": "#171b22",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "李现",
+      "街头潮酷",
+      "深海盐蓝调",
+      "李现_街头墨镜潮男_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-348f3e8997c3",
+    "name": "李现 · 西装短裤雅痞",
+    "background": "asset://predicted-348f3e8997c3.webp",
+    "preview": "asset://predicted-348f3e8997c3.webp",
+    "colors": {
+      "accent": "#ddcdc2",
+      "surface": "#fdfcfb",
+      "text": "#2e3035"
+    },
+    "colorsDark": {
+      "accent": "#e8ddd6",
+      "surface": "#28292e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "李现",
+      "商务雅致",
+      "深琥珀橙调",
+      "李现_西装短裤雅痞_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-f9a5c30e7c8a",
+    "name": "李现 · 运动风卫衣",
+    "background": "asset://predicted-f9a5c30e7c8a.webp",
+    "preview": "asset://predicted-f9a5c30e7c8a.webp",
+    "colors": {
+      "accent": "#f7dbba",
+      "surface": "#fefcfa",
+      "text": "#323234"
+    },
+    "colorsDark": {
+      "accent": "#fae7d0",
+      "surface": "#2b2b2d",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "李现",
+      "清新自然",
+      "琥珀橙调",
+      "李现_运动风卫衣_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-17a354f95b64",
+    "name": "李现 · 雨夜都市忧郁",
+    "background": "asset://predicted-17a354f95b64.webp",
+    "preview": "asset://predicted-17a354f95b64.webp",
+    "colors": {
+      "accent": "#071017",
+      "surface": "#eeeeef",
+      "text": "#10151d"
+    },
+    "colorsDark": {
+      "accent": "#565c61",
+      "surface": "#0a0e16",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "雾灰中性",
+    "tags": [
+      "李现",
+      "暗夜科技",
+      "雾灰中性",
+      "李现_雨夜都市忧郁_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-4e15f4389cf0",
+    "name": "李现 · 露营户外风",
+    "background": "asset://predicted-4e15f4389cf0.webp",
+    "preview": "asset://predicted-4e15f4389cf0.webp",
+    "colors": {
+      "accent": "#f2e6dc",
+      "surface": "#fefdfd",
+      "text": "#313339"
+    },
+    "colorsDark": {
+      "accent": "#f6eee7",
+      "surface": "#2a2c32",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "李现",
+      "清新自然",
+      "琥珀橙调",
+      "李现_露营户外风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-0ef27d44f924",
+    "name": "李现 · 黑色高领酷感",
+    "background": "asset://predicted-0ef27d44f924.webp",
+    "preview": "asset://predicted-0ef27d44f924.webp",
+    "colors": {
+      "accent": "#070a0f",
+      "surface": "#eeeeee",
+      "text": "#10141c"
+    },
+    "colorsDark": {
+      "accent": "#56585c",
+      "surface": "#0a0d15",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "李现",
+      "暗夜科技",
+      "黑白灰阶",
+      "李现_黑色高领酷感_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-2ae03fc2b15e",
+    "name": "李现 · 黑西装禁欲系",
+    "background": "asset://predicted-2ae03fc2b15e.webp",
+    "preview": "asset://predicted-2ae03fc2b15e.webp",
+    "colors": {
+      "accent": "#0a0f13",
+      "surface": "#eeeeee",
+      "text": "#11151c"
+    },
+    "colorsDark": {
+      "accent": "#585c5f",
+      "surface": "#0a0e16",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "李现",
+      "暗夜科技",
+      "黑白灰阶",
+      "李现_黑西装禁欲系_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-37988ac11bc1",
+    "name": "檀健次 · FENDI粉彩针织",
+    "background": "asset://predicted-37988ac11bc1.webp",
+    "preview": "asset://predicted-37988ac11bc1.webp",
+    "colors": {
+      "accent": "#e7dcd3",
+      "surface": "#fdfdfc",
+      "text": "#303237"
+    },
+    "colorsDark": {
+      "accent": "#efe7e1",
+      "surface": "#292b30",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "杂志时装",
+      "深琥珀橙调",
+      "檀健次_FENDI粉彩针织_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-6d0be96c732e",
+    "name": "檀健次 · 印花度假风",
+    "background": "asset://predicted-6d0be96c732e.webp",
+    "preview": "asset://predicted-6d0be96c732e.webp",
+    "colors": {
+      "accent": "#988172",
+      "surface": "#f8f6f5",
+      "text": "#25252a"
+    },
+    "colorsDark": {
+      "accent": "#b9a99f",
+      "surface": "#1e1e23",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "清新自然",
+      "深琥珀橙调",
+      "檀健次_印花度假风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-05e0ae2706e2",
+    "name": "檀健次 · 朋克刺绣舞台",
+    "background": "asset://predicted-05e0ae2706e2.webp",
+    "preview": "asset://predicted-05e0ae2706e2.webp",
+    "colors": {
+      "accent": "#58382c",
+      "surface": "#f3f1f0",
+      "text": "#1c1b20"
+    },
+    "colorsDark": {
+      "accent": "#8d7870",
+      "surface": "#151419",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "檀健次",
+      "舞台戏剧",
+      "琥珀橙调",
+      "檀健次_朋克刺绣舞台_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-6f021fdaebed",
+    "name": "檀健次 · 机场墨镜夹克",
+    "background": "asset://predicted-6f021fdaebed.webp",
+    "preview": "asset://predicted-6f021fdaebed.webp",
+    "colors": {
+      "accent": "#e3eef3",
+      "surface": "#fdfefe",
+      "text": "#2f343c"
+    },
+    "colorsDark": {
+      "accent": "#ecf3f7",
+      "surface": "#282d35",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "檀健次",
+      "街头潮酷",
+      "海盐蓝调",
+      "檀健次_机场墨镜夹克_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-c8563eb8d338",
+    "name": "檀健次 · 橙色开衫杂志风",
+    "background": "asset://predicted-c8563eb8d338.webp",
+    "preview": "asset://predicted-c8563eb8d338.webp",
+    "colors": {
+      "accent": "#c33c1e",
+      "surface": "#fbf1ef",
+      "text": "#2b1b1e"
+    },
+    "colorsDark": {
+      "accent": "#d67a66",
+      "surface": "#241417",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 48,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "檀健次",
+      "杂志时装",
+      "赤红暖调",
+      "檀健次_橙色开衫杂志风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-30411b9337e5",
+    "name": "檀健次 · 民国小说家黑白风",
+    "background": "asset://predicted-30411b9337e5.webp",
+    "preview": "asset://predicted-30411b9337e5.webp",
+    "colors": {
+      "accent": "#75675c",
+      "surface": "#f5f4f4",
+      "text": "#202127"
+    },
+    "colorsDark": {
+      "accent": "#a19890",
+      "surface": "#191a20",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "东方古韵",
+      "深琥珀橙调",
+      "檀健次_民国小说家黑白风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-2be591992629",
+    "name": "檀健次 · 深色高领神秘",
+    "background": "asset://predicted-2be591992629.webp",
+    "preview": "asset://predicted-2be591992629.webp",
+    "colors": {
+      "accent": "#626162",
+      "surface": "#f4f4f4",
+      "text": "#1d2028"
+    },
+    "colorsDark": {
+      "accent": "#949494",
+      "surface": "#161a21",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深樱粉玫调",
+    "tags": [
+      "檀健次",
+      "商务雅致",
+      "深樱粉玫调",
+      "檀健次_深色高领神秘_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-25c89c624185",
+    "name": "檀健次 · 画家文艺风",
+    "background": "asset://predicted-25c89c624185.webp",
+    "preview": "asset://predicted-25c89c624185.webp",
+    "colors": {
+      "accent": "#776b60",
+      "surface": "#f5f5f4",
+      "text": "#202227"
+    },
+    "colorsDark": {
+      "accent": "#a39a93",
+      "surface": "#191b20",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "温柔日常",
+      "深琥珀橙调",
+      "檀健次_画家文艺风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-4d51ce058538",
+    "name": "檀健次 · 白衬衫少年感",
+    "background": "asset://predicted-4d51ce058538.webp",
+    "preview": "asset://predicted-4d51ce058538.webp",
+    "colors": {
+      "accent": "#d2cfd1",
+      "surface": "#fcfcfc",
+      "text": "#2d3037"
+    },
+    "colorsDark": {
+      "accent": "#e0dee0",
+      "surface": "#262930",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深樱粉玫调",
+    "tags": [
+      "檀健次",
+      "商务雅致",
+      "深樱粉玫调",
+      "檀健次_白衬衫少年感_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-0e330f59aa03",
+    "name": "檀健次 · 眼镜斯文败类",
+    "background": "asset://predicted-0e330f59aa03.webp",
+    "preview": "asset://predicted-0e330f59aa03.webp",
+    "colors": {
+      "accent": "#555452",
+      "surface": "#f3f3f3",
+      "text": "#1b1f25"
+    },
+    "colorsDark": {
+      "accent": "#8b8b89",
+      "surface": "#14181e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "商务雅致",
+      "深琥珀橙调",
+      "檀健次_眼镜斯文败类_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-6c4e09931c37",
+    "name": "檀健次 · 粉色衬衫ELLE松弛感",
+    "background": "asset://predicted-6c4e09931c37.webp",
+    "preview": "asset://predicted-6c4e09931c37.webp",
+    "colors": {
+      "accent": "#cdaeac",
+      "surface": "#fcf9f9",
+      "text": "#2c2b32"
+    },
+    "colorsDark": {
+      "accent": "#ddc8c7",
+      "surface": "#25242b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "深赤红暖调",
+    "tags": [
+      "檀健次",
+      "杂志时装",
+      "深赤红暖调",
+      "檀健次_粉色衬衫ELLE松弛感_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-2c58759ae8ba",
+    "name": "檀健次 · 红色头发造型",
+    "background": "asset://predicted-2c58759ae8ba.webp",
+    "preview": "asset://predicted-2c58759ae8ba.webp",
+    "colors": {
+      "accent": "#120a0a",
+      "surface": "#eeeeee",
+      "text": "#12141b"
+    },
+    "colorsDark": {
+      "accent": "#5e5858",
+      "surface": "#0b0d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "檀健次",
+      "舞台戏剧",
+      "黑白灰阶",
+      "檀健次_红色头发造型_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-e55869c7f2dd",
+    "name": "檀健次 · 舞台中山装",
+    "background": "asset://predicted-e55869c7f2dd.webp",
+    "preview": "asset://predicted-e55869c7f2dd.webp",
+    "colors": {
+      "accent": "#7f6e64",
+      "surface": "#f6f5f4",
+      "text": "#212228"
+    },
+    "colorsDark": {
+      "accent": "#a89c96",
+      "surface": "#1a1b21",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "檀健次",
+      "东方古韵",
+      "深琥珀橙调",
+      "檀健次_舞台中山装_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-9d807bdcec91",
+    "name": "檀健次 · 舞台薄纱飘逸",
+    "background": "asset://predicted-9d807bdcec91.webp",
+    "preview": "asset://predicted-9d807bdcec91.webp",
+    "colors": {
+      "accent": "#575e68",
+      "surface": "#f3f4f4",
+      "text": "#1c2028"
+    },
+    "colorsDark": {
+      "accent": "#8d9298",
+      "surface": "#151921",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "檀健次",
+      "舞台戏剧",
+      "深海盐蓝调",
+      "檀健次_舞台薄纱飘逸_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-e257af8390d0",
+    "name": "檀健次 · 蓝色沙发微笑",
+    "background": "asset://predicted-e257af8390d0.webp",
+    "preview": "asset://predicted-e257af8390d0.webp",
+    "colors": {
+      "accent": "#161f2e",
+      "surface": "#efeff0",
+      "text": "#131720"
+    },
+    "colorsDark": {
+      "accent": "#616771",
+      "surface": "#0c1019",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "檀健次",
+      "都市人像",
+      "海盐蓝调",
+      "檀健次_蓝色沙发微笑_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-857b841756e0",
+    "name": "檀健次 · 运动休闲套装",
+    "background": "asset://predicted-857b841756e0.webp",
+    "preview": "asset://predicted-857b841756e0.webp",
+    "colors": {
+      "accent": "#525a63",
+      "surface": "#f3f3f4",
+      "text": "#1b2028"
+    },
+    "colorsDark": {
+      "accent": "#898f95",
+      "surface": "#141921",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "檀健次",
+      "清新自然",
+      "深海盐蓝调",
+      "檀健次_运动休闲套装_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-e10f568e35dd",
+    "name": "檀健次 · 银发古风仙侠",
+    "background": "asset://predicted-e10f568e35dd.webp",
+    "preview": "asset://predicted-e10f568e35dd.webp",
+    "colors": {
+      "accent": "#d4d3d4",
+      "surface": "#fcfcfc",
+      "text": "#2d3037"
+    },
+    "colorsDark": {
+      "accent": "#e2e1e2",
+      "surface": "#262a31",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深樱粉玫调",
+    "tags": [
+      "檀健次",
+      "东方古韵",
+      "深樱粉玫调",
+      "檀健次_银发古风仙侠_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-aea049f09e61",
+    "name": "檀健次 · 霓虹夜景都市",
+    "background": "asset://predicted-aea049f09e61.webp",
+    "preview": "asset://predicted-aea049f09e61.webp",
+    "colors": {
+      "accent": "#657785",
+      "surface": "#f4f5f6",
+      "text": "#1e242c"
+    },
+    "colorsDark": {
+      "accent": "#96a3ac",
+      "surface": "#171d26",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "檀健次",
+      "暗夜科技",
+      "深海盐蓝调",
+      "檀健次_霓虹夜景都市_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-ab6f6196e214",
+    "name": "檀健次 · 黑色皮衣酷帅",
+    "background": "asset://predicted-ab6f6196e214.webp",
+    "preview": "asset://predicted-ab6f6196e214.webp",
+    "colors": {
+      "accent": "#07060a",
+      "surface": "#eeeeee",
+      "text": "#10141b"
+    },
+    "colorsDark": {
+      "accent": "#565658",
+      "surface": "#0a0d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "檀健次",
+      "暗夜科技",
+      "黑白灰阶",
+      "檀健次_黑色皮衣酷帅_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-73ad9ea17c9c",
+    "name": "檀健次 · 黑西装清冷贵气",
+    "background": "asset://predicted-73ad9ea17c9c.webp",
+    "preview": "asset://predicted-73ad9ea17c9c.webp",
+    "colors": {
+      "accent": "#02040b",
+      "surface": "#ededee",
+      "text": "#10131b"
+    },
+    "colorsDark": {
+      "accent": "#535459",
+      "surface": "#090d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "雾灰中性",
+    "tags": [
+      "檀健次",
+      "暗夜科技",
+      "雾灰中性",
+      "檀健次_黑西装清冷贵气_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-16d88ee201eb",
+    "name": "田曦薇 · 风格01 · 蓝色妖姬冷艳",
+    "background": "asset://predicted-16d88ee201eb.webp",
+    "preview": "asset://predicted-16d88ee201eb.webp",
+    "colors": {
+      "accent": "#354c6d",
+      "surface": "#f1f2f5",
+      "text": "#171e29"
+    },
+    "colorsDark": {
+      "accent": "#76859c",
+      "surface": "#101722",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "stardust",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "田曦薇",
+      "奇幻梦境",
+      "海盐蓝调",
+      "田曦薇_风格01_蓝色妖姬冷艳"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-adb6ff64dedb",
+    "name": "田曦薇 · 风格02 · 甜酷西装",
+    "background": "asset://predicted-adb6ff64dedb.webp",
+    "preview": "asset://predicted-adb6ff64dedb.webp",
+    "colors": {
+      "accent": "#8c949e",
+      "surface": "#f7f8f8",
+      "text": "#232830"
+    },
+    "colorsDark": {
+      "accent": "#b1b6bd",
+      "surface": "#1c2129",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "田曦薇",
+      "街头潮酷",
+      "深海盐蓝调",
+      "田曦薇_风格02_甜酷西装"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-a4c0ca6c6e96",
+    "name": "田曦薇 · 风格03 · 梦幻花仙子",
+    "background": "asset://predicted-a4c0ca6c6e96.webp",
+    "preview": "asset://predicted-a4c0ca6c6e96.webp",
+    "colors": {
+      "accent": "#cbbdd9",
+      "surface": "#fbfafc",
+      "text": "#2c2d38"
+    },
+    "colorsDark": {
+      "accent": "#dcd2e5",
+      "surface": "#252631",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "stardust",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "深暮色紫调",
+    "tags": [
+      "田曦薇",
+      "奇幻梦境",
+      "深暮色紫调",
+      "田曦薇_风格03_梦幻花仙子"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-26d55133a17b",
+    "name": "田曦薇 · 风格04 · 二次元漫撕风",
+    "background": "asset://predicted-26d55133a17b.webp",
+    "preview": "asset://predicted-26d55133a17b.webp",
+    "colors": {
+      "accent": "#e7c3cb",
+      "surface": "#fdfbfb",
+      "text": "#302e36"
+    },
+    "colorsDark": {
+      "accent": "#efd6dc",
+      "surface": "#29272f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "stardust",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "田曦薇",
+      "奇幻梦境",
+      "赤红暖调",
+      "田曦薇_风格04_二次元漫撕风"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-121e08e65d93",
+    "name": "田曦薇 · 风格05 · 戏剧红毯",
+    "background": "asset://predicted-121e08e65d93.webp",
+    "preview": "asset://predicted-121e08e65d93.webp",
+    "colors": {
+      "accent": "#8f706d",
+      "surface": "#f7f5f5",
+      "text": "#242329"
+    },
+    "colorsDark": {
+      "accent": "#b39e9c",
+      "surface": "#1d1c22",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深赤红暖调",
+    "tags": [
+      "田曦薇",
+      "舞台戏剧",
+      "深赤红暖调",
+      "田曦薇_风格05_戏剧红毯"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-3e5e581dfb6d",
+    "name": "白鹿 · 风格01 · 优雅红毯礼服",
+    "background": "asset://predicted-3e5e581dfb6d.webp",
+    "preview": "asset://predicted-3e5e581dfb6d.webp",
+    "colors": {
+      "accent": "#ceb5ad",
+      "surface": "#fcfaf9",
+      "text": "#2c2c32"
+    },
+    "colorsDark": {
+      "accent": "#decdc7",
+      "surface": "#25252b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深赤红暖调",
+    "tags": [
+      "白鹿",
+      "舞台戏剧",
+      "深赤红暖调",
+      "白鹿_风格01_优雅红毯礼服"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-1b16a822a10d",
+    "name": "白鹿 · 风格02 · 杂志前卫造型",
+    "background": "asset://predicted-1b16a822a10d.webp",
+    "preview": "asset://predicted-1b16a822a10d.webp",
+    "colors": {
+      "accent": "#111a26",
+      "surface": "#eeeff0",
+      "text": "#12171f"
+    },
+    "colorsDark": {
+      "accent": "#5d636b",
+      "surface": "#0b1018",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "雾灰中性",
+    "tags": [
+      "白鹿",
+      "街头潮酷",
+      "雾灰中性",
+      "白鹿_风格02_杂志前卫造型"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-6bebbbfbadbb",
+    "name": "白鹿 · 风格03 · 街头飞行员夹克",
+    "background": "asset://predicted-6bebbbfbadbb.webp",
+    "preview": "asset://predicted-6bebbbfbadbb.webp",
+    "colors": {
+      "accent": "#040507",
+      "surface": "#edeeee",
+      "text": "#10141b"
+    },
+    "colorsDark": {
+      "accent": "#545556",
+      "surface": "#090d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "白鹿",
+      "街头潮酷",
+      "黑白灰阶",
+      "白鹿_风格03_街头飞行员夹克"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-81d29bd2af71",
+    "name": "白鹿 · 风格04 · 皮夹克酷飒",
+    "background": "asset://predicted-81d29bd2af71.webp",
+    "preview": "asset://predicted-81d29bd2af71.webp",
+    "colors": {
+      "accent": "#09080f",
+      "surface": "#eeeeee",
+      "text": "#11141c"
+    },
+    "colorsDark": {
+      "accent": "#58575c",
+      "surface": "#0a0d15",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "白鹿",
+      "街头潮酷",
+      "黑白灰阶",
+      "白鹿_风格04_皮夹克酷飒"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-eb5f9d5188f3",
+    "name": "白鹿 · 风格05 · 春日梦幻少女",
+    "background": "asset://predicted-eb5f9d5188f3.webp",
+    "preview": "asset://predicted-eb5f9d5188f3.webp",
+    "colors": {
+      "accent": "#d3beb0",
+      "surface": "#fcfaf9",
+      "text": "#2d2e32"
+    },
+    "colorsDark": {
+      "accent": "#e1d3c9",
+      "surface": "#26272c",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "白鹿",
+      "奇幻梦境",
+      "深琥珀橙调",
+      "白鹿_风格05_春日梦幻少女"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-809999c69344",
+    "name": "章若楠 · 风格01 · 花园优雅文艺",
+    "background": "asset://predicted-809999c69344.webp",
+    "preview": "asset://predicted-809999c69344.webp",
+    "colors": {
+      "accent": "#69745c",
+      "surface": "#f4f5f4",
+      "text": "#1e2327"
+    },
+    "colorsDark": {
+      "accent": "#99a090",
+      "surface": "#171c20",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深森系绿调",
+    "tags": [
+      "章若楠",
+      "清新自然",
+      "深森系绿调",
+      "章若楠_风格01_花园优雅文艺"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-b2cd1b9a3536",
+    "name": "章若楠 · 风格02 · 精致盘发露肩",
+    "background": "asset://predicted-b2cd1b9a3536.webp",
+    "preview": "asset://predicted-b2cd1b9a3536.webp",
+    "colors": {
+      "accent": "#bfc2c8",
+      "surface": "#fbfbfb",
+      "text": "#2a2e36"
+    },
+    "colorsDark": {
+      "accent": "#d3d6da",
+      "surface": "#23272f",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "章若楠",
+      "都市人像",
+      "深海盐蓝调",
+      "章若楠_风格02_精致盘发露肩"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-d9ef68c45aba",
+    "name": "章若楠 · 风格03 · 复古港风",
+    "background": "asset://predicted-d9ef68c45aba.webp",
+    "preview": "asset://predicted-d9ef68c45aba.webp",
+    "colors": {
+      "accent": "#624729",
+      "surface": "#f4f2f0",
+      "text": "#1d1d20"
+    },
+    "colorsDark": {
+      "accent": "#94826d",
+      "surface": "#161619",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 48,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "章若楠",
+      "都市人像",
+      "琥珀橙调",
+      "章若楠_风格03_复古港风"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-27360ff91238",
+    "name": "章若楠 · 风格04 · 休闲松弛街拍",
+    "background": "asset://predicted-27360ff91238.webp",
+    "preview": "asset://predicted-27360ff91238.webp",
+    "colors": {
+      "accent": "#969ca1",
+      "surface": "#f8f8f8",
+      "text": "#242930"
+    },
+    "colorsDark": {
+      "accent": "#b8bcbf",
+      "surface": "#1e2229",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "章若楠",
+      "温柔日常",
+      "深海盐蓝调",
+      "章若楠_风格04_休闲松弛街拍"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-c07f3498ead9",
+    "name": "章若楠 · 风格05 · 运动甜酷",
+    "background": "asset://predicted-c07f3498ead9.webp",
+    "preview": "asset://predicted-c07f3498ead9.webp",
+    "colors": {
+      "accent": "#edf1f4",
+      "surface": "#fefefe",
+      "text": "#31353c"
+    },
+    "colorsDark": {
+      "accent": "#f3f5f8",
+      "surface": "#2a2e35",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "章若楠",
+      "街头潮酷",
+      "深海盐蓝调",
+      "章若楠_风格05_运动甜酷"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-af91dd7b83a5",
+    "name": "蔡徐坤 · 樱花 · 仰望樱花",
+    "background": "asset://predicted-af91dd7b83a5.webp",
+    "preview": "asset://predicted-af91dd7b83a5.webp",
+    "colors": {
+      "accent": "#e9dbd8",
+      "surface": "#fdfcfc",
+      "text": "#303238"
+    },
+    "colorsDark": {
+      "accent": "#f0e7e4",
+      "surface": "#292b31",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深赤红暖调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深赤红暖调",
+      "蔡徐坤_Codeyes樱花背景_仰望樱花"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-8bb47921ff17",
+    "name": "蔡徐坤 · 樱花 · 低头闻花",
+    "background": "asset://predicted-8bb47921ff17.webp",
+    "preview": "asset://predicted-8bb47921ff17.webp",
+    "colors": {
+      "accent": "#dcc8bf",
+      "surface": "#fdfbfb",
+      "text": "#2e2f35"
+    },
+    "colorsDark": {
+      "accent": "#e7dad3",
+      "surface": "#27282e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_低头闻花"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-bd5a149d52d1",
+    "name": "蔡徐坤 · 樱花 · 侧身站立",
+    "background": "asset://predicted-bd5a149d52d1.webp",
+    "preview": "asset://predicted-bd5a149d52d1.webp",
+    "colors": {
+      "accent": "#d5bfb2",
+      "surface": "#fcfbfa",
+      "text": "#2d2e33"
+    },
+    "colorsDark": {
+      "accent": "#e2d3cb",
+      "surface": "#26272c",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_侧身站立"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-02c4be55e049",
+    "name": "蔡徐坤 · 樱花 · 手持咖啡",
+    "background": "asset://predicted-02c4be55e049.webp",
+    "preview": "asset://predicted-02c4be55e049.webp",
+    "colors": {
+      "accent": "#ebe2de",
+      "surface": "#fefdfd",
+      "text": "#303339"
+    },
+    "colorsDark": {
+      "accent": "#f1ebe9",
+      "surface": "#2a2c32",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_手持咖啡"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-9d31184dcbea",
+    "name": "蔡徐坤 · 樱花 · 正面微笑",
+    "background": "asset://predicted-9d31184dcbea.webp",
+    "preview": "asset://predicted-9d31184dcbea.webp",
+    "colors": {
+      "accent": "#eee1da",
+      "surface": "#fefdfc",
+      "text": "#313238"
+    },
+    "colorsDark": {
+      "accent": "#f3ebe6",
+      "surface": "#2a2c31",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_正面微笑"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-ce7d1e4d31ea",
+    "name": "蔡徐坤 · 樱花 · 轻靠树干",
+    "background": "asset://predicted-ce7d1e4d31ea.webp",
+    "preview": "asset://predicted-ce7d1e4d31ea.webp",
+    "colors": {
+      "accent": "#cfc1a5",
+      "surface": "#fcfbf9",
+      "text": "#2c2e31"
+    },
+    "colorsDark": {
+      "accent": "#ded5c2",
+      "surface": "#26272a",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_轻靠树干"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-b7fc9399be1e",
+    "name": "蔡徐坤 · 樱花 · 逆光侧脸",
+    "background": "asset://predicted-b7fc9399be1e.webp",
+    "preview": "asset://predicted-b7fc9399be1e.webp",
+    "colors": {
+      "accent": "#e4d7cd",
+      "surface": "#fdfcfc",
+      "text": "#2f3136"
+    },
+    "colorsDark": {
+      "accent": "#ede4dd",
+      "surface": "#292a30",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_Codeyes樱花背景_逆光侧脸"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-0f285b3bf672",
+    "name": "蔡徐坤 · 樱花 · 野餐坐姿",
+    "background": "asset://predicted-0f285b3bf672.webp",
+    "preview": "asset://predicted-0f285b3bf672.webp",
+    "colors": {
+      "accent": "#e2ecf3",
+      "surface": "#fdfefe",
+      "text": "#2f343c"
+    },
+    "colorsDark": {
+      "accent": "#ebf2f7",
+      "surface": "#282d35",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "sakura",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "海盐蓝调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "海盐蓝调",
+      "蔡徐坤_Codeyes樱花背景_野餐坐姿"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-1b2e759342a8",
+    "name": "蔡徐坤 · Versace丝质印花衬衫",
+    "background": "asset://predicted-1b2e759342a8.webp",
+    "preview": "asset://predicted-1b2e759342a8.webp",
+    "colors": {
+      "accent": "#c2bebb",
+      "surface": "#fbfafa",
+      "text": "#2b2e34"
+    },
+    "colorsDark": {
+      "accent": "#d6d3d1",
+      "surface": "#24272d",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "杂志时装",
+      "深琥珀橙调",
+      "蔡徐坤_Versace丝质印花衬衫_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-f5d93a74d51d",
+    "name": "蔡徐坤 · 暗黑摇滚风",
+    "background": "asset://predicted-f5d93a74d51d.webp",
+    "preview": "asset://predicted-f5d93a74d51d.webp",
+    "colors": {
+      "accent": "#1e1111",
+      "surface": "#efeeee",
+      "text": "#14151c"
+    },
+    "colorsDark": {
+      "accent": "#665d5d",
+      "surface": "#0d0e15",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "蔡徐坤",
+      "暗夜科技",
+      "黑白灰阶",
+      "蔡徐坤_暗黑摇滚风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-51e9dc0ea22e",
+    "name": "蔡徐坤 · 极简贵气黑西装",
+    "background": "asset://predicted-51e9dc0ea22e.webp",
+    "preview": "asset://predicted-51e9dc0ea22e.webp",
+    "colors": {
+      "accent": "#a29e9b",
+      "surface": "#f8f8f8",
+      "text": "#262930"
+    },
+    "colorsDark": {
+      "accent": "#c0bdbb",
+      "surface": "#1f2229",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "暗夜科技",
+      "深琥珀橙调",
+      "蔡徐坤_极简贵气黑西装_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-885d80ca42a3",
+    "name": "蔡徐坤 · 浅绿挑染灯芯绒夹克",
+    "background": "asset://predicted-885d80ca42a3.webp",
+    "preview": "asset://predicted-885d80ca42a3.webp",
+    "colors": {
+      "accent": "#cebba8",
+      "surface": "#fcfaf9",
+      "text": "#2c2d31"
+    },
+    "colorsDark": {
+      "accent": "#ded1c4",
+      "surface": "#25262a",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "都市人像",
+      "深琥珀橙调",
+      "蔡徐坤_浅绿挑染灯芯绒夹克_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-de822ec34e80",
+    "name": "蔡徐坤 · 浅金发杂志封面",
+    "background": "asset://predicted-de822ec34e80.webp",
+    "preview": "asset://predicted-de822ec34e80.webp",
+    "colors": {
+      "accent": "#040910",
+      "surface": "#edeeee",
+      "text": "#10141c"
+    },
+    "colorsDark": {
+      "accent": "#54585c",
+      "surface": "#090d15",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "雾灰中性",
+    "tags": [
+      "蔡徐坤",
+      "杂志时装",
+      "雾灰中性",
+      "蔡徐坤_浅金发杂志封面_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-1f18b0bfde55",
+    "name": "蔡徐坤 · 温暖森系PORT港口",
+    "background": "asset://predicted-1f18b0bfde55.webp",
+    "preview": "asset://predicted-1f18b0bfde55.webp",
+    "colors": {
+      "accent": "#aba69e",
+      "surface": "#f9f9f8",
+      "text": "#272a30"
+    },
+    "colorsDark": {
+      "accent": "#c6c2bd",
+      "surface": "#212329",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "清新自然",
+      "深琥珀橙调",
+      "蔡徐坤_温暖森系PORT港口_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-efa867f72e1e",
+    "name": "蔡徐坤 · 硬汉熟男风",
+    "background": "asset://predicted-efa867f72e1e.webp",
+    "preview": "asset://predicted-efa867f72e1e.webp",
+    "colors": {
+      "accent": "#78756e",
+      "surface": "#f6f5f5",
+      "text": "#202329"
+    },
+    "colorsDark": {
+      "accent": "#a3a19c",
+      "surface": "#191c22",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "都市人像",
+      "深琥珀橙调",
+      "蔡徐坤_硬汉熟男风_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-4afcf3d5c9fe",
+    "name": "蔡徐坤 · 舞台白色中山装",
+    "background": "asset://predicted-4afcf3d5c9fe.webp",
+    "preview": "asset://predicted-4afcf3d5c9fe.webp",
+    "colors": {
+      "accent": "#7e7f86",
+      "surface": "#f6f6f7",
+      "text": "#21252d"
+    },
+    "colorsDark": {
+      "accent": "#a7a8ad",
+      "surface": "#1a1e26",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "蔡徐坤",
+      "东方古韵",
+      "深海盐蓝调",
+      "蔡徐坤_舞台白色中山装_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-73203ec1ce2f",
+    "name": "蔡徐坤 · 蓝发杂志撕漫男",
+    "background": "asset://predicted-73203ec1ce2f.webp",
+    "preview": "asset://predicted-73203ec1ce2f.webp",
+    "colors": {
+      "accent": "#2b3c52",
+      "surface": "#f0f1f3",
+      "text": "#161b25"
+    },
+    "colorsDark": {
+      "accent": "#6f7a89",
+      "surface": "#0f141e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "杂志时装",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "蔡徐坤",
+      "杂志时装",
+      "深海盐蓝调",
+      "蔡徐坤_蓝发杂志撕漫男_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-34a3971940c4",
+    "name": "蔡徐坤 · 蓝黄波浪开衫",
+    "background": "asset://predicted-34a3971940c4.webp",
+    "preview": "asset://predicted-34a3971940c4.webp",
+    "colors": {
+      "accent": "#9e7642",
+      "surface": "#f8f5f2",
+      "text": "#262323"
+    },
+    "colorsDark": {
+      "accent": "#bda27e",
+      "surface": "#1f1d1c",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "都市人像",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "都市人像",
+      "琥珀橙调",
+      "蔡徐坤_蓝黄波浪开衫_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-56a0549641a6",
+    "name": "蔡徐坤 · 财阀贵公子西装短裤",
+    "background": "asset://predicted-56a0549641a6.webp",
+    "preview": "asset://predicted-56a0549641a6.webp",
+    "colors": {
+      "accent": "#d7c3af",
+      "surface": "#fcfbf9",
+      "text": "#2e2e32"
+    },
+    "colorsDark": {
+      "accent": "#e4d6c9",
+      "surface": "#27272b",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "商务雅致",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "商务雅致",
+      "琥珀橙调",
+      "蔡徐坤_财阀贵公子西装短裤_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-a6a5dc83f55b",
+    "name": "蔡徐坤 · 邻家大男孩日常",
+    "background": "asset://predicted-a6a5dc83f55b.webp",
+    "preview": "asset://predicted-a6a5dc83f55b.webp",
+    "colors": {
+      "accent": "#8f8f82",
+      "surface": "#f7f7f6",
+      "text": "#24272c"
+    },
+    "colorsDark": {
+      "accent": "#b3b3aa",
+      "surface": "#1d2025",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深鎏金黄调",
+    "tags": [
+      "蔡徐坤",
+      "温柔日常",
+      "深鎏金黄调",
+      "蔡徐坤_邻家大男孩日常_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-3561c24218cb",
+    "name": "蔡徐坤 · 高街潮酷bomber",
+    "background": "asset://predicted-3561c24218cb.webp",
+    "preview": "asset://predicted-3561c24218cb.webp",
+    "colors": {
+      "accent": "#b8c9da",
+      "surface": "#fafbfc",
+      "text": "#292f38"
+    },
+    "colorsDark": {
+      "accent": "#cfdae6",
+      "surface": "#222831",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "蔡徐坤",
+      "街头潮酷",
+      "深海盐蓝调",
+      "蔡徐坤_高街潮酷bomber_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-e286442a7cd2",
+    "name": "蔡徐坤 · 黑白花衬衫皮手套",
+    "background": "asset://predicted-e286442a7cd2.webp",
+    "preview": "asset://predicted-e286442a7cd2.webp",
+    "colors": {
+      "accent": "#7f6e61",
+      "surface": "#f6f5f4",
+      "text": "#212227"
+    },
+    "colorsDark": {
+      "accent": "#a89c94",
+      "surface": "#1a1b20",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "蔡徐坤",
+      "暗夜科技",
+      "深琥珀橙调",
+      "蔡徐坤_黑白花衬衫皮手套_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-c0eab03bea8d",
+    "name": "蔡徐坤 · 黑色泼墨长外套",
+    "background": "asset://predicted-c0eab03bea8d.webp",
+    "preview": "asset://predicted-c0eab03bea8d.webp",
+    "colors": {
+      "accent": "#05070a",
+      "surface": "#eeeeee",
+      "text": "#10141b"
+    },
+    "colorsDark": {
+      "accent": "#555658",
+      "surface": "#090d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "neon",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "暗夜科技",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "蔡徐坤",
+      "暗夜科技",
+      "黑白灰阶",
+      "蔡徐坤_黑色泼墨长外套_Codeyes背景"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-7c0dc40c1f38",
+    "name": "虞书欣 · 风格01 · 鎏金紧身裙",
+    "background": "asset://predicted-7c0dc40c1f38.webp",
+    "preview": "asset://predicted-7c0dc40c1f38.webp",
+    "colors": {
+      "accent": "#552c15",
+      "surface": "#f3f0ef",
+      "text": "#1b191d"
+    },
+    "colorsDark": {
+      "accent": "#8b7060",
+      "surface": "#141216",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 48,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "琥珀橙调",
+    "tags": [
+      "虞书欣",
+      "舞台戏剧",
+      "琥珀橙调",
+      "虞书欣_风格01_鎏金紧身裙"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-25c09a5b901c",
+    "name": "虞书欣 · 风格02 · 新中式优雅",
+    "background": "asset://predicted-25c09a5b901c.webp",
+    "preview": "asset://predicted-25c09a5b901c.webp",
+    "colors": {
+      "accent": "#929188",
+      "surface": "#f7f7f7",
+      "text": "#24272d"
+    },
+    "colorsDark": {
+      "accent": "#b5b4ae",
+      "surface": "#1d2026",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深鎏金黄调",
+    "tags": [
+      "虞书欣",
+      "东方古韵",
+      "深鎏金黄调",
+      "虞书欣_风格02_新中式优雅"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-d3fce6de7d66",
+    "name": "虞书欣 · 风格03 · 千禧甜辣",
+    "background": "asset://predicted-d3fce6de7d66.webp",
+    "preview": "asset://predicted-d3fce6de7d66.webp",
+    "colors": {
+      "accent": "#a97fa8",
+      "surface": "#f9f6f9",
+      "text": "#272531"
+    },
+    "colorsDark": {
+      "accent": "#c5a8c4",
+      "surface": "#201e2a",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深樱粉玫调",
+    "tags": [
+      "虞书欣",
+      "街头潮酷",
+      "深樱粉玫调",
+      "虞书欣_风格03_千禧甜辣"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-6f5a8ff579a2",
+    "name": "虞书欣 · 风格04 · 大露背性感",
+    "background": "asset://predicted-6f5a8ff579a2.webp",
+    "preview": "asset://predicted-6f5a8ff579a2.webp",
+    "colors": {
+      "accent": "#11090a",
+      "surface": "#eeeeee",
+      "text": "#12141b"
+    },
+    "colorsDark": {
+      "accent": "#5d5858",
+      "surface": "#0b0d14",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "黑白灰阶",
+    "tags": [
+      "虞书欣",
+      "舞台戏剧",
+      "黑白灰阶",
+      "虞书欣_风格04_大露背性感"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-5afaf6c99511",
+    "name": "虞书欣 · 风格05 · 复古休闲街拍",
+    "background": "asset://predicted-5afaf6c99511.webp",
+    "preview": "asset://predicted-5afaf6c99511.webp",
+    "colors": {
+      "accent": "#8d8984",
+      "surface": "#f7f7f6",
+      "text": "#23262c"
+    },
+    "colorsDark": {
+      "accent": "#b1afab",
+      "surface": "#1c1f25",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "虞书欣",
+      "温柔日常",
+      "深琥珀橙调",
+      "虞书欣_风格05_复古休闲街拍"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-deb4d79769ce",
+    "name": "赵露思 · 风格01 · 清新短发白裙",
+    "background": "asset://predicted-deb4d79769ce.webp",
+    "preview": "asset://predicted-deb4d79769ce.webp",
+    "colors": {
+      "accent": "#ded46d",
+      "surface": "#fdfcf5",
+      "text": "#2f3129"
+    },
+    "colorsDark": {
+      "accent": "#e9e29c",
+      "surface": "#282a22",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "鎏金黄调",
+    "tags": [
+      "赵露思",
+      "清新自然",
+      "鎏金黄调",
+      "赵露思_风格01_清新短发白裙"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-c73aa9fe5426",
+    "name": "赵露思 · 风格02 · 甜美粉色抹胸",
+    "background": "asset://predicted-c73aa9fe5426.webp",
+    "preview": "asset://predicted-c73aa9fe5426.webp",
+    "colors": {
+      "accent": "#e6bcbe",
+      "surface": "#fdfafa",
+      "text": "#302d34"
+    },
+    "colorsDark": {
+      "accent": "#eed1d3",
+      "surface": "#29262e",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "温柔日常",
+    "paletteLabel": "赤红暖调",
+    "tags": [
+      "赵露思",
+      "温柔日常",
+      "赤红暖调",
+      "赵露思_风格02_甜美粉色抹胸"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-85cce647a2cd",
+    "name": "赵露思 · 风格03 · 甜酷Y2K",
+    "background": "asset://predicted-85cce647a2cd.webp",
+    "preview": "asset://predicted-85cce647a2cd.webp",
+    "colors": {
+      "accent": "#9d7da8",
+      "surface": "#f8f6f9",
+      "text": "#252431"
+    },
+    "colorsDark": {
+      "accent": "#bca7c4",
+      "surface": "#1f1e2a",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "深暮色紫调",
+    "tags": [
+      "赵露思",
+      "街头潮酷",
+      "深暮色紫调",
+      "赵露思_风格03_甜酷Y2K"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-1fa476b658ff",
+    "name": "赵露思 · 风格04 · 性感都市黑亮片",
+    "background": "asset://predicted-1fa476b658ff.webp",
+    "preview": "asset://predicted-1fa476b658ff.webp",
+    "colors": {
+      "accent": "#575c69",
+      "surface": "#f3f4f4",
+      "text": "#1c2028"
+    },
+    "colorsDark": {
+      "accent": "#8d9099",
+      "surface": "#151922",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "赵露思",
+      "舞台戏剧",
+      "深海盐蓝调",
+      "赵露思_风格04_性感都市黑亮片"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-d80e46278d3e",
+    "name": "赵露思 · 风格05 · 民族复古风",
+    "background": "asset://predicted-d80e46278d3e.webp",
+    "preview": "asset://predicted-d80e46278d3e.webp",
+    "colors": {
+      "accent": "#d4dee5",
+      "surface": "#fcfdfd",
+      "text": "#2d323a"
+    },
+    "colorsDark": {
+      "accent": "#e2e9ed",
+      "surface": "#262b33",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深海盐蓝调",
+    "tags": [
+      "赵露思",
+      "东方古韵",
+      "深海盐蓝调",
+      "赵露思_风格05_民族复古风"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-ea79e10af8fe",
+    "name": "鞠婧祎 · 风格01 · 梦幻公主风",
+    "background": "asset://predicted-ea79e10af8fe.webp",
+    "preview": "asset://predicted-ea79e10af8fe.webp",
+    "colors": {
+      "accent": "#d5c1ba",
+      "surface": "#fcfbfa",
+      "text": "#2d2e34"
+    },
+    "colorsDark": {
+      "accent": "#e2d5d0",
+      "surface": "#26272d",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "stardust",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "奇幻梦境",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "鞠婧祎",
+      "奇幻梦境",
+      "深琥珀橙调",
+      "鞠婧祎_风格01_梦幻公主风"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-7ae4635dccbb",
+    "name": "鞠婧祎 · 风格02 · Y2K千禧辣妹",
+    "background": "asset://predicted-7ae4635dccbb.webp",
+    "preview": "asset://predicted-7ae4635dccbb.webp",
+    "colors": {
+      "accent": "#483d7a",
+      "surface": "#f2f1f6",
+      "text": "#1a1b2b"
+    },
+    "colorsDark": {
+      "accent": "#837ba5",
+      "surface": "#131524",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "街头潮酷",
+    "paletteLabel": "暮色紫调",
+    "tags": [
+      "鞠婧祎",
+      "街头潮酷",
+      "暮色紫调",
+      "鞠婧祎_风格02_Y2K千禧辣妹"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-f53523c05938",
+    "name": "鞠婧祎 · 风格03 · 新中式古典",
+    "background": "asset://predicted-f53523c05938.webp",
+    "preview": "asset://predicted-f53523c05938.webp",
+    "colors": {
+      "accent": "#8b8782",
+      "surface": "#f7f7f6",
+      "text": "#23262c"
+    },
+    "colorsDark": {
+      "accent": "#b0adaa",
+      "surface": "#1c1f25",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "东方古韵",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "鞠婧祎",
+      "东方古韵",
+      "深琥珀橙调",
+      "鞠婧祎_风格03_新中式古典"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-a027c2d0e8a0",
+    "name": "鞠婧祎 · 风格04 · 暗夜红毯",
+    "background": "asset://predicted-a027c2d0e8a0.webp",
+    "preview": "asset://predicted-a027c2d0e8a0.webp",
+    "colors": {
+      "accent": "#c49f8f",
+      "surface": "#fbf8f7",
+      "text": "#2b292e"
+    },
+    "colorsDark": {
+      "accent": "#d7beb3",
+      "surface": "#242227",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "舞台戏剧",
+    "paletteLabel": "深琥珀橙调",
+    "tags": [
+      "鞠婧祎",
+      "舞台戏剧",
+      "深琥珀橙调",
+      "鞠婧祎_风格04_暗夜红毯"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  },
+  {
+    "schemaVersion": 3,
+    "id": "image-864186fed867",
+    "name": "鞠婧祎 · 风格05 · 日常森系法式",
+    "background": "asset://predicted-864186fed867.webp",
+    "preview": "asset://predicted-864186fed867.webp",
+    "colors": {
+      "accent": "#c4c39a",
+      "surface": "#fbfbf8",
+      "text": "#2b2e2f"
+    },
+    "colorsDark": {
+      "accent": "#d7d6ba",
+      "surface": "#242728",
+      "text": "#f5f7fb"
+    },
+    "layout": {
+      "x": 50,
+      "y": 50,
+      "veil": 58,
+      "sidebarOpacity": 48,
+      "veils": {
+        "content": 18,
+        "left": 8,
+        "bottom": 10
+      }
+    },
+    "shape": {
+      "radiusScale": 1.3,
+      "shadow": "default"
+    },
+    "effects": {
+      "scrollbar": "slim",
+      "particles": "none",
+      "motion": "default",
+      "typingFx": "none",
+      "listFx": "slide",
+      "bgMotion": "none",
+      "thinkingFx": "subtle"
+    },
+    "brand": {
+      "startupTint": true
+    },
+    "category": "清新自然",
+    "paletteLabel": "深鎏金黄调",
+    "tags": [
+      "鞠婧祎",
+      "清新自然",
+      "深鎏金黄调",
+      "鞠婧祎_风格05_日常森系法式"
+    ],
+    "predicted": true,
+    "createdAt": "2026-07-26T00:00:00.000Z"
+  }
+]
