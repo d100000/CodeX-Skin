@@ -61,9 +61,13 @@ test("rust commands are registered and mocked in browser bridge", async () => {
   }
 });
 
-test("studio topbar exposes the model view switch next to the brand", () => {
+test("studio topbar exposes the model view switch next to the brand", async () => {
   assert.match(appSource, /view-switch/, "顶栏必须有视图切换器");
   assert.match(appSource, /ModelPanel/, "必须挂载 ModelPanel");
   // 皮肤区在模型页下只隐藏不卸载，保住草稿与视频预览状态
   assert.match(appSource, /hidden=\{view !== "skin"\}/, "皮肤工作区应隐藏而非卸载");
+  // hidden 属性的 UA 样式 display:none 会被 .studio-layout 的 display:grid 压过，
+  // 必须有显式的 [hidden] 规则，否则点"模型"页面不会切换（真实踩过的坑）
+  const css = await readFile(new URL("../src/studio.css", import.meta.url), "utf8");
+  assert.match(css, /\.studio-layout\[hidden\]\s*\{\s*display:\s*none/, "缺少 .studio-layout[hidden] 显式隐藏规则");
 });

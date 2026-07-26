@@ -64,6 +64,9 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .top-actions .toggle-row small { display: none; }
 
 .studio-layout { min-width: 0; min-height: 0; display: grid; grid-template-columns: 260px minmax(520px, 1fr) 360px; overflow: hidden; }
+/* 切到模型页时皮肤区用 hidden 属性藏起来（不卸载，保住草稿/视频状态）。
+   author 样式的 display:grid 会压过 UA 的 [hidden]{display:none}，必须显式补回。 */
+.studio-layout[hidden] { display: none; }
 .library, .inspector { position: relative; z-index: 3; min-width: 0; min-height: 0; background: var(--studio-panel); }
 .library { display: grid; grid-template-rows: auto auto auto minmax(0, 1fr) auto; gap: 9px; padding: 14px 12px 12px; border-right: 1px solid var(--studio-border); }
 .panel-heading { height: 35px; display: flex; align-items: center; justify-content: space-between; padding: 0 2px; }
