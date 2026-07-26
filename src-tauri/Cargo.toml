@@ -22,3 +22,5 @@ tokio-tungstenite = { version = "0.28", features = ["rustls-tls-native-roots"] }
 futures-util = "0.3"
 rfd = "0.15"
 tauri-plugin-updater = "2"
+toml = "0.8"
+toml_edit = "0.22"

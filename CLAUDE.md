@@ -43,6 +43,8 @@ Legacy and shared implementation halves:
 
 Known injected element IDs shared across files (cli/cdp/theme-manager tests reference them): `codex-doll-skin-runtime` (base style), `codex-doll-theme-override`, `codex-doll-skin-menu` (trigger button), `codex-doll-skin-manager` (panel).
 
+4. **Model switcher** (`src-tauri/src/model_config.rs`, `src/ModelPanel.jsx`, `src/model-presets.js`): the 模型 view in the Studio topbar configures which LLM provider Codex uses, by editing `~/.codex/config.toml` + `auth.json` (the same files Codex CLI/desktop reads; mechanism borrowed from cc-switch). Ownership-sentinel rules, all test-enforced (`tests/model-config.test.mjs` + Rust unit tests): only the `[model_providers.aha-codex]` table and the three top-level routing keys (`model_provider`/`model`/`model_reasoning_effort`) are ever edited via `toml_edit` (comments and user content preserved); the MCP servers table must never appear in `model_config.rs`; writes are temp-file+rename atomic with pre-write TOML validation, snapshots to `~/.codex/backups-aha/`, and auth-fails-rolls-back-config; official OAuth login is backed up to `auth.json.aha-official.bak` before the first third-party switch and restored when switching back. Provider profiles (incl. API keys, 0600) live in App Support `model-providers.json`. Switching requires a Codex restart — the panel reuses `restart_codex`, after which the skin re-injects automatically. Presets in `model-presets.js` must never contain real keys (test-enforced).
+
 ## Conventions
 
 - Plain ESM `.mjs` with `node:` built-ins only — the installer/runtime must stay dependency-free because it runs on Codex's bundled Node.

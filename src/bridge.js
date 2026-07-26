@@ -3,6 +3,7 @@ import packageJson from "../package.json";
 
 export const isDesktop = Boolean(window.__TAURI_INTERNALS__);
 const FALLBACK_KEY = "doll-skin-studio-library-v1";
+const MODEL_FALLBACK_KEY = "doll-skin-studio-model-providers-v1";
 
 function browserExport(filename, payload) {
   const blob = new Blob([payload], { type: "application/json" });
@@ -50,7 +51,20 @@ const fallbacks = {
   restart_codex: async () => { throw new Error("桌面构建中才能重启 Codex"); },
   migrate_legacy_themes: async () => ({ themes: [], selectedId: null, error: null }),
   export_theme: async ({ filename, payload }) => browserExport(filename, payload),
-  open_data_folder: async () => { throw new Error("桌面构建中才能打开数据目录"); }
+  open_data_folder: async () => { throw new Error("桌面构建中才能打开数据目录"); },
+  load_model_providers: async () => {
+    try {
+      return JSON.parse(localStorage.getItem(MODEL_FALLBACK_KEY) || '{"activeId":null,"providers":[]}');
+    } catch {
+      return { activeId: null, providers: [] };
+    }
+  },
+  save_model_providers: async ({ payload }) => localStorage.setItem(MODEL_FALLBACK_KEY, JSON.stringify(payload)),
+  read_live_model_config: async () => ({
+    provider: null, providerName: null, baseUrl: null, wireApi: null,
+    model: null, reasoningEffort: null, authMode: "none", apiKey: null, managed: false
+  }),
+  apply_model_provider: async () => { throw new Error("桌面构建中才能写入 Codex 配置"); }
 };
 
 export async function call(command, args = {}) {

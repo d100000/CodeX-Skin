@@ -1,3 +1,5 @@
+mod model_config;
+
 use futures_util::{SinkExt, StreamExt};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -801,7 +803,11 @@ pub fn run() {
             load_library,
             save_library,
             export_theme,
-            open_data_folder
+            open_data_folder,
+            model_config::load_model_providers,
+            model_config::save_model_providers,
+            model_config::read_live_model_config,
+            model_config::apply_model_provider
         ])
         .setup(|app| {
             let show = MenuItem::with_id(app, "show", "打开 aha-codex", true, None::<&str>)?;

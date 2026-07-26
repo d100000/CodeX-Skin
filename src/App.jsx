@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import packageJson from "../package.json";
 import {
+  BrainCircuit,
   Check,
   ChevronDown,
   CircleAlert,
@@ -35,6 +36,7 @@ import {
   X,
 } from "lucide-react";
 import { call, isDesktop } from "./bridge";
+import ModelPanel from "./ModelPanel";
 import { hydrateThemeAssets, loadBuiltinThemes } from "./presets";
 import {
   ANSI_KEYS,
@@ -528,6 +530,7 @@ function App() {
   const [toast, setToast] = useState(null);
   const [menuThemeId, setMenuThemeId] = useState(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [view, setView] = useState("skin"); // skin = 焕肤工作区 / model = Codex 大模型供应商切换
   const [confirmRestart, setConfirmRestart] = useState(false);
   const [pendingTheme, setPendingTheme] = useState(null);
   const [updateOpen, setUpdateOpen] = useState(false);
@@ -968,6 +971,10 @@ function App() {
     <div className="studio-app">
       <header className="studio-topbar">
         <div className="app-brand"><span><WandSparkles size={19} /></span><div><strong>aha-codex <em className={updateState.available ? "app-version has-update" : "app-version"}>v{displayedVersion}</em></strong><small>独立皮肤创作与控制</small></div></div>
+        <nav className="view-switch" aria-label="功能切换">
+          <button className={view === "skin" ? "active" : ""} onClick={() => setView("skin")}><Palette size={15} />焕肤</button>
+          <button className={view === "model" ? "active" : ""} onClick={() => setView("model")}><BrainCircuit size={15} />模型</button>
+        </nav>
         <div className="connection-summary"><StatusBadge status={status} onClick={() => setSettingsOpen(true)} /><span>{status.message}</span></div>
         <div className="top-actions">
           <Toggle checked={settings.livePreview} onChange={(value) => setSetting("livePreview", value)} label="实时预览" />
@@ -979,7 +986,9 @@ function App() {
         </div>
       </header>
 
-      <main className="studio-layout">
+      {view === "model" && <ModelPanel status={status} notify={notify} restartCodex={restart} />}
+
+      <main className="studio-layout" hidden={view !== "skin"}>
         <aside className="library">
           <div className="panel-heading"><div><strong>皮肤库</strong><small>{filtered.length === themes.length ? `${themes.length} 套主题` : `${filtered.length} / ${themes.length}`}</small></div><IconButton label="新建图片皮肤" onClick={() => backgroundRef.current?.click()}><Plus size={17} /></IconButton></div>
           <label className="search-box"><Search size={15} /><input type="search" placeholder="搜索皮肤" value={query} onChange={(event) => setQuery(event.target.value)} />{query && <button onClick={() => setQuery("")} aria-label="清除搜索"><X size={14} /></button>}</label>
