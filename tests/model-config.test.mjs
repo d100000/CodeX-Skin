@@ -44,8 +44,11 @@ test("rust writer follows atomic-write + sentinel ownership rules", () => {
   assert.match(rustSource, /config\.toml 已回滚/, "auth 写失败必须回滚 config");
   // 官方登录保护
   assert.match(rustSource, /OFFICIAL_AUTH_BACKUP/, "覆盖官方登录前必须备份");
-  // 绝不写入 mcp_servers（cc-switch 的教训：孤儿配置复活）
-  assert.ok(!/mcp_servers/.test(rustSource), "模型切换器不允许触碰 [mcp_servers]");
+  // 绝不写入 mcp_servers（cc-switch 的教训：孤儿配置复活）。
+  // 只检查生产代码——#[cfg(test)] 里的夹具恰恰要用这个表名来验证"原样保留"。
+  const productionSource = rustSource.split("#[cfg(test)]")[0];
+  assert.ok(!/mcp_servers/.test(productionSource), "模型切换器生产代码不允许触碰 MCP 服务器表");
+  assert.match(rustSource, /#\[cfg\(test\)\]/, "写入逻辑必须带 Rust 单元测试");
   // Key 文件权限收紧
   assert.match(rustSource, /0o600/, "落盘文件必须 0600");
 });
