@@ -4,12 +4,17 @@
 
 ## 下载安装
 
-当前版本 **v0.4.0**（Apple Silicon macOS）：
+当前版本 **v0.4.0**（Apple Silicon macOS）。
 
-1. 从 [GitHub Releases](https://github.com/d100000/CodeX-Skin/releases/latest) 下载 `aha-codex_0.4.0_aarch64.dmg`。
-2. 双击 DMG，把 **aha-codex** 拖入“应用程序”。
-3. 首次打开时右键 → “打开”（应用未经 Apple 公证，Gatekeeper 会提示一次）。
-4. 之后无需手动升级：应用启动时自动检查 GitHub Release，有新版本会提示一键更新并重启。
+**推荐：一行命令安装**（自动下载最新版、安装到“应用程序”并直接启动，无需右键绕过 Gatekeeper）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
+```
+
+也可以手动安装：从 [GitHub Releases](https://github.com/d100000/CodeX-Skin/releases/latest) 下载 `aha-codex_<版本号>_aarch64.dmg`，拖入“应用程序”，首次打开时右键 → “打开”（应用未经 Apple 公证，Gatekeeper 会提示一次）。
+
+装好后无需再手动升级：应用启动时自动检查 GitHub Release，有新版本会提示一键更新并重启。
 
 ## 产品能力
 

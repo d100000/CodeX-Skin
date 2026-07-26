@@ -1,51 +1,52 @@
-#!/bin/zsh
-# Codex Doll Skin 一键安装器
-# 用法： curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
-# 无需系统 Node / npm / git —— 直接使用 Codex 自带的 Node 运行时。
+#!/bin/bash
+# aha-codex 一键安装脚本
+#
+#   curl -fsSL https://raw.githubusercontent.com/d100000/CodeX-Skin/main/install.sh | bash
+#
+# 做的事：从 GitHub Release 取 latest.json → 下载对应的 aha-codex.app.tar.gz →
+# 解压到 /Applications → 去掉 quarantine（应用未经 Apple 公证，不去掉的话首次要右键打开）→ 启动。
+# 之后升级不再需要本脚本：应用内置签名自动更新器，启动时会自己检查 GitHub Release。
+#
+# （旧版"注入式启动器"的安装脚本已由本文件取代；开发者仍可在仓库里用 npm run install-launcher。）
 set -euo pipefail
 
-REPO="d100000/CodeX-Skin"
-BRANCH="main"
-CODEX_APP="${CODEX_APP_PATH:-/Applications/ChatGPT.app}"
-NODE="$CODEX_APP/Contents/Resources/cua_node/bin/node"
+MANIFEST_URL="https://github.com/d100000/CodeX-Skin/releases/latest/download/latest.json"
+APP_NAME="aha-codex"
+DEST="/Applications"
 
-printf '\n\033[1m▶ Codex Doll Skin 安装程序\033[0m\n\n'
+say() { printf '\033[1;35m[aha-codex]\033[0m %s\n' "$1"; }
+die() { printf '\033[1;31m[aha-codex]\033[0m %s\n' "$1" >&2; exit 1; }
 
-if [ ! -d "$CODEX_APP" ]; then
-  echo "✗ 未找到 Codex 桌面版（$CODEX_APP）。"
-  echo "  请先安装 Codex，再重新运行本脚本。"
-  exit 1
+[ "$(uname -s)" = "Darwin" ] || die "只支持 macOS。"
+[ "$(uname -m)" = "arm64" ] || die "当前版本只提供 Apple Silicon (arm64) 构建，你的机器是 $(uname -m)。"
+
+say "获取最新版本信息……"
+manifest="$(curl -fsSL "$MANIFEST_URL")" || die "无法访问 GitHub Release，请检查网络。"
+version="$(printf '%s' "$manifest" | /usr/bin/python3 -c 'import json,sys; print(json.load(sys.stdin)["version"])')"
+url="$(printf '%s' "$manifest" | /usr/bin/python3 -c 'import json,sys; print(json.load(sys.stdin)["platforms"]["darwin-aarch64"]["url"])')"
+
+workdir="$(mktemp -d /tmp/aha-codex-install.XXXXXX)"
+trap 'rm -rf "$workdir"' EXIT
+
+say "下载 aha-codex v${version}……"
+curl -fL --progress-bar "$url" -o "$workdir/app.tar.gz"
+
+say "安装到 ${DEST}……"
+tar -xzf "$workdir/app.tar.gz" -C "$workdir"
+[ -d "$workdir/${APP_NAME}.app" ] || die "更新包结构异常，未找到 ${APP_NAME}.app。"
+
+# 正在运行的话先退出，避免替换正在使用的二进制
+if pgrep -xq "$APP_NAME"; then
+  say "退出正在运行的 aha-codex……"
+  osascript -e "tell application \"$APP_NAME\" to quit" >/dev/null 2>&1 || pkill -x "$APP_NAME" || true
+  sleep 1
 fi
-if [ ! -x "$NODE" ]; then
-  echo "✗ 未找到 Codex 内置 Node（$NODE）。"
-  echo "  可能是 Codex 版本较旧，请更新 Codex 后重试。"
-  exit 1
-fi
 
-WORK="$(mktemp -d)"
-trap 'rm -rf "$WORK"' EXIT
+rm -rf "${DEST:?}/${APP_NAME}.app"
+mv "$workdir/${APP_NAME}.app" "$DEST/"
 
-echo "▶ 正在从 GitHub 下载皮肤运行时…"
-curl -fsSL "https://github.com/$REPO/archive/refs/heads/$BRANCH.tar.gz" | tar -xz -C "$WORK"
-SRC="$WORK/$(ls "$WORK")"
+# 未经 Apple 公证；去掉 quarantine 后无需右键打开
+xattr -dr com.apple.quarantine "${DEST}/${APP_NAME}.app" 2>/dev/null || true
 
-echo "▶ 正在安装启动器与运行时…"
-cd "$SRC"
-"$NODE" installer/cli.mjs install-launcher >/dev/null
-
-# 版本兼容提示（不阻断安装）
-INSTALLED_VER="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$CODEX_APP/Contents/Info.plist" 2>/dev/null || echo '?')"
-TESTED_VER="$("$NODE" -e 'console.log(JSON.parse(require("fs").readFileSync("theme/manifest.json")).minimumCodexVersion)' 2>/dev/null || echo '?')"
-
-printf '\n\033[1;32m✓ 安装完成！\033[0m\n\n'
-echo "启动方式："
-echo "  1. 退出当前 Codex（⌘Q）"
-echo "  2. 打开 访达 → 应用程序（或个人 ~/Applications），双击 “Codex Doll Skin”"
-echo "     或运行： open ~/Applications/\"Codex Doll Skin.app\""
-echo "  3. 窗口顶部中间的 “D” 按钮即皮肤管理器"
-echo ""
-if [ "$INSTALLED_VER" != "$TESTED_VER" ]; then
-  echo "ℹ 你的 Codex 版本 $INSTALLED_VER 与验证版本 $TESTED_VER 不同，"
-  echo "  皮肤仍可注入，个别样式可能有偏差；如遇异常可反馈。"
-fi
-echo "卸载： curl -fsSL https://raw.githubusercontent.com/$REPO/$BRANCH/uninstall.sh | bash"
+say "安装完成，正在启动 aha-codex v${version} 🎀"
+open "${DEST}/${APP_NAME}.app"
